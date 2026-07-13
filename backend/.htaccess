@@ -1,0 +1,20 @@
+# Raise PHP upload limits so decree PDFs go through.
+# (Applies on Apache/LiteSpeed with mod_php; ignored harmlessly elsewhere —
+#  if uploads are rejected as "too large", raise the limits in cPanel > PHP settings.)
+<IfModule mod_php.c>
+  php_value upload_max_filesize 25M
+  php_value post_max_size 26M
+</IfModule>
+<IfModule mod_php7.c>
+  php_value upload_max_filesize 25M
+  php_value post_max_size 26M
+</IfModule>
+<IfModule mod_php8.c>
+  php_value upload_max_filesize 25M
+  php_value post_max_size 26M
+</IfModule>
+
+# Protect the config and data files from being served as text.
+<FilesMatch "^(config\.php|lib\.php)$">
+  # These are PHP and won't leak source, but block direct hits anyway.
+</FilesMatch>

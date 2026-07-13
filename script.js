@@ -1,3 +1,11 @@
+// ============================================================================
+//  MoF DECREES BACKEND
+//  Once your PHP backend is live, set this to your decrees.php URL, e.g.
+//  const DECREES_API = "https://eso-acc.com/decrees/decrees.php";
+//  Leave it "" and the site shows the static fallback list (nothing breaks).
+// ============================================================================
+const DECREES_API = "";
+
 const translations = {
   en: {
     nav_home: "Home",
@@ -1361,19 +1369,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 6. PDF Modal Logic
-  const pdfBtns = document.querySelectorAll('.view-pdf-btn');
+  // 6. PDF Modal Logic (event-delegated so live-loaded decrees work too)
   const modal = document.getElementById('pdf-modal');
   const closeBtn = document.querySelector('.close-modal');
   const iframeContainer = document.getElementById('iframe-container');
+  const SAMPLE_PDF = 'http://www.pdf995.com/samples/pdf.pdf';
 
-  pdfBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (iframeContainer) {
-        iframeContainer.innerHTML = `<iframe src="https://docs.google.com/gview?url=http://www.pdf995.com/samples/pdf.pdf&embedded=true" width="100%" height="100%" frameborder="0"></iframe>`;
-      }
-      if (modal) modal.style.display = 'block';
-    });
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.view-pdf-btn');
+    if (!btn) return;
+    e.preventDefault();
+    // Real uploaded decrees carry data-pdf-url; the static fallback opens a sample.
+    const pdfUrl = btn.getAttribute('data-pdf-url') || SAMPLE_PDF;
+    const viewer = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+    if (iframeContainer) {
+      iframeContainer.innerHTML = `<iframe src="${viewer}" width="100%" height="100%" frameborder="0"></iframe>`;
+    }
+    if (modal) modal.style.display = 'block';
   });
 
   if (closeBtn) {
@@ -1394,6 +1406,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem('eso_lang') || 'en';
   if (typeof window.setLanguage === 'function') {
     window.setLanguage(savedLang);
+  }
+
+  // 8. Load MoF decrees live from the PHP backend (if DECREES_API is configured)
+  if (typeof window.loadDecrees === 'function') {
+    window.loadDecrees();
   }
 
 });
@@ -1428,5 +1445,77 @@ window.setLanguage = function(lang) {
     }
   });
 
+  // Keep live-loaded decrees in sync with the chosen language
+  if (window.__esoDecrees && typeof window.renderDecrees === 'function') {
+    window.renderDecrees();
+  }
+
   localStorage.setItem('eso_lang', lang);
+};
+
+// ============================================================================
+//  MoF DECREES — live loading & rendering from the PHP backend
+// ============================================================================
+window.__esoDecrees = null;
+
+window.loadDecrees = function () {
+  if (!DECREES_API) return;                 // not configured → keep static fallback
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  fetch(DECREES_API, { signal: ctrl.signal })
+    .then(r => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+    .then(items => {
+      clearTimeout(timer);
+      if (Array.isArray(items)) {
+        window.__esoDecrees = items;
+        window.renderDecrees();
+      }
+    })
+    .catch(() => { clearTimeout(timer); /* leave the static fallback in place */ });
+};
+
+window.renderDecrees = function () {
+  const list = document.getElementById('decrees-list');
+  if (!list || !Array.isArray(window.__esoDecrees)) return;
+
+  const lang = document.documentElement.lang || localStorage.getItem('eso_lang') || 'en';
+  const dict = translations[lang] || translations.en;
+  const openLabel = dict.mof_open_decree || 'Open Decree';
+  const pubLabel  = dict.published_label || 'Published:';
+  const localeMap = { en: 'en-US', fr: 'fr-FR', ar: 'ar' };
+  const emptyMsg  = { en: 'No decrees published yet.', fr: 'Aucun décret publié pour le moment.', ar: 'لا توجد قرارات منشورة بعد.' }[lang] || 'No decrees published yet.';
+
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+  const fmtDate = (d) => {
+    if (!d) return '';
+    const dt = new Date(d + 'T00:00:00');
+    if (isNaN(dt.getTime())) return esc(d);
+    try { return dt.toLocaleDateString(localeMap[lang] || 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }); }
+    catch (e) { return esc(d); }
+  };
+
+  const items = window.__esoDecrees;
+  if (!items.length) {
+    list.innerHTML = `<p style="color: var(--eso-text-muted); padding: 20px 0; margin: 0;">${esc(emptyMsg)}</p>`;
+    return;
+  }
+
+  list.innerHTML = items.map((it, i) => {
+    const border  = i < items.length - 1 ? 'border-bottom: 1px solid #f1f5f9;' : '';
+    const heading = (it.karar ? '<strong>' + esc(it.karar) + '</strong> — ' : '') + esc(it.title);
+    const url     = esc(it.url || '');
+    return `
+      <div class="pdf-item" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; ${border}">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <span style="font-size: 28px;">📄</span>
+          <div>
+            <h4 style="margin: 0 0 5px 0; color: var(--eso-navy); font-size: 1.15rem;">${heading}</h4>
+            <span style="color: var(--eso-text-muted); font-size: 0.85rem;"><span data-i18n="published_label">${esc(pubLabel)}</span> ${fmtDate(it.date)}</span>
+          </div>
+        </div>
+        <a href="javascript:void(0)" class="btn btn-outline-dark view-pdf-btn" data-pdf-url="${url}" style="padding: 10px 20px; font-size: 0.8rem; border-color: var(--eso-silver-dark);" data-i18n="mof_open_decree">${esc(openLabel)}</a>
+      </div>`;
+  }).join('');
 };

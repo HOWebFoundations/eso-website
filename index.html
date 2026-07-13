@@ -671,6 +671,9 @@
         <div class="container reveal" style="max-width: 900px;">
           <div style="background: #fff; padding: 40px; border-radius: 8px; border: 1px solid var(--eso-silver-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
             <h3 style="margin-bottom: 25px; border-bottom: 2px solid var(--eso-navy); padding-bottom: 10px; color: var(--eso-navy); font-size: 1.5rem;" data-i18n="mof_official_decrees">Official Decrees (Kararat)</h3>
+            <!-- This list is populated live from the PHP backend when DECREES_API is set in script.js.
+                 The static items below are a fallback shown until the backend is connected. -->
+            <div id="decrees-list">
             <div class="pdf-item" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #f1f5f9;">
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <span style="font-size: 28px;">📄</span>
@@ -711,6 +714,7 @@
                 </div>
                 <a href="javascript:void(0)" class="btn btn-outline-dark view-pdf-btn" data-pdf="karar-89.pdf" style="padding: 10px 20px; font-size: 0.8rem; border-color: var(--eso-silver-dark);" data-i18n="mof_open_decree">Open Decree</a>
             </div>
+            </div><!-- /#decrees-list -->
           </div>
         </div>
       </div>
