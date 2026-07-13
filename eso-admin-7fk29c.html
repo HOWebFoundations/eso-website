@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ESO Decrees — Admin</title>
+<style>
+  :root { --navy:#15182b; --accent:#38bdf8; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,Segoe UI,Roboto,Inter,sans-serif; background:var(--bg); color:#334155; line-height:1.5; }
+  .topbar { background:var(--navy); color:#fff; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .topbar h1 { font-size:1.15rem; font-weight:600; }
+  .badge { background:rgba(56,189,248,.15); color:var(--accent); border:1px solid rgba(56,189,248,.4); font-size:.7rem; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:1px; }
+  .wrap { max-width:820px; margin:32px auto; padding:0 20px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:28px; margin-bottom:24px; box-shadow:0 6px 20px rgba(0,0,0,.04); }
+  .card h2 { color:var(--navy); font-size:1.2rem; margin-bottom:18px; }
+  label { display:block; font-size:.82rem; font-weight:600; color:var(--navy); margin:14px 0 6px; }
+  input[type=text], input[type=date], input[type=password] { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:.95rem; font-family:inherit; }
+  input[type=file] { width:100%; padding:12px; border:1px dashed var(--line); border-radius:6px; background:#fbfdff; }
+  input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
+  .row { display:flex; gap:16px; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:160px; }
+  .btn { display:inline-block; border:none; cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase; padding:13px 26px; border-radius:6px; transition:.2s; }
+  .btn-primary { background:var(--accent); color:var(--navy); }
+  .btn-primary:hover { filter:brightness(1.08); }
+  .btn-primary:disabled { opacity:.5; cursor:default; }
+  .btn-ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.4); padding:8px 16px; }
+  .btn-danger { background:#fff; color:#dc2626; border:1px solid #fecaca; padding:8px 14px; font-size:.72rem; }
+  .btn-danger:hover { background:#dc2626; color:#fff; }
+  .msg { padding:13px 16px; border-radius:6px; margin-bottom:20px; font-size:.9rem; display:none; }
+  .msg.ok { background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; display:block; }
+  .msg.err { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; display:block; }
+  table { width:100%; border-collapse:collapse; margin-top:8px; }
+  th, td { text-align:left; padding:12px 10px; border-bottom:1px solid var(--line); font-size:.9rem; vertical-align:top; }
+  th { font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+  td .k { font-weight:600; color:var(--navy); }
+  td .d { color:var(--muted); font-size:.8rem; }
+  td a.file { color:var(--accent); font-size:.8rem; text-decoration:none; }
+  .empty { color:var(--muted); text-align:center; padding:26px 0; }
+  .login-wrap { max-width:400px; margin:9vh auto; }
+  .hint { font-size:.78rem; color:var(--muted); margin-top:8px; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-view" class="login-wrap hidden">
+  <div class="card">
+    <h2>ESO Decrees — Admin</h2>
+    <div id="login-msg" class="msg"></div>
+    <label for="pw">Password</label>
+    <input type="password" id="pw" autocomplete="current-password" autofocus>
+    <div style="margin-top:20px;"><button class="btn btn-primary" id="login-btn" style="width:100%;">Log In</button></div>
+    <p class="hint">Manage the Ministry of Finance decrees shown on the website.</p>
+  </div>
+</div>
+
+<!-- MANAGER -->
+<div id="admin-view" class="hidden">
+  <div class="topbar">
+    <h1>ESO Decrees <span class="badge">Admin</span></h1>
+    <button class="btn btn-ghost" id="logout-btn">Log out</button>
+  </div>
+  <div class="wrap">
+    <div id="msg" class="msg"></div>
+
+    <div class="card">
+      <h2>Add a decree</h2>
+      <label for="title">Title *</label>
+      <input type="text" id="title" placeholder="e.g. VAT Deadline Extension">
+      <div class="row">
+        <div>
+          <label for="karar">Decree number (optional)</label>
+          <input type="text" id="karar" placeholder="e.g. Karar No. 456/1">
+        </div>
+        <div>
+          <label for="date">Publication date</label>
+          <input type="date" id="date">
+        </div>
+      </div>
+      <label for="pdf">PDF file * (max 25 MB)</label>
+      <input type="file" id="pdf" accept="application/pdf,.pdf">
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="upload-btn">Upload &amp; Publish</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Published decrees (<span id="count">0</span>)</h2>
+      <div id="list"><div class="empty">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_ADMIN = '/api/admin';
+const API_UPLOAD = '/api/upload';
+const API_LIST = '/api/decrees';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function show(view) {
+  $('login-view').classList.toggle('hidden', view !== 'login');
+  $('admin-view').classList.toggle('hidden', view !== 'admin');
+}
+function flash(el, text, kind) { el.textContent = text; el.className = 'msg ' + kind; if (kind === 'ok') setTimeout(() => { el.className = 'msg'; }, 4000); }
+
+async function postAdmin(payload) {
+  const r = await fetch(API_ADMIN, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+  return { status: r.status, data: await r.json().catch(() => ({})) };
+}
+
+async function loadList() {
+  const listEl = $('list');
+  try {
+    const r = await fetch(API_LIST, { cache:'no-store' });
+    const items = await r.json();
+    $('count').textContent = items.length;
+    if (!items.length) { listEl.innerHTML = '<div class="empty">No decrees yet. Add your first one above.</div>'; return; }
+    listEl.innerHTML = '<table><thead><tr><th>Decree</th><th>Date</th><th>PDF</th><th></th></tr></thead><tbody>' +
+      items.map(it => `<tr>
+        <td><div class="k">${esc(it.title)}</div>${it.karar ? `<div class="d">${esc(it.karar)}</div>` : ''}</td>
+        <td class="d">${esc(it.date)}</td>
+        <td><a class="file" href="${esc(it.url)}" target="_blank" rel="noopener">view ↗</a></td>
+        <td style="text-align:right;"><button class="btn btn-danger" data-id="${esc(it.id)}">Delete</button></td>
+      </tr>`).join('') + '</tbody></table>';
+    listEl.querySelectorAll('button[data-id]').forEach(b => b.addEventListener('click', () => del(b.getAttribute('data-id'))));
+  } catch (e) {
+    listEl.innerHTML = '<div class="empty">Could not load the list.</div>';
+  }
+}
+
+async function del(id) {
+  if (!confirm('Delete this decree and its PDF?')) return;
+  const { status, data } = await postAdmin({ action:'delete', id });
+  if (status === 200) { flash($('msg'), 'Decree removed.', 'ok'); loadList(); }
+  else if (status === 401) { show('login'); }
+  else { flash($('msg'), 'Delete failed: ' + (data.error || status), 'err'); }
+}
+
+async function upload() {
+  const title = $('title').value.trim();
+  const file = $('pdf').files[0];
+  if (!title) { flash($('msg'), 'Please enter a title.', 'err'); return; }
+  if (!file) { flash($('msg'), 'Please choose a PDF file.', 'err'); return; }
+  const btn = $('upload-btn'); btn.disabled = true; btn.textContent = 'Uploading…';
+  const fd = new FormData();
+  fd.append('title', title);
+  fd.append('karar', $('karar').value.trim());
+  fd.append('date', $('date').value);
+  fd.append('pdf', file);
+  try {
+    const r = await fetch(API_UPLOAD, { method:'POST', body: fd });
+    const data = await r.json().catch(() => ({}));
+    if (r.status === 200) {
+      flash($('msg'), 'Decree added and published.', 'ok');
+      $('title').value = ''; $('karar').value = ''; $('pdf').value = '';
+      loadList();
+    } else if (r.status === 401) { show('login'); }
+    else { flash($('msg'), 'Upload failed: ' + (data.error || r.status) + (data.message ? ' — ' + data.message : ''), 'err'); }
+  } catch (e) {
+    flash($('msg'), 'Upload failed: ' + e.message, 'err');
+  } finally { btn.disabled = false; btn.textContent = 'Upload & Publish'; }
+}
+
+async function doLogin() {
+  const pw = $('pw').value;
+  const { status } = await postAdmin({ action:'login', password: pw });
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); }
+  else { flash($('login-msg'), 'Incorrect password.', 'err'); }
+}
+
+$('login-btn').addEventListener('click', doLogin);
+$('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+$('upload-btn').addEventListener('click', upload);
+$('logout-btn').addEventListener('click', async () => { await postAdmin({ action:'logout' }); show('login'); });
+
+// Boot: default date = today, check session.
+$('date').value = new Date().toISOString().slice(0, 10);
+(async () => {
+  const { data } = await postAdmin({ action:'session' });
+  if (data && data.authed) { show('admin'); loadList(); } else { show('login'); }
+})();
+</script>
+</body>
+</html>

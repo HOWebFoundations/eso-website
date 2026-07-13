@@ -1,3 +1,0 @@
-# The PHP backend must NOT be deployed to Vercel (Vercel can't run PHP, and
-# serving these files statically could expose config). It lives on PHP hosting.
-backend/

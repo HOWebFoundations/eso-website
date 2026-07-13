@@ -1,10 +1,10 @@
 // ============================================================================
 //  MoF DECREES BACKEND
-//  Once your PHP backend is live, set this to your decrees.php URL, e.g.
-//  const DECREES_API = "https://eso-acc.com/decrees/decrees.php";
-//  Leave it "" and the site shows the static fallback list (nothing breaks).
+//  Live decrees are served by the Vercel serverless function at /api/decrees
+//  (uploads are managed from the secret admin page). Same origin, so no CORS.
+//  Set to "" to force the static fallback list.
 // ============================================================================
-const DECREES_API = "";
+const DECREES_API = "/api/decrees";
 
 const translations = {
   en: {
@@ -1379,11 +1379,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = e.target.closest('.view-pdf-btn');
     if (!btn) return;
     e.preventDefault();
-    // Real uploaded decrees carry data-pdf-url; the static fallback opens a sample.
-    const pdfUrl = btn.getAttribute('data-pdf-url') || SAMPLE_PDF;
-    const viewer = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+    // Real uploaded decrees carry data-pdf-url (loaded directly — the Blob store
+    // serves them inline). The static fallback items open a sample via gview.
+    const real = btn.getAttribute('data-pdf-url');
+    const src = real
+      ? real
+      : `https://docs.google.com/gview?url=${encodeURIComponent(SAMPLE_PDF)}&embedded=true`;
     if (iframeContainer) {
-      iframeContainer.innerHTML = `<iframe src="${viewer}" width="100%" height="100%" frameborder="0"></iframe>`;
+      iframeContainer.innerHTML = `<iframe src="${src}" width="100%" height="100%" frameborder="0" style="border:0;"></iframe>`;
     }
     if (modal) modal.style.display = 'block';
   });
