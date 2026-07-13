@@ -62,6 +62,7 @@ export default async function handler(req, res) {
       access: 'public',
       contentType: 'application/pdf',
       addRandomSuffix: true,
+      cacheControlMaxAge: 300, // 5 min, so a deleted decree's PDF clears from the CDN quickly
     });
     const meta = { id, karar, title, date, url: pdf.url, uploaded: new Date().toISOString() };
     await put(`meta/${id}.json`, JSON.stringify(meta), {
