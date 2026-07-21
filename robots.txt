@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /eso-admin-7fk29c.html
+
+Sitemap: https://eso-website.vercel.app/sitemap.xml

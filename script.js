@@ -1391,20 +1391,77 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 120);
 
-  // 2. Routing Logic
+  // 2. Routing Logic (real URLs via the History API)
+  const SITE_NAME = 'ESO | Auditors & Consultants';
+  const DEFAULT_DESC = 'ESO Auditors & Consultants: Big 4 caliber audit, tax, accounting and advisory for enterprises in Lebanon and the MENA region. Trusted since 2001.';
+  const META = {
+    home: { t: 'ESO | Auditors & Consultants in Lebanon', d: DEFAULT_DESC },
+    about: { t: 'About ESO | Audit & Advisory Firm in Lebanon', d: 'A quarter century of audit, tax and advisory expertise. The ESO standard: rigorous, independent, and rooted in local and international best practice.' },
+    clients: { t: 'Our Clients | Industries ESO Serves in Lebanon', d: 'ESO serves 15+ sectors including food & beverage, manufacturing, real estate, healthcare, NGOs and financial services across Lebanon.' },
+    'client-fb': { t: 'Food & Beverage Audit & Accounting | ESO Lebanon', d: 'Specialist F&B financial services: inventory and yield control, POS and aggregator reconciliation, franchise auditing, and NSSF and VAT optimization.' },
+    team: { t: 'Leadership & Team | ESO Auditors & Consultants', d: 'Meet the ESO partners and professionals delivering audit, tax and advisory engagements across Lebanon and the region since 2001.' },
+    services: { t: 'Services: Audit, Tax, Accounting & Consulting | ESO', d: 'The full spectrum of audit & assurance, tax advisory, accounting and corporate consulting, to Big 4 standards with boutique agility.' },
+    'service-audit': { t: 'Audit & Assurance Services | ESO Lebanon', d: 'Independent statutory audits under ISA, IFRS compliance and transition, internal control reviews and agreed-upon procedures for enterprises in Lebanon.' },
+    'service-tax': { t: 'Tax Advisory & VAT Compliance | ESO Lebanon', d: 'Corporate tax planning, VAT compliance, Ministry of Finance decree guidance and tax audit defense for businesses in Lebanon.' },
+    'service-accounting': { t: 'Accounting & Payroll Services | ESO Lebanon', d: 'Outsourced bookkeeping, NSSF payroll, multi-currency reconciliation and management reporting for growing enterprises in Lebanon.' },
+    'service-consulting': { t: 'Corporate Consulting & M&A Advisory | ESO Lebanon', d: 'M&A due diligence, enterprise valuation, outsourced CFO services and operational restructuring for enterprises in Lebanon and MENA.' },
+    'lebanon-guide': { t: 'Lebanon Market Guide | ESO Auditors & Consultants', d: 'Actionable intelligence on operating in Lebanon: Ministry of Finance decrees, NSSF compliance and cross-border structuring in the MENA region.' },
+    'kararat-portal': { t: 'Ministry of Finance Decrees (Kararat) | ESO Lebanon', d: 'Official Lebanese Ministry of Finance decrees and regulatory documents, curated and instantly viewable by ESO Auditors & Consultants.' },
+    news: { t: 'Insights & Technical Studies | ESO Lebanon', d: 'In-depth studies on IFRS, tax strategy, NSSF, valuation and audit standards for enterprises in Lebanon and the MENA region.' },
+    careers: { t: 'Careers | Join ESO Auditors & Consultants', d: 'Build your career in audit, tax and consulting at ESO. Open roles for senior auditors, tax associates and summer interns in Lebanon.' },
+    'client-portal': { t: 'Contact & Client Portal | ESO Lebanon', d: 'Contact ESO Auditors & Consultants in Jal El Dib, Lebanon. Schedule a consultation for audit, tax, accounting or advisory services.' }
+  };
+
+  function pathFromId(id) { return id === 'home' ? '/' : '/' + id; }
+
+  function idFromPath(pathname) {
+    const p = decodeURIComponent(pathname || '/').replace(/\/+$/, '');
+    if (p === '') return 'home';
+    const id = p.slice(1);
+    const el = document.getElementById(id);
+    return (el && el.classList.contains('page-view')) ? id : 'home';
+  }
+
+  function setHeadTag(selector, attr, value) {
+    const el = document.head.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  }
+
+  function applyMeta(id) {
+    let m = META[id];
+    if (!m) {
+      const el = document.getElementById(id);
+      const h = el && el.querySelector('.page-title');
+      const p = el && el.querySelector('.study-article p');
+      m = {
+        t: h ? h.textContent.trim() + ' | ESO Insights' : SITE_NAME,
+        d: p ? p.textContent.trim().replace(/\s+/g, ' ').slice(0, 155) : DEFAULT_DESC
+      };
+    }
+    const url = location.origin + pathFromId(id);
+    document.title = m.t;
+    setHeadTag('meta[name="description"]', 'content', m.d);
+    setHeadTag('meta[property="og:title"]', 'content', m.t);
+    setHeadTag('meta[property="og:description"]', 'content', m.d);
+    setHeadTag('meta[property="og:url"]', 'content', url);
+    setHeadTag('meta[name="twitter:title"]', 'content', m.t);
+    setHeadTag('meta[name="twitter:description"]', 'content', m.d);
+    setHeadTag('link[rel="canonical"]', 'href', url);
+  }
+
+  let currentRouteId = 'home';
   function handleRouting() {
-    let hash = window.location.hash || '#home';
+    const id = idFromPath(location.pathname);
+    currentRouteId = id;
 
-    document.querySelectorAll('.page-view').forEach(page => {
-      page.classList.remove('active');
-    });
-
-    const targetSection = document.querySelector(hash);
+    document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+    const targetSection = document.getElementById(id);
     if (targetSection) {
       targetSection.classList.add('active');
       window.scrollTo(0, 0);
       triggerReveals();
     }
+    applyMeta(id);
 
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -1412,14 +1469,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navLinks) navLinks.classList.remove('active');
   }
 
-  window.addEventListener('hashchange', handleRouting);
-
-  if (window.location.hash) {
+  // Intercept internal link clicks and navigate via the History API (no reload).
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const link = e.target.closest('a.nav-router');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href[0] !== '/' || href[1] === '/') return;
+    e.preventDefault();
+    if (href !== location.pathname) history.pushState({}, '', href);
     handleRouting();
-  } else {
-    const homeView = document.getElementById('home');
-    if (homeView) homeView.classList.add('active');
-  }
+  });
+
+  window.addEventListener('popstate', handleRouting);
+
+  // Let the language switcher refresh the current page's title/description.
+  window.__esoApplyMeta = () => applyMeta(currentRouteId);
+
+  handleRouting();
 
   // 3. Scroll Reveal Animation
   function triggerReveals() {
@@ -1568,6 +1635,11 @@ window.setLanguage = function(lang) {
   // Keep live-loaded decrees in sync with the chosen language
   if (window.__esoDecrees && typeof window.renderDecrees === 'function') {
     window.renderDecrees();
+  }
+
+  // Refresh the current page's title/description in the chosen language
+  if (typeof window.__esoApplyMeta === 'function') {
+    window.__esoApplyMeta();
   }
 
   localStorage.setItem('eso_lang', lang);
