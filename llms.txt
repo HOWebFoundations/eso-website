@@ -15,7 +15,7 @@ Languages: English, Arabic, French
 - [Food & Beverage](https://eso-website.vercel.app/industries/food-and-beverage): Roughly 70% of ESO's enterprise clients are in F&B. Depth in restaurant prime-cost control, POS and delivery-aggregator reconciliation, franchise and multi-unit royalty audits, and NSSF payroll for hospitality.
 
 ## Lebanon regulatory resources
-- [Market Guide](https://eso-website.vercel.app/lebanon-market-guide): Operating in Lebanon — MoF decrees, NSSF, cross-border structuring.
+- [Doing Business in Lebanon (Market Guide)](https://eso-website.vercel.app/lebanon-market-guide): The pillar guide to operating in Lebanon, covering business structures (SAL, SARL, holding, offshore), corporate tax and the annual budget, VAT and e-invoicing, NSSF payroll, IFRS reporting, banking and trapped deposits, and MoF decrees. Each topic links to a detailed study.
 - [Ministry of Finance Decrees (Kararat)](https://eso-website.vercel.app/ministry-of-finance-decrees): Curated official Lebanese MoF decrees.
 - [Insights & Studies](https://eso-website.vercel.app/insights): 22 dated technical studies (Oct 2024 – Jul 2026) on IFRS 18/19, deposit recovery under the financial-gap framework, NSSF ceilings, e-invoicing, transfer pricing, valuation and audit standards.
 
