@@ -113,7 +113,7 @@ nav { width: 95%; max-width: 1400px; margin: auto; display: flex; justify-conten
   height: 100vh;
   min-height: 850px;
   background-color: var(--eso-navy);
-  background-image: url('https://i.postimg.cc/25F2JXvk/eso-homepage.jpg');
+  background-image: url('/images/eso-homepage.jpg');
   background-size: cover;
   background-position: center top;
   background-origin: content-box;
@@ -305,7 +305,7 @@ nav { width: 95%; max-width: 1400px; margin: auto; display: flex; justify-conten
   .advisory-hero {
     height: auto;
     min-height: 100vh;
-    background-image: url('https://i.postimg.cc/y6Xjc19k/Whats-App-Image-2026-04-12-at-18-05-10.jpg') !important;
+    background-image: url('/images/hero-mobile.jpg') !important;
     background-position: top center;
     background-size: 100% 100% !important;
     background-repeat: no-repeat;
