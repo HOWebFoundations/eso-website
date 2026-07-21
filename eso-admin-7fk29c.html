@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>ESO Decrees — Admin</title>
+<title>ESO Decrees, Admin</title>
 <style>
   :root { --navy:#15182b; --accent:#38bdf8; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -48,7 +48,7 @@
 <!-- LOGIN -->
 <div id="login-view" class="login-wrap hidden">
   <div class="card">
-    <h2>ESO Decrees — Admin</h2>
+    <h2>ESO Decrees, Admin</h2>
     <div id="login-msg" class="msg"></div>
     <label for="pw">Password</label>
     <input type="password" id="pw" autocomplete="current-password" autofocus>
@@ -158,7 +158,7 @@ async function upload() {
       $('title').value = ''; $('karar').value = ''; $('pdf').value = '';
       loadList();
     } else if (r.status === 401) { show('login'); }
-    else { flash($('msg'), 'Upload failed: ' + (data.error || r.status) + (data.message ? ' — ' + data.message : ''), 'err'); }
+    else { flash($('msg'), 'Upload failed: ' + (data.error || r.status) + (data.message ? ', ' + data.message : ''), 'err'); }
   } catch (e) {
     flash($('msg'), 'Upload failed: ' + e.message, 'err');
   } finally { btn.disabled = false; btn.textContent = 'Upload & Publish'; }

@@ -1,4 +1,4 @@
-// Supabase Storage helpers (raw REST — no SDK needed).
+// Supabase Storage helpers (raw REST, no SDK needed).
 // Uses SUPABASE_URL + SUPABASE_SECRET_KEY env vars. Bucket: "decrees" (public).
 const BUCKET = 'decrees';
 

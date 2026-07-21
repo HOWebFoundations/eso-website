@@ -206,7 +206,7 @@ const translations = {
     cons_breadcrumb: "Consulting",
     cons_page_title: "Corporate Consulting",
     cons_architecting: "Architecting Strategic Growth",
-    cons_intro: "When enterprises face critical inflection points—whether a major acquisition, a cash flow crisis, or a need for deep structural reorganization—ESO's Corporate Consulting team provides the specialized expertise required to navigate forward. We partner with leadership to translate complex financial data into decisive corporate strategy.",
+    cons_intro: "When enterprises face critical inflection points, whether a major acquisition, a cash flow crisis, or a need for deep structural reorganization, ESO's Corporate Consulting team provides the specialized expertise required to navigate forward. We partner with leadership to translate complex financial data into decisive corporate strategy.",
     cons_solutions: "Strategic Advisory Solutions",
     cons_li1_strong: "M&A Due Diligence:",
     cons_li1_desc: "Rigorous financial and tax due diligence for buy-side and sell-side transactions, identifying hidden liabilities before the deal closes.",
@@ -319,7 +319,7 @@ const translations = {
     study_title_dd: "Due Diligence Pitfalls in Cross-Border M&A",
     study_desc_dd: "Common financial blindspots discovered during the acquisition of local tech startups by international venture capital firms.",
     study_12_p1: "As international venture capital targets MENA tech startups, the financial due diligence process has revealed consistent operational blindspots. This study covers the most common deal-breakers encountered during M&A audits.",
-    study_12_p2: "The primary reason acquisitions fall through in the final stages is undocumented off-balance-sheet liabilities—specifically, informal shareholder loans and unfiled NSSF declarations. International buyers require absolute certainty that they are not inheriting hidden regulatory fines.",
+    study_12_p2: "The primary reason acquisitions fall through in the final stages is undocumented off-balance-sheet liabilities, specifically, informal shareholder loans and unfiled NSSF declarations. International buyers require absolute certainty that they are not inheriting hidden regulatory fines.",
     study_12_p3: "Startups seeking exit opportunities should commission a \"Vendor Due Diligence\" audit 12 months prior to engaging buyers. This allows management to clean up ledgers and formalize all employment contracts before opening their data room.",
     study_12_source: "Data aggregated from ESO's Corporate Consulting M&A transactions and regional investment banking standards.",
     study_title_cyber: "Cybersecurity Risks in Financial Reporting",
@@ -421,7 +421,7 @@ const translations = {
     footer_contact: "Contact",
     footer_rights: "All rights reserved.",
     trust_title: "A Firm You Can Build On",
-    trust_sub: "A quarter-century of audit, tax, and advisory expertise — grounded in what we can prove.",
+    trust_sub: "A quarter-century of audit, tax, and advisory expertise, grounded in what we can prove.",
     trust_years_label: "Years Established",
     trust_years_desc: "Trusted counsel since 2001, through every market cycle Lebanon has seen.",
     trust_standards_label: "Global Standards",
@@ -430,7 +430,7 @@ const translations = {
     trust_sector_desc: "A recognised specialism in Food & Beverage, across 15+ industries served.",
     trust_lacpa_label: "Licensed & Registered",
     trust_lacpa_desc: "A member of the Lebanese Association of Certified Public Accountants (LACPA).",
-    trust_footnote: "Partner-led engagements — with strict confidentiality and independence on every mandate.",
+    trust_footnote: "Partner-led engagements, with strict confidentiality and independence on every mandate.",
     date_jul10_26: "July 10, 2026",
     date_jun20_26: "June 20, 2026",
     date_may15_26: "May 15, 2026",
@@ -442,15 +442,15 @@ const translations = {
     study_19_p3: "We advise every client to run a documented H1 health check now: reconcile VAT input and output, confirm NSSF ceilings against the latest circulars, and re-model income tax instalments on the 2026 brackets. Correcting these in July costs a fraction of correcting them under audit.",
     study_19_source: "Based on the 2026 filing calendar of the Ministry of Finance (Lebanon) and current NSSF contribution circulars.",
     study_title_ifrs19: "IFRS 19: Simplified Disclosures for Eligible Subsidiaries",
-    study_desc_ifrs19: "How subsidiaries without public accountability can cut disclosure volume under IFRS 19 while staying fully IFRS-compliant — ahead of the 2027 effective date.",
+    study_desc_ifrs19: "How subsidiaries without public accountability can cut disclosure volume under IFRS 19 while staying fully IFRS-compliant, ahead of the 2027 effective date.",
     study_20_p1: "Following IFRS 18, the IASB has issued IFRS 19, which lets eligible subsidiaries apply substantially reduced disclosure requirements while still using full IFRS recognition and measurement. For MENA groups with several local subsidiaries, this can materially cut reporting effort.",
-    study_20_p2: "A subsidiary qualifies if it has no public accountability and its parent prepares consolidated IFRS financial statements. The relief is in the notes only — recognition and measurement are unchanged — so this is a disclosure simplification, not an accounting shortcut. The election is made entity by entity.",
+    study_20_p2: "A subsidiary qualifies if it has no public accountability and its parent prepares consolidated IFRS financial statements. The relief is in the notes only, recognition and measurement are unchanged, so this is a disclosure simplification, not an accounting shortcut. The election is made entity by entity.",
     study_20_p3: "We recommend groups map which subsidiaries are eligible now and model the reduced disclosure set before the 2027 effective date, so adoption is a planned election rather than a year-end scramble. Early application is permitted and can streamline the 2026 close for qualifying entities.",
     study_20_source: "Based on IFRS 19 'Subsidiaries without Public Accountability: Disclosures', as issued by the International Accounting Standards Board (IASB).",
     study_title_gaplaw: "Accounting for Deposit Recovery Under the Financial Gap Law",
-    study_desc_gaplaw: "Practical guidance on valuing, provisioning, and disclosing trapped bank deposits as recovery mechanisms take shape — and what it means for your balance sheet.",
+    study_desc_gaplaw: "Practical guidance on valuing, provisioning, and disclosing trapped bank deposits as recovery mechanisms take shape, and what it means for your balance sheet.",
     study_21_p1: "As the framework for addressing the banking sector's losses advances, enterprises holding trapped bank deposits face a pressing question: at what value should those deposits sit on the balance sheet? Carrying them at face value overstates assets that may only be partially recoverable.",
-    study_21_p2: "Under IFRS 9, these deposits are financial assets subject to expected credit loss assessment. The emerging recovery mechanisms — staggered payouts, tiered treatment, and instrument conversions — change the timing and amount of expected cash flows, and therefore the impairment provision. Auditors will closely scrutinise the assumptions behind any recovery estimate.",
+    study_21_p2: "Under IFRS 9, these deposits are financial assets subject to expected credit loss assessment. The emerging recovery mechanisms, staggered payouts, tiered treatment, and instrument conversions, change the timing and amount of expected cash flows, and therefore the impairment provision. Auditors will closely scrutinise the assumptions behind any recovery estimate.",
     study_21_p3: "We advise clients to document a defensible impairment model for trapped deposits, tied to the specific recovery terms as they are published, and to disclose the judgement and its sensitivity clearly in the notes. Transparency here protects both the audit opinion and management's credibility with lenders.",
     study_21_source: "Analysis under IFRS 9 (Financial Instruments) in the context of published guidance on Lebanon's banking-sector recovery framework.",
     study_title_einvoice: "The Shift to E-Invoicing: Preparing for Digital VAT",
@@ -875,7 +875,7 @@ const translations = {
     footer_contact: "Contact",
     footer_rights: "Tous droits réservés.",
     trust_title: "Un cabinet sur lequel bâtir",
-    trust_sub: "Un quart de siècle d'expertise en audit, fiscalité et conseil — fondé sur des faits, pas des adjectifs.",
+    trust_sub: "Un quart de siècle d'expertise en audit, fiscalité et conseil, fondé sur des faits, pas des adjectifs.",
     trust_years_label: "Ans d'existence",
     trust_years_desc: "Un conseil de confiance depuis 2001, à travers tous les cycles qu'a connus le Liban.",
     trust_standards_label: "Normes mondiales",
@@ -884,7 +884,7 @@ const translations = {
     trust_sector_desc: "Une spécialisation reconnue dans la restauration (F&B), parmi plus de 15 secteurs servis.",
     trust_lacpa_label: "Agréé et enregistré",
     trust_lacpa_desc: "Membre de l'Association Libanaise des Experts-Comptables (LACPA).",
-    trust_footnote: "Des missions dirigées par les associés — avec une confidentialité et une indépendance strictes à chaque mandat.",
+    trust_footnote: "Des missions dirigées par les associés, avec une confidentialité et une indépendance strictes à chaque mandat.",
     date_jul10_26: "10 Juillet 2026",
     date_jun20_26: "20 Juin 2026",
     date_may15_26: "15 Mai 2026",
@@ -898,13 +898,13 @@ const translations = {
     study_title_ifrs19: "IFRS 19 : informations simplifiées pour les filiales éligibles",
     study_desc_ifrs19: "Comment les filiales sans obligation d'information du public peuvent réduire le volume d'informations selon l'IFRS 19 tout en restant conformes, avant l'entrée en vigueur en 2027.",
     study_20_p1: "Après l'IFRS 18, l'IASB a publié l'IFRS 19, qui permet aux filiales éligibles d'appliquer des obligations d'information nettement réduites tout en conservant la comptabilisation et l'évaluation IFRS. Pour les groupes MENA à plusieurs filiales, l'effort de reporting peut être sensiblement réduit.",
-    study_20_p2: "Une filiale est éligible si elle n'a pas d'obligation d'information du public et si sa société mère prépare des états financiers consolidés IFRS. L'allègement porte uniquement sur les notes — la comptabilisation et l'évaluation restent inchangées. Le choix se fait entité par entité.",
+    study_20_p2: "Une filiale est éligible si elle n'a pas d'obligation d'information du public et si sa société mère prépare des états financiers consolidés IFRS. L'allègement porte uniquement sur les notes, la comptabilisation et l'évaluation restent inchangées. Le choix se fait entité par entité.",
     study_20_p3: "Nous recommandons aux groupes d'identifier dès maintenant les filiales éligibles et de modéliser l'ensemble réduit d'informations avant 2027, afin que l'adoption soit planifiée. L'application anticipée est permise et peut simplifier la clôture 2026 des entités éligibles.",
     study_20_source: "D'après l'IFRS 19 « Filiales sans obligation d'information du public : informations à fournir », publiée par l'International Accounting Standards Board (IASB).",
     study_title_gaplaw: "Comptabiliser la récupération des dépôts dans le cadre de la loi sur l'écart financier",
     study_desc_gaplaw: "Des conseils pratiques pour évaluer, provisionner et présenter les dépôts bancaires bloqués à mesure que les mécanismes de récupération se précisent.",
     study_21_p1: "À mesure que le cadre de traitement des pertes du secteur bancaire progresse, les entreprises détenant des dépôts bancaires bloqués font face à une question pressante : à quelle valeur inscrire ces dépôts au bilan ? Les maintenir à leur valeur nominale surévalue des actifs qui ne sont peut-être que partiellement récupérables.",
-    study_21_p2: "Selon l'IFRS 9, ces dépôts sont des actifs financiers soumis à l'évaluation des pertes de crédit attendues. Les mécanismes de récupération émergents — paiements échelonnés, traitement par tranches et conversions d'instruments — modifient l'échéancier et le montant des flux attendus, et donc la provision pour dépréciation. Les auditeurs examineront de près les hypothèses retenues.",
+    study_21_p2: "Selon l'IFRS 9, ces dépôts sont des actifs financiers soumis à l'évaluation des pertes de crédit attendues. Les mécanismes de récupération émergents, paiements échelonnés, traitement par tranches et conversions d'instruments, modifient l'échéancier et le montant des flux attendus, et donc la provision pour dépréciation. Les auditeurs examineront de près les hypothèses retenues.",
     study_21_p3: "Nous conseillons de documenter un modèle de dépréciation défendable, lié aux modalités de récupération publiées, et de présenter clairement le jugement et sa sensibilité dans les notes. La transparence protège à la fois l'opinion d'audit et la crédibilité de la direction auprès des prêteurs.",
     study_21_source: "Analyse selon l'IFRS 9 (Instruments financiers) dans le contexte des orientations publiées sur le cadre de redressement du secteur bancaire libanais.",
     study_title_einvoice: "Le passage à la facturation électronique : se préparer à la TVA numérique",
@@ -1329,7 +1329,7 @@ const translations = {
     footer_contact: "اتصل بنا",
     footer_rights: "جميع الحقوق محفوظة.",
     trust_title: "شركة يمكنك البناء عليها",
-    trust_sub: "ربع قرن من الخبرة في التدقيق والضرائب والاستشارات — قائم على ما يمكن إثباته.",
+    trust_sub: "ربع قرن من الخبرة في التدقيق والضرائب والاستشارات، قائم على ما يمكن إثباته.",
     trust_years_label: "عاماً من الخبرة",
     trust_years_desc: "مشورة موثوقة منذ عام 2001، عبر كل الدورات التي شهدها لبنان.",
     trust_standards_label: "معايير عالمية",
@@ -1338,7 +1338,7 @@ const translations = {
     trust_sector_desc: "تخصص معترف به في قطاع الأغذية والمشروبات، ضمن أكثر من 15 قطاعاً نخدمه.",
     trust_lacpa_label: "مرخّص ومسجّل",
     trust_lacpa_desc: "عضو في جمعية خبراء المحاسبة المجازين في لبنان (LACPA).",
-    trust_footnote: "مهام بإشراف الشركاء — مع سرية تامة واستقلالية صارمة في كل تكليف.",
+    trust_footnote: "مهام بإشراف الشركاء، مع سرية تامة واستقلالية صارمة في كل تكليف.",
     date_jul10_26: "10 يوليو 2026",
     date_jun20_26: "20 يونيو 2026",
     date_may15_26: "15 مايو 2026",
@@ -1352,13 +1352,13 @@ const translations = {
     study_title_ifrs19: "المعيار IFRS 19: إفصاحات مبسّطة للشركات التابعة المؤهلة",
     study_desc_ifrs19: "كيف يمكن للشركات التابعة غير الخاضعة للمساءلة العامة تقليص حجم الإفصاحات وفق IFRS 19 مع بقائها ممتثلة بالكامل، قبل موعد النفاذ في 2027.",
     study_20_p1: "بعد المعيار IFRS 18، أصدر مجلس المعايير الدولية المعيار IFRS 19 الذي يتيح للشركات التابعة المؤهلة تطبيق متطلبات إفصاح مخفّضة إلى حد كبير مع الاستمرار في اعتماد الاعتراف والقياس وفق IFRS. وهذا قد يقلّص جهد إعداد التقارير للمجموعات في المنطقة.",
-    study_20_p2: "تكون الشركة التابعة مؤهلة إذا لم تكن خاضعة للمساءلة العامة وكانت شركتها الأم تُعدّ قوائم مالية موحّدة وفق IFRS. التخفيف يقتصر على الإيضاحات فقط — أما الاعتراف والقياس فيبقيان دون تغيير — أي أنه تبسيط للإفصاح لا اختصار محاسبي، ويُتَّخذ القرار لكل كيان على حدة.",
+    study_20_p2: "تكون الشركة التابعة مؤهلة إذا لم تكن خاضعة للمساءلة العامة وكانت شركتها الأم تُعدّ قوائم مالية موحّدة وفق IFRS. التخفيف يقتصر على الإيضاحات فقط، أما الاعتراف والقياس فيبقيان دون تغيير، أي أنه تبسيط للإفصاح لا اختصار محاسبي، ويُتَّخذ القرار لكل كيان على حدة.",
     study_20_p3: "نوصي المجموعات بتحديد الشركات التابعة المؤهلة الآن ونمذجة مجموعة الإفصاحات المخفّضة قبل موعد 2027، لتكون الاعتماد قراراً مخططاً لا اندفاعاً في اللحظة الأخيرة. ويُسمح بالتطبيق المبكر، وقد يبسّط إقفال 2026 للكيانات المؤهلة.",
     study_20_source: "استناداً إلى المعيار IFRS 19 «الشركات التابعة غير الخاضعة للمساءلة العامة: الإفصاحات» الصادر عن مجلس معايير المحاسبة الدولية (IASB).",
     study_title_gaplaw: "المحاسبة عن استرداد الودائع في إطار قانون الفجوة المالية",
     study_desc_gaplaw: "إرشادات عملية لتقييم الودائع المصرفية المحتجزة وتكوين مخصصاتها والإفصاح عنها مع تبلور آليات الاسترداد، وأثر ذلك على ميزانيتك.",
     study_21_p1: "مع تقدّم إطار معالجة خسائر القطاع المصرفي، تواجه الشركات التي تحتفظ بودائع مصرفية محتجزة سؤالاً ملحّاً: بأي قيمة تُدرَج هذه الودائع في الميزانية؟ إن إدراجها بالقيمة الاسمية يضخّم أصولاً قد لا تكون قابلة للاسترداد إلا جزئياً.",
-    study_21_p2: "بموجب IFRS 9، تُعدّ هذه الودائع أصولاً مالية خاضعة لتقييم الخسائر الائتمانية المتوقعة. وآليات الاسترداد الناشئة — الدفعات المجزّأة والمعالجة على شرائح وتحويل الأدوات — تغيّر توقيت ومقدار التدفقات المتوقعة، وبالتالي مخصص التدني. وسيدقّق المدققون في الافتراضات وراء أي تقدير للاسترداد.",
+    study_21_p2: "بموجب IFRS 9، تُعدّ هذه الودائع أصولاً مالية خاضعة لتقييم الخسائر الائتمانية المتوقعة. وآليات الاسترداد الناشئة، الدفعات المجزّأة والمعالجة على شرائح وتحويل الأدوات، تغيّر توقيت ومقدار التدفقات المتوقعة، وبالتالي مخصص التدني. وسيدقّق المدققون في الافتراضات وراء أي تقدير للاسترداد.",
     study_21_p3: "ننصح العملاء بتوثيق نموذج تدنٍّ قابل للدفاع عنه للودائع المحتجزة، مرتبط بشروط الاسترداد المعلنة، والإفصاح بوضوح عن الحكم وحساسيته في الإيضاحات. فالشفافية هنا تحمي رأي التدقيق ومصداقية الإدارة أمام المقرضين.",
     study_21_source: "تحليل بموجب IFRS 9 (الأدوات المالية) في سياق الإرشادات المنشورة حول إطار تعافي القطاع المصرفي في لبنان.",
     study_title_einvoice: "التحول إلى الفوترة الإلكترونية: الاستعداد لضريبة القيمة المضافة الرقمية",
@@ -1496,7 +1496,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = e.target.closest('.view-pdf-btn');
     if (!btn) return;
     e.preventDefault();
-    // Real uploaded decrees carry data-pdf-url (loaded directly — the Blob store
+    // Real uploaded decrees carry data-pdf-url (loaded directly, the Blob store
     // serves them inline). The static fallback items open a sample via gview.
     const real = btn.getAttribute('data-pdf-url');
     const src = real
@@ -1574,7 +1574,7 @@ window.setLanguage = function(lang) {
 };
 
 // ============================================================================
-//  MoF DECREES — live loading & rendering from the PHP backend
+//  MoF DECREES, live loading & rendering from the PHP backend
 // ============================================================================
 window.__esoDecrees = null;
 
@@ -1624,7 +1624,7 @@ window.renderDecrees = function () {
 
   list.innerHTML = items.map((it, i) => {
     const border  = i < items.length - 1 ? 'border-bottom: 1px solid #f1f5f9;' : '';
-    const heading = (it.karar ? '<strong>' + esc(it.karar) + '</strong> — ' : '') + esc(it.title);
+    const heading = (it.karar ? '<strong>' + esc(it.karar) + '</strong>, ' : '') + esc(it.title);
     const url     = esc(it.url || '');
     return `
       <div class="pdf-item" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; ${border}">

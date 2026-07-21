@@ -1,4 +1,4 @@
-// POST /api/admin  — JSON actions: session | login | logout | delete
+// POST /api/admin, JSON actions: session | login | logout | delete
 import { fetchJson, deleteObject } from './_storage.js';
 import { passwordOk, signSession, isAuthed, setSessionCookie, readJson, json } from './_lib.js';
 

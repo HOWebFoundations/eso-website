@@ -1,4 +1,4 @@
-// POST /api/upload  — multipart: pdf (file) + title, karar, date. Auth required.
+// POST /api/upload, multipart: pdf (file) + title, karar, date. Auth required.
 // Stores the PDF and its metadata in Supabase Storage.
 import Busboy from 'busboy';
 import crypto from 'node:crypto';

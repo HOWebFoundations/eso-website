@@ -1,4 +1,4 @@
-// GET /api/decrees  — public, read-only list of published decrees (from Supabase Storage).
+// GET /api/decrees, public, read-only list of published decrees (from Supabase Storage).
 import { listObjects, fetchJson } from './_storage.js';
 
 export default async function handler(req, res) {
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     res.status(200).setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify(items));
   } catch (e) {
-    // fail soft — the site falls back to its static list
+    // fail soft, the site falls back to its static list
     res.status(200).setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end('[]');
   }
