@@ -1412,14 +1412,73 @@ document.addEventListener("DOMContentLoaded", () => {
     'client-portal': { t: 'Contact & Client Portal | ESO Lebanon', d: 'Contact ESO Auditors & Consultants in Jal El Dib, Lebanon. Schedule a consultation for audit, tax, accounting or advisory services.' }
   };
 
-  function pathFromId(id) { return id === 'home' ? '/' : '/' + id; }
+  // --- Pretty slugs + language-prefixed routes (en default, /ar, /fr) --------
+  const SLUG = {
+    home: '', about: 'about', services: 'services', team: 'team', careers: 'careers',
+    'service-audit': 'services/audit-assurance',
+    'service-tax': 'services/tax-advisory',
+    'service-accounting': 'services/accounting-payroll',
+    'service-consulting': 'services/corporate-consulting',
+    clients: 'industries',
+    'client-fb': 'industries/food-and-beverage',
+    'lebanon-guide': 'lebanon-market-guide',
+    'kararat-portal': 'ministry-of-finance-decrees',
+    news: 'insights',
+    'client-portal': 'contact',
+    'study-1': 'insights/2026-budget-analysis',
+    'study-2': 'insights/ifrs-18-transition',
+    'study-3': 'insights/valuation-strategies',
+    'study-4': 'insights/nssf-compliance',
+    'study-5': 'insights/esg-reporting-frameworks',
+    'study-6': 'insights/transfer-pricing-scrutiny',
+    'study-7': 'insights/restructuring-distressed-assets',
+    'study-8': 'insights/vat-recovery-bad-debts',
+    'study-9': 'insights/ai-impact-on-auditing',
+    'study-10': 'insights/holding-company-structures',
+    'study-11': 'insights/real-estate-tax-landscape',
+    'study-12': 'insights/ma-due-diligence-pitfalls',
+    'study-13': 'insights/cybersecurity-financial-reporting',
+    'study-14': 'insights/offshore-lebanon-vs-cyprus',
+    'study-15': 'insights/cryptocurrency-asset-valuation',
+    'study-16': 'insights/optimizing-working-capital',
+    'study-17': 'insights/outsourced-cfo-role',
+    'study-18': 'insights/ngo-corporate-governance',
+    'study-19': 'insights/mid-year-2026-compliance-review',
+    'study-20': 'insights/ifrs-19-simplified-disclosures',
+    'study-21': 'insights/deposit-recovery-financial-gap-law',
+    'study-22': 'insights/e-invoicing-shift'
+  };
+  const ID_BY_SLUG = {};
+  Object.keys(SLUG).forEach((id) => { ID_BY_SLUG[SLUG[id]] = id; });
+  const LANGS = ['ar', 'fr'];              // 'en' is the default and carries no prefix
+  const OG_LOCALE = { en: 'en_US', ar: 'ar_LB', fr: 'fr_FR' };
+  let currentLang = 'en';
+  let booted = false;
 
-  function idFromPath(pathname) {
-    const p = decodeURIComponent(pathname || '/').replace(/\/+$/, '');
-    if (p === '') return 'home';
-    const id = p.slice(1);
-    const el = document.getElementById(id);
-    return (el && el.classList.contains('page-view')) ? id : 'home';
+  function pathForId(id, lang) {
+    const slug = SLUG[id] || '';
+    const prefix = (lang && lang !== 'en') ? '/' + lang : '';
+    if (slug === '') return prefix || '/';
+    return prefix + '/' + slug;
+  }
+
+  // Resolve any path (real URL or an English href in the markup) to a route.
+  // Returns { lang, id, legacy } — legacy flags an old /id path to upgrade.
+  function resolvePath(pathname) {
+    let p = pathname || '/';
+    try { p = decodeURIComponent(p); } catch (e) {}
+    p = p.replace(/[?#].*$/, '').replace(/\/+$/, '');
+    let lang = 'en';
+    const segs = p.split('/').filter(Boolean);
+    if (segs.length && LANGS.indexOf(segs[0]) !== -1) lang = segs.shift();
+    const slug = segs.join('/');
+    if (slug === '') return { lang: lang, id: 'home', legacy: false };
+    if (Object.prototype.hasOwnProperty.call(ID_BY_SLUG, slug))
+      return { lang: lang, id: ID_BY_SLUG[slug], legacy: false };
+    const el = document.getElementById(slug);            // legacy /service-audit, /study-1
+    if (el && el.classList.contains('page-view'))
+      return { lang: lang, id: slug, legacy: true };
+    return { lang: lang, id: 'home', legacy: false };
   }
 
   function setHeadTag(selector, attr, value) {
@@ -1438,30 +1497,57 @@ document.addEventListener("DOMContentLoaded", () => {
         d: p ? p.textContent.trim().replace(/\s+/g, ' ').slice(0, 155) : DEFAULT_DESC
       };
     }
-    const url = location.origin + pathFromId(id);
+    const origin = location.origin;
+    const url = origin + pathForId(id, currentLang);
     document.title = m.t;
     setHeadTag('meta[name="description"]', 'content', m.d);
     setHeadTag('meta[property="og:title"]', 'content', m.t);
     setHeadTag('meta[property="og:description"]', 'content', m.d);
     setHeadTag('meta[property="og:url"]', 'content', url);
+    setHeadTag('meta[property="og:locale"]', 'content', OG_LOCALE[currentLang] || 'en_US');
     setHeadTag('meta[name="twitter:title"]', 'content', m.t);
     setHeadTag('meta[name="twitter:description"]', 'content', m.d);
     setHeadTag('link[rel="canonical"]', 'href', url);
+    setHeadTag('link[rel="alternate"][hreflang="en"]', 'href', origin + pathForId(id, 'en'));
+    setHeadTag('link[rel="alternate"][hreflang="ar"]', 'href', origin + pathForId(id, 'ar'));
+    setHeadTag('link[rel="alternate"][hreflang="fr"]', 'href', origin + pathForId(id, 'fr'));
+    setHeadTag('link[rel="alternate"][hreflang="x-default"]', 'href', origin + pathForId(id, 'en'));
   }
 
   let currentRouteId = 'home';
   function handleRouting() {
-    const id = idFromPath(location.pathname);
-    currentRouteId = id;
+    const info = resolvePath(location.pathname);
 
-    document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
-    const targetSection = document.getElementById(id);
+    // On the very first load at the bare root, honor a returning visitor's
+    // saved language by upgrading the URL (crawlers have no storage -> English).
+    if (!booted && info.lang === 'en' && (SLUG[info.id] || '') === ''
+        && location.pathname.replace(/\/+$/, '') === '') {
+      let saved = null;
+      try { saved = localStorage.getItem('eso_lang'); } catch (e) {}
+      if (saved && LANGS.indexOf(saved) !== -1) {
+        info.lang = saved;
+        history.replaceState({}, '', pathForId(info.id, saved));
+      }
+    }
+    booted = true;
+
+    // Upgrade a legacy /id path to its pretty slug (no extra history entry).
+    if (info.legacy) history.replaceState({}, '', pathForId(info.id, info.lang));
+
+    currentRouteId = info.id;
+    currentLang = info.lang;
+
+    document.querySelectorAll('.page-view').forEach((page) => page.classList.remove('active'));
+    const targetSection = document.getElementById(info.id);
     if (targetSection) {
       targetSection.classList.add('active');
       window.scrollTo(0, 0);
       triggerReveals();
     }
-    applyMeta(id);
+
+    // Apply the language this URL implies (translations + dir + meta).
+    if (typeof window.setLanguage === 'function') window.setLanguage(currentLang);
+    else applyMeta(info.id);
 
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -1469,7 +1555,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (navLinks) navLinks.classList.remove('active');
   }
 
-  // Intercept internal link clicks and navigate via the History API (no reload).
+  // Intercept internal link clicks; markup hrefs are English pretty paths, so
+  // resolve to an id and navigate in the language the visitor is viewing.
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const link = e.target.closest('a.nav-router');
@@ -1477,11 +1564,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const href = link.getAttribute('href');
     if (!href || href[0] !== '/' || href[1] === '/') return;
     e.preventDefault();
-    if (href !== location.pathname) history.pushState({}, '', href);
+    const target = pathForId(resolvePath(href).id, currentLang);
+    if (target !== location.pathname) history.pushState({}, '', target);
     handleRouting();
   });
 
   window.addEventListener('popstate', handleRouting);
+
+  // Language switch = navigate to this same page in the chosen language.
+  window.switchLanguage = function (lang) {
+    if (lang !== 'en' && LANGS.indexOf(lang) === -1) lang = 'en';
+    const target = pathForId(currentRouteId, lang);
+    if (target !== location.pathname) history.pushState({}, '', target);
+    handleRouting();
+  };
 
   // Let the language switcher refresh the current page's title/description.
   window.__esoApplyMeta = () => applyMeta(currentRouteId);
@@ -1589,11 +1685,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 7. i18n Language Initialization
-  const savedLang = localStorage.getItem('eso_lang') || 'en';
-  if (typeof window.setLanguage === 'function') {
-    window.setLanguage(savedLang);
-  }
+  // 7. i18n - language is driven by the URL now (/ar, /fr). handleRouting()
+  //    applies the right language and honors a saved preference on the root.
 
   // 8. Load MoF decrees live from the PHP backend (if DECREES_API is configured)
   if (typeof window.loadDecrees === 'function') {

@@ -1,40 +1,374 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://eso-website.vercel.app/</loc><lastmod>2026-07-21</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://eso-website.vercel.app/about</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/services</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/service-audit</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/service-tax</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/service-accounting</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/service-consulting</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/clients</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/client-fb</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/team</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/lebanon-guide</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/kararat-portal</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/news</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/careers</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/client-portal</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-1</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-2</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-3</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-4</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-5</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-6</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-7</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-8</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-9</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-10</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-11</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-12</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-13</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-14</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-15</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-16</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-17</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-18</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-19</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-20</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-21</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://eso-website.vercel.app/study-22</loc><lastmod>2026-07-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://eso-website.vercel.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/about"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/about"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/services</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/services"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/services"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/services"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/services/audit-assurance</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/services/audit-assurance"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/services/audit-assurance"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/services/audit-assurance"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/services/audit-assurance"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/services/tax-advisory</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/services/tax-advisory"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/services/tax-advisory"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/services/tax-advisory"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/services/tax-advisory"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/services/accounting-payroll</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/services/accounting-payroll"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/services/accounting-payroll"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/services/accounting-payroll"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/services/accounting-payroll"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/services/corporate-consulting</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/services/corporate-consulting"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/services/corporate-consulting"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/services/corporate-consulting"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/services/corporate-consulting"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/industries</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/industries"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/industries"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/industries"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/industries"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/industries/food-and-beverage</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/industries/food-and-beverage"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/industries/food-and-beverage"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/industries/food-and-beverage"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/industries/food-and-beverage"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/team</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/team"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/team"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/team"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/team"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/lebanon-market-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/lebanon-market-guide"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/lebanon-market-guide"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/lebanon-market-guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/lebanon-market-guide"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/ministry-of-finance-decrees</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/ministry-of-finance-decrees"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/ministry-of-finance-decrees"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/ministry-of-finance-decrees"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/ministry-of-finance-decrees"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/careers</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/careers"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/careers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/careers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/careers"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/contact"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/contact"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/2026-budget-analysis</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/2026-budget-analysis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/2026-budget-analysis"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/2026-budget-analysis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/2026-budget-analysis"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/ifrs-18-transition</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/ifrs-18-transition"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/ifrs-18-transition"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/ifrs-18-transition"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/ifrs-18-transition"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/valuation-strategies</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/valuation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/valuation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/valuation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/valuation-strategies"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/nssf-compliance</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/nssf-compliance"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/nssf-compliance"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/nssf-compliance"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/nssf-compliance"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/esg-reporting-frameworks</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/esg-reporting-frameworks"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/esg-reporting-frameworks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/esg-reporting-frameworks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/esg-reporting-frameworks"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/transfer-pricing-scrutiny</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/transfer-pricing-scrutiny"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/transfer-pricing-scrutiny"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/transfer-pricing-scrutiny"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/transfer-pricing-scrutiny"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/restructuring-distressed-assets</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/restructuring-distressed-assets"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/restructuring-distressed-assets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/restructuring-distressed-assets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/restructuring-distressed-assets"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/vat-recovery-bad-debts</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/vat-recovery-bad-debts"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/vat-recovery-bad-debts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/vat-recovery-bad-debts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/vat-recovery-bad-debts"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/ai-impact-on-auditing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/ai-impact-on-auditing"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/ai-impact-on-auditing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/ai-impact-on-auditing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/ai-impact-on-auditing"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/holding-company-structures</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/holding-company-structures"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/holding-company-structures"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/holding-company-structures"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/holding-company-structures"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/real-estate-tax-landscape</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/real-estate-tax-landscape"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/real-estate-tax-landscape"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/real-estate-tax-landscape"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/real-estate-tax-landscape"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/ma-due-diligence-pitfalls</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/ma-due-diligence-pitfalls"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/ma-due-diligence-pitfalls"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/ma-due-diligence-pitfalls"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/ma-due-diligence-pitfalls"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/cybersecurity-financial-reporting</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/cybersecurity-financial-reporting"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/cybersecurity-financial-reporting"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/cybersecurity-financial-reporting"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/cybersecurity-financial-reporting"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/offshore-lebanon-vs-cyprus</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/offshore-lebanon-vs-cyprus"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/offshore-lebanon-vs-cyprus"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/offshore-lebanon-vs-cyprus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/offshore-lebanon-vs-cyprus"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/cryptocurrency-asset-valuation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/cryptocurrency-asset-valuation"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/cryptocurrency-asset-valuation"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/cryptocurrency-asset-valuation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/cryptocurrency-asset-valuation"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/optimizing-working-capital</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/optimizing-working-capital"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/optimizing-working-capital"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/optimizing-working-capital"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/optimizing-working-capital"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/outsourced-cfo-role</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/outsourced-cfo-role"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/outsourced-cfo-role"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/outsourced-cfo-role"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/outsourced-cfo-role"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/ngo-corporate-governance</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/ngo-corporate-governance"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/ngo-corporate-governance"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/ngo-corporate-governance"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/ngo-corporate-governance"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/mid-year-2026-compliance-review</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/mid-year-2026-compliance-review"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/mid-year-2026-compliance-review"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/mid-year-2026-compliance-review"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/mid-year-2026-compliance-review"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/ifrs-19-simplified-disclosures</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/ifrs-19-simplified-disclosures"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/ifrs-19-simplified-disclosures"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/ifrs-19-simplified-disclosures"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/ifrs-19-simplified-disclosures"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/deposit-recovery-financial-gap-law</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/deposit-recovery-financial-gap-law"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/deposit-recovery-financial-gap-law"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/deposit-recovery-financial-gap-law"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/deposit-recovery-financial-gap-law"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eso-website.vercel.app/insights/e-invoicing-shift</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/insights/e-invoicing-shift"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar/insights/e-invoicing-shift"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr/insights/e-invoicing-shift"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/insights/e-invoicing-shift"/>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

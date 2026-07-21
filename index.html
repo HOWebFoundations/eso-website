@@ -7,6 +7,10 @@
   <title>ESO | Auditors & Consultants in Lebanon</title>
   <meta name="description" content="ESO Auditors & Consultants: Big 4 caliber audit, tax, accounting and advisory for enterprises in Lebanon and the MENA region. Trusted since 2001.">
   <link rel="canonical" href="https://eso-website.vercel.app/">
+  <link rel="alternate" hreflang="en" href="https://eso-website.vercel.app/">
+  <link rel="alternate" hreflang="ar" href="https://eso-website.vercel.app/ar">
+  <link rel="alternate" hreflang="fr" href="https://eso-website.vercel.app/fr">
+  <link rel="alternate" hreflang="x-default" href="https://eso-website.vercel.app/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <meta property="og:type" content="website">
@@ -63,7 +67,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -130,23 +134,23 @@
         <li><a href="/" class="nav-router" data-i18n="nav_home">Home</a></li>
         <li><a href="/about" class="nav-router" data-i18n="nav_about">About Us</a></li>
         <li><a href="/services" class="nav-router" data-i18n="nav_services">Our Services</a></li>
-        <li><a href="/clients" class="nav-router" data-i18n="nav_clients">Our Clients</a></li>
+        <li><a href="/industries" class="nav-router" data-i18n="nav_clients">Our Clients</a></li>
 
         <li class="nav-dropdown">
           <a href="javascript:void(0)" class="nav-dropbtn"><span data-i18n="nav_lebanon_insights">Lebanon Insights</span> <span style="font-size: 0.7em; margin-left: 3px;">▼</span></a>
           <ul class="dropdown-content">
-            <li><a href="/lebanon-guide" class="nav-router" data-i18n="nav_market_guide">Market Guide</a></li>
-            <li><a href="/kararat-portal" class="nav-router" data-i18n="nav_mof_decrees">MoF Decrees</a></li>
+            <li><a href="/lebanon-market-guide" class="nav-router" data-i18n="nav_market_guide">Market Guide</a></li>
+            <li><a href="/ministry-of-finance-decrees" class="nav-router" data-i18n="nav_mof_decrees">MoF Decrees</a></li>
           </ul>
         </li>
 
-        <li><a href="/news" class="nav-router" data-i18n="nav_news">News</a></li>
+        <li><a href="/insights" class="nav-router" data-i18n="nav_news">News</a></li>
         <li><a href="/careers" class="nav-router" data-i18n="nav_careers">Careers</a></li>
-        <li><a href="/client-portal" class="nav-router" data-i18n="nav_client_portal">Client Portal</a></li>
+        <li><a href="/contact" class="nav-router" data-i18n="nav_client_portal">Client Portal</a></li>
         <li class="lang-switcher">
-          <button onclick="setLanguage('en')" class="lang-btn" data-lang="en">EN</button>
-          <button onclick="setLanguage('ar')" class="lang-btn" data-lang="ar">ع</button>
-          <button onclick="setLanguage('fr')" class="lang-btn" data-lang="fr">FR</button>
+          <button onclick="switchLanguage('en')" class="lang-btn" data-lang="en">EN</button>
+          <button onclick="switchLanguage('ar')" class="lang-btn" data-lang="ar">ع</button>
+          <button onclick="switchLanguage('fr')" class="lang-btn" data-lang="fr">FR</button>
         </li>
       </ul>
     </nav>
@@ -170,27 +174,27 @@
               <div class="panel-category">
                 <h4 class="category-title" data-i18n="hero_firm_expertise">Firm Expertise & Resources</h4>
                 <div class="quick-access-grid">
-                  <a href="/service-audit" class="nav-router simple-nav-link">
+                  <a href="/services/audit-assurance" class="nav-router simple-nav-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></span>
                     <span data-i18n="hero_audit_assurance">Audit & Assurance</span>
                   </a>
-                  <a href="/service-tax" class="nav-router simple-nav-link">
+                  <a href="/services/tax-advisory" class="nav-router simple-nav-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line></svg></span>
                     <span data-i18n="hero_tax_advisory">Tax Advisory</span>
                   </a>
-                  <a href="/service-accounting" class="nav-router simple-nav-link">
+                  <a href="/services/accounting-payroll" class="nav-router simple-nav-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></span>
                     <span data-i18n="hero_accounting">Accounting</span>
                   </a>
-                  <a href="/service-consulting" class="nav-router simple-nav-link">
+                  <a href="/services/corporate-consulting" class="nav-router simple-nav-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
                     <span data-i18n="hero_consulting">Consulting</span>
                   </a>
-                  <a href="/client-fb" class="nav-router simple-nav-link highlight-link">
+                  <a href="/industries/food-and-beverage" class="nav-router simple-nav-link highlight-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></span>
                     <span data-i18n="hero_fb_specialty">F&B Specialty</span>
                   </a>
-                  <a href="/kararat-portal" class="nav-router simple-nav-link highlight-link">
+                  <a href="/ministry-of-finance-decrees" class="nav-router simple-nav-link highlight-link">
                     <span class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></span>
                     <span data-i18n="hero_mof_decrees">MoF Decrees</span>
                   </a>
@@ -198,7 +202,7 @@
               </div>
             </div>
 
-            <a href="/client-portal" class="nav-router btn glowing-action-btn" style="margin-top: 30px; display: block;" data-i18n="hero_schedule_consultation">SCHEDULE A CONSULTATION</a>
+            <a href="/contact" class="nav-router btn glowing-action-btn" style="margin-top: 30px; display: block;" data-i18n="hero_schedule_consultation">SCHEDULE A CONSULTATION</a>
           </div>
 
           <div class="advisory-glass-panel right-panel">
@@ -212,16 +216,16 @@
               <div class="panel-category">
                 <h4 class="category-title" style="font-size: 0.75rem;" data-i18n="hero_market_intelligence">Market Intelligence</h4>
                 <div class="news-access-list">
-                  <a href="/study-19" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
+                  <a href="/insights/mid-year-2026-compliance-review" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
                     <span class="date-badge">Jul 10</span> <span data-i18n="study_title_midyear">Mid-Year Compliance Review</span>
                   </a>
-                  <a href="/study-20" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
+                  <a href="/insights/ifrs-19-simplified-disclosures" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
                     <span class="date-badge">Jun 20</span> <span data-i18n="study_title_ifrs19">IFRS 19 Disclosures</span>
                   </a>
-                  <a href="/study-21" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
+                  <a href="/insights/deposit-recovery-financial-gap-law" class="nav-router simple-nav-link" style="padding: 10px 12px; font-size: 0.75rem;">
                     <span class="date-badge">May 15</span> <span data-i18n="study_title_gaplaw">Deposit Recovery</span>
                   </a>
-                  <a href="/news" class="nav-router btn glowing-action-btn" style="margin-top: 15px; padding: 12px; font-size: 0.75rem;" data-i18n="hero_view_all_news">VIEW ALL NEWS</a>
+                  <a href="/insights" class="nav-router btn glowing-action-btn" style="margin-top: 15px; padding: 12px; font-size: 0.75rem;" data-i18n="hero_view_all_news">VIEW ALL NEWS</a>
                 </div>
               </div>
             </div>
@@ -391,7 +395,7 @@
           <div class="reveal" style="background: #fff; padding: 60px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--eso-silver-dark);">
             <p style="margin-bottom: 30px; font-size: 1.1rem; color: var(--eso-text-dark); line-height: 1.8;" data-i18n="clients_intro">Our clients are among our prestigious local and foreign in different sectors, ESO has developed an expertise in all industries, mainly:</p>
             <ul class="client-list" style="list-style-type: disc; padding-left: 40px; line-height: 2.4; color: var(--eso-text-dark); font-size: 1.1rem;">
-              <li><a href="/client-fb" class="nav-router fb-subtle-link" data-i18n="client_fb">Food and Beverage</a></li>
+              <li><a href="/industries/food-and-beverage" class="nav-router fb-subtle-link" data-i18n="client_fb">Food and Beverage</a></li>
               <li data-i18n="client_manufacturing">Manufacturing Industry</li>
               <li data-i18n="client_contracting">Contracting and real estate development</li>
               <li data-i18n="client_transportation">Transportation (freight)</li>
@@ -418,14 +422,14 @@
     <section id="client-fb" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/clients" class="nav-router" data-i18n="nav_clients">Our Clients</a> <span>→</span> <span class="current" data-i18n="fb_breadcrumb">Food & Beverage</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/industries" class="nav-router" data-i18n="nav_clients">Our Clients</a> <span>→</span> <span class="current" data-i18n="fb_breadcrumb">Food & Beverage</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="fb_page_title">Food and Beverage Sector</h1>
         </div>
       </div>
 
       <div class="container reveal">
         <div class="study-article" style="max-width: 900px; padding: 80px 40px;">
-          <a href="/clients" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_clients">← Back to Clients</a>
+          <a href="/industries" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_clients">← Back to Clients</a>
           <span class="subtitle" style="display: block; margin-bottom: 10px;" data-i18n="fb_core_specialty">Firm Core Specialty</span>
           <h2 style="font-size: 2.5rem; margin-top: 0; margin-bottom: 30px;" data-i18n="fb_financial_engine">The Financial Engine of Hospitality</h2>
           <p class="lead" style="font-size: 1.25rem; font-weight: 500; color: var(--eso-navy); margin-bottom: 40px; border-left: 4px solid var(--eso-accent); padding-left: 20px;" data-i18n="fb_lead_text">Nearly 70% of our enterprise clients operate within the dynamic Food & Beverage sector.</p>
@@ -465,7 +469,7 @@
           <div style="background-color: var(--eso-silver-light); padding: 40px; border-radius: 8px; border-left: 5px solid var(--eso-navy);">
             <h3 style="font-size: 1.4rem; margin-top: 0; margin-bottom: 15px; color: var(--eso-navy);" data-i18n="fb_ready_scale">Ready to scale your concept?</h3>
             <p style="margin-bottom: 20px;" data-i18n="fb_stop_guessing">Stop guessing your prime costs.</p>
-            <a href="/client-portal" class="btn btn-primary nav-router" data-i18n="fb_consult_team">Consult our F&B Team</a>
+            <a href="/contact" class="btn btn-primary nav-router" data-i18n="fb_consult_team">Consult our F&B Team</a>
           </div>
         </div>
       </div>
@@ -579,25 +583,25 @@
             <h2 style="color: #fff;" data-i18n="services_explore_services">Explore Our Services</h2>
           </div>
           <div class="grid-4 reveal">
-            <a href="/service-audit" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');">
+            <a href="/services/audit-assurance" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_audit_title">Audit & Assurance</h3>
                 <p data-i18n="card_audit_desc">Independent statutory audits and IFRS compliance ensuring absolute integrity. Click to explore.</p>
               </div>
             </a>
-            <a href="/service-tax" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=800&q=80');">
+            <a href="/services/tax-advisory" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=800&q=80');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_tax_title">Tax Advisory</h3>
                 <p data-i18n="card_tax_desc">Strategic tax planning, VAT compliance, and defense against regulatory audits. Click to explore.</p>
               </div>
             </a>
-            <a href="/service-accounting" class="expertise-card nav-router" style="background-image: url('/images/service-accounting.webp');">
+            <a href="/services/accounting-payroll" class="expertise-card nav-router" style="background-image: url('/images/service-accounting.webp');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_acc_title">Accounting</h3>
                 <p data-i18n="card_acc_desc">Comprehensive bookkeeping, payroll processing, and multi-currency ledger reconciliation. Click to explore.</p>
               </div>
             </a>
-            <a href="/service-consulting" class="expertise-card nav-router" style="background-image: url('/images/service-consulting.jpg');">
+            <a href="/services/corporate-consulting" class="expertise-card nav-router" style="background-image: url('/images/service-consulting.jpg');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_cons_title">Consulting</h3>
                 <p data-i18n="card_cons_desc">Rigorous M&A due diligence, enterprise valuations, and operational restructuring. Click to explore.</p>
@@ -631,7 +635,7 @@
           <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--eso-silver-dark);">
             <h3 style="font-size: 1.4rem; color: var(--eso-navy); margin-bottom: 15px; margin-top: 0;" data-i18n="ready_elevate">Ready to elevate your enterprise?</h3>
             <p style="margin-bottom: 20px; color: var(--eso-text-muted);" data-i18n="contact_advisory">Contact our advisory team to discuss how we can assist with your specific requirements.</p>
-            <a href="/client-portal" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
+            <a href="/contact" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -660,7 +664,7 @@
           <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--eso-silver-dark);">
             <h3 style="font-size: 1.4rem; color: var(--eso-navy); margin-bottom: 15px; margin-top: 0;" data-i18n="ready_elevate">Ready to elevate your enterprise?</h3>
             <p style="margin-bottom: 20px; color: var(--eso-text-muted);" data-i18n="contact_advisory">Contact our advisory team to discuss how we can assist.</p>
-            <a href="/client-portal" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
+            <a href="/contact" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -689,7 +693,7 @@
           <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--eso-silver-dark);">
             <h3 style="font-size: 1.4rem; color: var(--eso-navy); margin-bottom: 15px; margin-top: 0;" data-i18n="ready_elevate">Ready to elevate your enterprise?</h3>
             <p style="margin-bottom: 20px; color: var(--eso-text-muted);" data-i18n="contact_advisory">Contact our advisory team to discuss how we can assist.</p>
-            <a href="/client-portal" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
+            <a href="/contact" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -718,7 +722,7 @@
           <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--eso-silver-dark);">
             <h3 style="font-size: 1.4rem; color: var(--eso-navy); margin-bottom: 15px; margin-top: 0;" data-i18n="ready_elevate">Ready to elevate your enterprise?</h3>
             <p style="margin-bottom: 20px; color: var(--eso-text-muted);" data-i18n="contact_advisory">Contact our advisory team to discuss how we can assist.</p>
-            <a href="/client-portal" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
+            <a href="/contact" class="btn btn-primary nav-router" data-i18n="get_in_touch">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -739,7 +743,7 @@
             <h2 data-i18n="guide_seamlessly">Seamlessly operate within local jurisdictions.</h2>
             <p data-i18n="guide_p1">Expanding or operating in Lebanon brings unique regulatory, tax, and financial nuances.</p>
             <p data-i18n="guide_p2">Whether you require guidance on Ministry of Finance decrees, NSSF compliance, or cross-border structuring, ESO provides actionable intelligence.</p>
-            <a href="/client-portal" class="btn btn-outline-dark nav-router" style="margin-right: 15px;" data-i18n="guide_consult">Consult an Expert</a>
+            <a href="/contact" class="btn btn-outline-dark nav-router" style="margin-right: 15px;" data-i18n="guide_consult">Consult an Expert</a>
           </div>
           <div class="split-image">
             <div style="width: 100%; aspect-ratio: 4/3; background-image: url('/images/nejmeh-square-beirut.jpg'); background-size: cover; background-position: center top; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" title="Nejmeh Square, Beirut Lebanon"></div>
@@ -831,7 +835,7 @@
                 <span class="date" data-i18n="date_jul10_26">July 10, 2026</span>
                 <h3 data-i18n="study_title_midyear">Mid-Year 2026 Compliance Review: Tax & NSSF Checkpoints</h3>
                 <p data-i18n="study_desc_midyear">A practical half-year checklist covering income tax instalments, VAT filing cycles, and NSSF declarations to avoid year-end penalties.</p>
-                <a href="/study-19" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/mid-year-2026-compliance-review" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -839,7 +843,7 @@
                 <span class="date" data-i18n="date_jun20_26">June 20, 2026</span>
                 <h3 data-i18n="study_title_ifrs19">IFRS 19: Simplified Disclosures for Eligible Subsidiaries</h3>
                 <p data-i18n="study_desc_ifrs19">How subsidiaries without public accountability can cut disclosure volume under IFRS 19 while staying fully IFRS-compliant.</p>
-                <a href="/study-20" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/ifrs-19-simplified-disclosures" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -847,7 +851,7 @@
                 <span class="date" data-i18n="date_may15_26">May 15, 2026</span>
                 <h3 data-i18n="study_title_gaplaw">Accounting for Deposit Recovery Under the Financial Gap Law</h3>
                 <p data-i18n="study_desc_gaplaw">Practical guidance on valuing, provisioning, and disclosing trapped bank deposits as recovery mechanisms take shape.</p>
-                <a href="/study-21" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/deposit-recovery-financial-gap-law" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -855,7 +859,7 @@
                 <span class="date" data-i18n="date_apr08_26">April 08, 2026</span>
                 <h3 data-i18n="study_title_einvoice">The Shift to E-Invoicing: Preparing for Digital VAT</h3>
                 <p data-i18n="study_desc_einvoice">Why mandatory electronic invoicing is coming to the region, and the system, data, and process changes to start now.</p>
-                <a href="/study-22" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/e-invoicing-shift" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -863,7 +867,7 @@
                 <span class="date" data-i18n="date_mar18">March 18, 2026</span>
                 <h3 data-i18n="study_title_budget_2026">2026 Budget Analysis: Navigating New Corporate Tax Brackets</h3>
                 <p data-i18n="study_desc_budget">A comprehensive study on the Ministry of Finance's latest fiscal decrees and strategic modeling for tax optimization.</p>
-                <a href="/study-1" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/2026-budget-analysis" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -871,7 +875,7 @@
                 <span class="date" data-i18n="date_feb28">February 28, 2026</span>
                 <h3 data-i18n="study_title_ifrs18">The Transition to IFRS 18: What MENA Enterprises Need to Know</h3>
                 <p data-i18n="study_desc_ifrs">An in-depth guide on presentation and disclosure changes required by IFRS 18.</p>
-                <a href="/study-2" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/ifrs-18-transition" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -879,7 +883,7 @@
                 <span class="date" data-i18n="date_jan15">January 15, 2026</span>
                 <h3 data-i18n="study_title_valuation">Valuation Strategies Amidst Multi-Tiered Exchange Rates</h3>
                 <p data-i18n="study_desc_valuation">Evaluating SME portfolios in Lebanon: How to properly bridge the gap between historical book value and hyper-inflationary realities.</p>
-                <a href="/study-3" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/valuation-strategies" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -887,7 +891,7 @@
                 <span class="date" data-i18n="date_dec10">December 10, 2025</span>
                 <h3 data-i18n="study_title_nssf">NSSF Compliance in a Hyper-Inflationary Economy</h3>
                 <p data-i18n="study_desc_nssf">Strategies for managing payroll deductions and National Social Security Fund declarations.</p>
-                <a href="/study-4" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/nssf-compliance" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -895,7 +899,7 @@
                 <span class="date" data-i18n="date_nov22">November 22, 2025</span>
                 <h3 data-i18n="study_title_esg">ESG Reporting Frameworks for Lebanese Corporations</h3>
                 <p data-i18n="study_desc_esg">Why Environmental, Social, and Governance (ESG) reporting is becoming mandatory for local firms.</p>
-                <a href="/study-5" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/esg-reporting-frameworks" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -903,7 +907,7 @@
                 <span class="date" data-i18n="date_oct05">October 05, 2025</span>
                 <h3 data-i18n="study_title_transfer">Transfer Pricing Scrutiny in the MENA Region</h3>
                 <p data-i18n="study_desc_transfer">An analysis of recent tax authority audits focusing on intercompany transactions.</p>
-                <a href="/study-6" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/transfer-pricing-scrutiny" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -911,7 +915,7 @@
                 <span class="date" data-i18n="date_sep18">September 18, 2025</span>
                 <h3 data-i18n="study_title_distressed">Restructuring Distressed Assets: A Legal and Financial Guide</h3>
                 <p data-i18n="study_desc_distressed">Key accounting maneuvers and debt-to-equity swaps to rescue distressed manufacturing assets.</p>
-                <a href="/study-7" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/restructuring-distressed-assets" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -919,7 +923,7 @@
                 <span class="date" data-i18n="date_aug30">August 30, 2025</span>
                 <h3 data-i18n="study_title_vat_bad">VAT Recovery on Bad Debts in Lebanon</h3>
                 <p data-i18n="study_desc_vat_bad">A step-by-step technical bulletin on how to legally reclaim Value Added Tax.</p>
-                <a href="/study-8" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/vat-recovery-bad-debts" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -927,7 +931,7 @@
                 <span class="date" data-i18n="date_jul12">July 12, 2025</span>
                 <h3 data-i18n="study_title_ai">The Impact of AI on Automated Statutory Auditing</h3>
                 <p data-i18n="study_desc_ai">How artificial intelligence is changing sample sizes, anomaly detection, and fraud prevention.</p>
-                <a href="/study-9" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/ai-impact-on-auditing" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -935,7 +939,7 @@
                 <span class="date" data-i18n="date_jun25">June 25, 2025</span>
                 <h3 data-i18n="study_title_holding">Holding Company Structures: Tax Optimization Strategies</h3>
                 <p data-i18n="study_desc_holding">Evaluating the tax benefits of establishing an SAL Holding company in Lebanon versus a UAE Freezone entity.</p>
-                <a href="/study-10" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/holding-company-structures" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -943,7 +947,7 @@
                 <span class="date" data-i18n="date_may14">May 14, 2025</span>
                 <h3 data-i18n="study_title_real_estate">Navigating the Real Estate Tax Landscape</h3>
                 <p data-i18n="study_desc_real_estate">Essential tax planning for property developers dealing with built property tax.</p>
-                <a href="/study-11" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/real-estate-tax-landscape" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -951,7 +955,7 @@
                 <span class="date" data-i18n="date_apr08">April 08, 2025</span>
                 <h3 data-i18n="study_title_dd">Due Diligence Pitfalls in Cross-Border M&A</h3>
                 <p data-i18n="study_desc_dd">Common financial blindspots discovered during the acquisition of local tech startups.</p>
-                <a href="/study-12" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/ma-due-diligence-pitfalls" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -959,7 +963,7 @@
                 <span class="date" data-i18n="date_mar20">March 20, 2025</span>
                 <h3 data-i18n="study_title_cyber">Cybersecurity Risks in Financial Reporting</h3>
                 <p data-i18n="study_desc_cyber">Auditing the IT environment: Why the integrity of financial statements relies on testing data security protocols.</p>
-                <a href="/study-13" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/cybersecurity-financial-reporting" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -967,7 +971,7 @@
                 <span class="date" data-i18n="date_feb11">February 11, 2025</span>
                 <h3 data-i18n="study_title_offshore">Offshore Incorporation: Lebanon vs. Cyprus</h3>
                 <p data-i18n="study_desc_offshore">A comparative study on corporate tax rates, maintenance costs, and banking compliance.</p>
-                <a href="/study-14" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/offshore-lebanon-vs-cyprus" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -975,7 +979,7 @@
                 <span class="date" data-i18n="date_jan29">January 29, 2025</span>
                 <h3 data-i18n="study_title_crypto">Cryptocurrency Asset Valuation for Statutory Audits</h3>
                 <p data-i18n="study_desc_crypto">Determining fair value and recognizing impairment losses for corporate treasuries holding Bitcoin under IFRS.</p>
-                <a href="/study-15" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/cryptocurrency-asset-valuation" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -983,7 +987,7 @@
                 <span class="date" data-i18n="date_dec15">December 15, 2024</span>
                 <h3 data-i18n="study_title_wc">Optimizing Working Capital Amidst Supply Chain Shocks</h3>
                 <p data-i18n="study_desc_wc">Cash flow modeling strategies to extend payables and accelerate receivables.</p>
-                <a href="/study-16" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/optimizing-working-capital" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -991,7 +995,7 @@
                 <span class="date" data-i18n="date_nov03">November 03, 2024</span>
                 <h3 data-i18n="study_title_cfo">The Role of the Outsourced CFO for Growing SMEs</h3>
                 <p data-i18n="study_desc_cfo">Why mid-sized family businesses are shifting to fractional financial leadership.</p>
-                <a href="/study-17" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/outsourced-cfo-role" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
             <div class="insight-card no-image reveal">
@@ -999,7 +1003,7 @@
                 <span class="date" data-i18n="date_oct18">October 18, 2024</span>
                 <h3 data-i18n="study_title_ngo">Corporate Governance Requirements for NGOs</h3>
                 <p data-i18n="study_desc_ngo">Ensuring transparency: Audit requirements for non-governmental organizations to secure funding.</p>
-                <a href="/study-18" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
+                <a href="/insights/ngo-corporate-governance" class="read-more nav-router" data-i18n="read_full_study">Read Full Study →</a>
               </div>
             </div>
           </div>
@@ -1010,14 +1014,14 @@
     <section id="study-1" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_budget_2026">2026 Budget Analysis</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_mar18">March 18, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_1_p1">The 2026 fiscal budget introduced by the Ministry of Finance represents a significant shift in corporate taxation strategy.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1035,14 +1039,14 @@
     <section id="study-2" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ifrs18">The Transition to IFRS 18</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_feb28">February 28, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="study_2_h2_1">The End of IAS 1</h2>
           <p data-i18n="study_2_p1">The International Accounting Standards Board (IASB) has officially rolled out IFRS 18.</p>
           <h2 data-i18n="study_2_h2_2">New P&L Categories</h2>
@@ -1059,14 +1063,14 @@
     <section id="study-3" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_valuation">Valuation Strategies</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jan15">January 15, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="study_3_h2_1">The Valuation Crisis</h2>
           <p data-i18n="study_3_p1">Evaluating the true net worth of SMEs in Lebanon remains one of the most complex auditing challenges.</p>
           <h2 data-i18n="study_3_h2_2">Bridging the Gap</h2>
@@ -1083,14 +1087,14 @@
     <section id="study-4" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_nssf">NSSF Compliance</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_dec10">December 10, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_4_p1">As the NSSF in Lebanon adjusts contribution limits, businesses are facing steep increases in payroll liabilities.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1107,14 +1111,14 @@
     <section id="study-5" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_esg">ESG Reporting Frameworks</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_nov22">November 22, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_5_p1">ESG criteria are no longer optional for Lebanese enterprises looking to attract foreign direct investment.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1131,14 +1135,14 @@
     <section id="study-6" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_transfer">Transfer Pricing Scrutiny</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_oct05">October 05, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_6_p1">Tax authorities across the MENA region are cracking down on profit shifting.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1155,14 +1159,14 @@
     <section id="study-7" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32d7?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_distressed">Restructuring Distressed Assets</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_sep18">September 18, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_7_p1">This guide covers the accounting maneuvers required to successfully restructure corporate debt.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1179,14 +1183,14 @@
     <section id="study-8" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_vat_bad">VAT Recovery on Bad Debts</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_aug30">August 30, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_8_p1">Enterprises are paying VAT on invoices they will never collect. This bulletin provides a roadmap to legally recover remitted VAT.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1203,14 +1207,14 @@
     <section id="study-9" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ai">The Impact of AI on Auditing</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jul12">July 12, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_9_p1">Artificial Intelligence is rapidly transforming the assurance industry.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1227,14 +1231,14 @@
     <section id="study-10" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_holding">Holding Company Structures</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jun25">June 25, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_10_p1">For high-net-worth individuals and family offices in Lebanon, structuring investments through a holding company is vital.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1251,14 +1255,14 @@
     <section id="study-11" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_real_estate">Real Estate Tax Landscape</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_may14">May 14, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_11_p1">Real estate remains a primary store of value in Lebanon. This guide highlights essential tax planning strategies for property developers.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1275,14 +1279,14 @@
     <section id="study-12" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_dd">Due Diligence Pitfalls in M&A</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_apr08">April 08, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_12_p1">The financial due diligence process has revealed consistent operational blindspots in MENA tech startups.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1299,14 +1303,14 @@
     <section id="study-13" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_cyber">Cybersecurity Risks in Financial Reporting</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_mar20">March 20, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_13_p1">An auditor's opinion is only as reliable as the IT systems generating the financial data.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1323,14 +1327,14 @@
     <section id="study-14" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_offshore">Offshore Incorporation: Lebanon vs. Cyprus</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_feb11">February 11, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_14_p1">Deciding where to incorporate is a critical strategic choice for service providers engaging with international clients.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1347,14 +1351,14 @@
     <section id="study-15" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_crypto">Cryptocurrency Asset Valuation</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jan29">January 29, 2025</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_15_p1">Auditors are grappling with how to correctly value digital assets under IFRS.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1371,14 +1375,14 @@
     <section id="study-16" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_wc">Optimizing Working Capital</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_dec15">December 15, 2024</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_16_p1">Global supply chain disruptions require robust cash flow modeling to ensure liquidity.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1395,14 +1399,14 @@
     <section id="study-17" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_cfo">The Role of the Outsourced CFO</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_nov03">November 03, 2024</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_17_p1">As mid-sized family businesses scale, the gap between a head accountant and a strategic CFO becomes apparent.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1419,14 +1423,14 @@
     <section id="study-18" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1598550874175-4d0ef43ee90d?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ngo">Corporate Governance Requirements for NGOs</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_oct18">October 18, 2024</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_18_p1">International donor agencies such as USAID and the EU demand absolute transparency before releasing grants.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1443,14 +1447,14 @@
     <section id="study-19" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_midyear">Mid-Year 2026 Compliance Review</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jul10_26">July 10, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_19_p1">The first half of 2026 has brought tighter filing windows and revised NSSF ceilings.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1467,14 +1471,14 @@
     <section id="study-20" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ifrs19">IFRS 19: Simplified Disclosures</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_jun20_26">June 20, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_20_p1">Following IFRS 18, the IASB has issued IFRS 19 for eligible subsidiaries.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1491,14 +1495,14 @@
     <section id="study-21" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_gaplaw">Deposit Recovery & the Financial Gap Law</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_may15_26">May 15, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_21_p1">Enterprises holding trapped bank deposits must decide at what value to carry them.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1515,14 +1519,14 @@
     <section id="study-22" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80') center/cover;">
         <div class="container text-center reveal">
-          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/news" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_einvoice">The Shift to E-Invoicing</h1>
           <span class="date" style="color: var(--eso-accent); display: block; margin-top: 15px;"><span data-i18n="published_label">Published:</span> <span data-i18n="date_apr08_26">April 08, 2026</span></span>
         </div>
       </div>
       <div class="container reveal">
         <div class="study-article">
-          <a href="/news" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">← Back to News</a>
           <h2 data-i18n="exec_summary">Executive Summary</h2>
           <p data-i18n="study_22_p1">Electronic invoicing has moved from optional to mandatory across much of the region.</p>
           <h2 data-i18n="key_adjustments">Key Adjustments & Impact</h2>
@@ -1722,22 +1726,22 @@
             <li><a href="/" class="nav-router" data-i18n="nav_home">Home</a></li>
             <li><a href="/about" class="nav-router" data-i18n="nav_about">About Us</a></li>
             <li><a href="/services" class="nav-router" data-i18n="nav_services">Services</a></li>
-            <li><a href="/clients" class="nav-router" data-i18n="nav_clients">Our Clients</a></li>
+            <li><a href="/industries" class="nav-router" data-i18n="nav_clients">Our Clients</a></li>
             <li class="nav-dropdown footer-dropdown-wrapper">
               <a href="javascript:void(0)" class="nav-dropbtn" style="padding: 0; color: var(--eso-text-muted);"><span data-i18n="nav_lebanon_insights">Lebanon Insights</span> <span style="font-size: 0.7em; margin-left: 3px;">▼</span></a>
               <ul class="dropdown-content footer-dropdown">
-                <li style="margin-bottom: 0;"><a href="/lebanon-guide" class="nav-router" style="color: var(--eso-silver-light);" data-i18n="nav_market_guide">Market Guide</a></li>
-                <li style="margin-bottom: 0;"><a href="/kararat-portal" class="nav-router" style="color: var(--eso-silver-light);" data-i18n="nav_mof_decrees">MoF Decrees</a></li>
+                <li style="margin-bottom: 0;"><a href="/lebanon-market-guide" class="nav-router" style="color: var(--eso-silver-light);" data-i18n="nav_market_guide">Market Guide</a></li>
+                <li style="margin-bottom: 0;"><a href="/ministry-of-finance-decrees" class="nav-router" style="color: var(--eso-silver-light);" data-i18n="nav_mof_decrees">MoF Decrees</a></li>
               </ul>
             </li>
-            <li><a href="/news" class="nav-router" data-i18n="nav_news">News</a></li>
+            <li><a href="/insights" class="nav-router" data-i18n="nav_news">News</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4 data-i18n="footer_connect_title">Connect</h4>
           <ul>
             <li><a href="/careers" class="nav-router" data-i18n="nav_careers">Careers</a></li>
-            <li><a href="/client-portal" class="nav-router" data-i18n="footer_contact">Contact</a></li>
+            <li><a href="/contact" class="nav-router" data-i18n="footer_contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -1754,6 +1758,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
