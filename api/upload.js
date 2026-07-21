@@ -1,8 +1,9 @@
 // POST /api/upload  — multipart: pdf (file) + title, karar, date. Auth required.
+// Stores the PDF and its metadata in Supabase Storage.
 import Busboy from 'busboy';
-import { put } from '@vercel/blob';
 import crypto from 'node:crypto';
 import { isAuthed, json } from './_lib.js';
+import { uploadObject, publicUrl } from './_storage.js';
 
 export const config = { api: { bodyParser: false } };
 
@@ -31,7 +32,6 @@ export default async function handler(req, res) {
       bb.on('close', resolve);
       bb.on('error', reject);
 
-      // Vercel usually leaves multipart bodies unparsed (a stream), but guard both ways.
       if (Buffer.isBuffer(req.body)) bb.end(req.body);
       else if (typeof req.body === 'string') bb.end(Buffer.from(req.body));
       else req.pipe(bb);
@@ -58,19 +58,12 @@ export default async function handler(req, res) {
 
   try {
     const id = crypto.randomUUID().replace(/-/g, '').slice(0, 12);
-    const pdf = await put(`pdf/${id}.pdf`, fileBuf, {
-      access: 'public',
-      contentType: 'application/pdf',
-      addRandomSuffix: true,
-      cacheControlMaxAge: 300, // 5 min, so a deleted decree's PDF clears from the CDN quickly
-    });
-    const meta = { id, karar, title, date, url: pdf.url, uploaded: new Date().toISOString() };
-    await put(`meta/${id}.json`, JSON.stringify(meta), {
-      access: 'public',
-      contentType: 'application/json',
-      addRandomSuffix: false,
-    });
-    json(res, 200, { ok: true, decree: { id, karar, title, date, url: pdf.url } });
+    const pdfPath = `pdf/${id}.pdf`;
+    await uploadObject(pdfPath, fileBuf, 'application/pdf');
+    const url = publicUrl(pdfPath);
+    const meta = { id, karar, title, date, url, uploaded: new Date().toISOString() };
+    await uploadObject(`meta/${id}.json`, Buffer.from(JSON.stringify(meta)), 'application/json');
+    json(res, 200, { ok: true, decree: { id, karar, title, date, url } });
   } catch (e) {
     json(res, 500, { error: 'store_failed', message: String((e && e.message) || e) });
   }

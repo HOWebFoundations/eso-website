@@ -1,5 +1,5 @@
 // POST /api/admin  — JSON actions: session | login | logout | delete
-import { list, del } from '@vercel/blob';
+import { fetchJson, deleteObject } from './_storage.js';
 import { passwordOk, signSession, isAuthed, setSessionCookie, readJson, json } from './_lib.js';
 
 export default async function handler(req, res) {
@@ -41,15 +41,10 @@ export default async function handler(req, res) {
     const id = String(body.id || '');
     if (!id) { json(res, 400, { error: 'missing_id' }); return; }
     try {
-      const { blobs } = await list({ prefix: `meta/${id}`, limit: 10 });
-      if (!blobs.length) { json(res, 404, { error: 'not_found' }); return; }
-      for (const b of blobs) {
-        try {
-          const r = await fetch(b.url, { cache: 'no-store' });
-          if (r.ok) { const m = await r.json(); if (m.url) await del(m.url); }
-        } catch {}
-        await del(b.url);
-      }
+      const meta = await fetchJson(`meta/${id}.json`);
+      if (!meta) { json(res, 404, { error: 'not_found' }); return; }
+      await deleteObject(`pdf/${id}.pdf`);
+      await deleteObject(`meta/${id}.json`);
       json(res, 200, { ok: true });
     } catch (e) {
       json(res, 500, { error: 'delete_failed' });

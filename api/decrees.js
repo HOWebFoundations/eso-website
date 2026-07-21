@@ -1,5 +1,5 @@
-// GET /api/decrees  — public, read-only list of published decrees.
-import { list } from '@vercel/blob';
+// GET /api/decrees  — public, read-only list of published decrees (from Supabase Storage).
+import { listObjects, fetchJson } from './_storage.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,23 +9,20 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') { res.status(405).json({ error: 'method_not_allowed' }); return; }
 
   try {
-    const { blobs } = await list({ prefix: 'meta/', limit: 1000 });
+    const objs = await listObjects('meta/');
     const metas = await Promise.all(
-      blobs
-        .filter(b => b.pathname.endsWith('.json'))
-        .map(async b => {
-          try {
-            const r = await fetch(b.url, { cache: 'no-store' });
-            if (!r.ok) return null;
-            const m = await r.json();
-            return {
-              id: m.id || '',
-              karar: m.karar || '',
-              title: m.title || '',
-              date: m.date || '',
-              url: m.url || '',
-            };
-          } catch { return null; }
+      objs
+        .filter(o => o.name && o.name.endsWith('.json'))
+        .map(async o => {
+          const m = await fetchJson('meta/' + o.name);
+          if (!m) return null;
+          return {
+            id: m.id || '',
+            karar: m.karar || '',
+            title: m.title || '',
+            date: m.date || '',
+            url: m.url || '',
+          };
         })
     );
 
@@ -33,7 +30,8 @@ export default async function handler(req, res) {
     res.status(200).setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify(items));
   } catch (e) {
+    // fail soft — the site falls back to its static list
     res.status(200).setHeader('Content-Type', 'application/json; charset=utf-8');
-    res.end('[]'); // fail soft — the site falls back to its static list
+    res.end('[]');
   }
 }
