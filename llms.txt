@@ -1,0 +1,23 @@
+# ESO Auditors & Consultants
+
+> A full-service audit, tax, accounting and corporate advisory firm based in Jal El Dib, Metn, Lebanon, serving enterprises across Lebanon and the MENA region to Big 4 standards since 2001. Member of the Lebanese Association of Certified Public Accountants (LACPA). Founder & CEO: Elie Salloum.
+
+Contact: info@eso-acc.com · +961 4 725 730 · Jal El Dib, Metn, Lebanon (P.O. Box 60-468)
+Languages: English, Arabic, French
+
+## Core services
+- [Audit & Assurance](https://eso-website.vercel.app/service-audit): Statutory and independent audits under ISA, IFRS compliance and transition, internal control reviews, agreed-upon procedures.
+- [Tax Advisory](https://eso-website.vercel.app/service-tax): Corporate tax planning, VAT compliance, Ministry of Finance decree guidance, tax audit defense.
+- [Accounting](https://eso-website.vercel.app/service-accounting): Bookkeeping, NSSF payroll, multi-currency reconciliation, management reporting.
+- [Corporate Consulting](https://eso-website.vercel.app/service-consulting): M&A due diligence, enterprise valuation, outsourced CFO, operational restructuring.
+
+## Specialization
+- [Food & Beverage](https://eso-website.vercel.app/client-fb): Roughly 70% of ESO's enterprise clients are in F&B. Depth in restaurant prime-cost control, POS and delivery-aggregator reconciliation, franchise and multi-unit royalty audits, and NSSF payroll for hospitality.
+
+## Lebanon regulatory resources
+- [Market Guide](https://eso-website.vercel.app/lebanon-guide): Operating in Lebanon — MoF decrees, NSSF, cross-border structuring.
+- [Ministry of Finance Decrees (Kararat)](https://eso-website.vercel.app/kararat-portal): Curated official Lebanese MoF decrees.
+- [Insights & Studies](https://eso-website.vercel.app/news): 22 dated technical studies (Oct 2024 – Jul 2026) on IFRS 18/19, deposit recovery under the financial-gap framework, NSSF ceilings, e-invoicing, transfer pricing, valuation and audit standards.
+
+## About
+- [About ESO](https://eso-website.vercel.app/about) · [Leadership & Team](https://eso-website.vercel.app/team) · [Careers](https://eso-website.vercel.app/careers) · [Contact](https://eso-website.vercel.app/client-portal)

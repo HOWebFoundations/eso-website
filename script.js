@@ -1378,7 +1378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let count = 0;
 
   const interval = setInterval(() => {
-    count += Math.floor(Math.random() * 20) + 10;
+    count += Math.floor(Math.random() * 28) + 30;
     if (count > 100) count = 100;
     if (counter) counter.innerText = count + '%';
     if (count === 100) {
@@ -1387,9 +1387,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (preloader) preloader.classList.add('hidden');
         document.body.classList.remove('no-scroll');
         handleRouting();
-      }, 600);
+      }, 200);
     }
-  }, 120);
+  }, 55);
 
   // 2. Routing Logic (real URLs via the History API)
   const SITE_NAME = 'ESO | Auditors & Consultants';
