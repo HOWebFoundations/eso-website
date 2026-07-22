@@ -69,6 +69,7 @@ export default async function handler(req, res) {
     const article = {
       id, slug, date,
       category: clip(b.category || 'Insights', 60),
+      image: clip(b.image, 600),
       title, desc: pick(b.desc, 500), body: pick(b.body, 20000),
       updated: new Date().toISOString()
     };
@@ -92,7 +93,7 @@ export default async function handler(req, res) {
   // --- CMS content overrides: text (Phase 4), images (Phase 5), team + leadership (Phase 3) ---
   if (action === 'save-content') {
     const section = String(body.section || '');
-    if (['text', 'images', 'team', 'leadership', 'contact', 'theme'].indexOf(section) === -1) { json(res, 400, { error: 'bad_section' }); return; }
+    if (['text', 'images', 'team', 'leadership', 'contact', 'theme', 'studies'].indexOf(section) === -1) { json(res, 400, { error: 'bad_section' }); return; }
     try {
       let content = await fetchJson('site/content.json');
       if (!content || typeof content !== 'object' || Array.isArray(content)) content = {};

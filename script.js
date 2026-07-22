@@ -121,6 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
     var loc = { en: 'en-US', fr: 'fr-FR', ar: 'ar' }[L] || 'en-US';
     if (q('#article-date')) q('#article-date').textContent = isNaN(d.getTime()) ? art.date : d.toLocaleDateString(loc, { year: 'numeric', month: 'long', day: 'numeric' });
     if (q('#article-cat')) q('#article-cat').textContent = art.category || 'Insights';
+    var hdr = q('.study-header');
+    if (hdr) {
+      if (hdr.getAttribute('data-default-bg') === null) hdr.setAttribute('data-default-bg', hdr.style.backgroundImage || '');
+      hdr.style.backgroundImage = art.image
+        ? "linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('" + art.image + "')"
+        : hdr.getAttribute('data-default-bg');
+    }
     var bodyEl = q('#article-body');
     if (bodyEl) {
       bodyEl.innerHTML = '';
@@ -224,7 +231,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentRouteId = 'home';
   function handleRouting() {
-    const info = resolvePath(location.pathname);
+    let info = resolvePath(location.pathname);
+
+    // If Elie hid this built-in case study, send visitors to the News listing.
+    if (info.id && /^study-\d+$/.test(info.id) && Array.isArray(window.__esoHiddenStudies)) {
+      const sslug = (SLUG[info.id] || '').replace(/^insights\//, '');
+      if (sslug && window.__esoHiddenStudies.indexOf(sslug) !== -1) {
+        history.replaceState({}, '', pathForId('news', info.lang));
+        info = resolvePath(location.pathname);
+      }
+    }
 
     // On the very first load at the bare root, honor a returning visitor's
     // saved language by upgrading the URL (crawlers have no storage -> English).
@@ -724,6 +740,7 @@ window.loadContent = function () {
       window.applyTheme();                // Design: colours, fonts, animation
       window.applyImageOverrides();       // Phase 5
       window.applyContact();              // Contact details
+      window.applyStudies();              // Hide built-in case studies Elie removed
       window.renderTeam();                // Phase 3
       if (typeof window.setLanguage === 'function') window.setLanguage(document.documentElement.lang || 'en');
     })
@@ -791,6 +808,20 @@ window.applyTheme = function () {
     window.__esoAnim = { enabled: th.animation.enabled !== false, intensity: +th.animation.intensity || 1 };
     if (typeof window.__heroApply === 'function') window.__heroApply();
   }
+};
+
+window.applyStudies = function () {
+  var c = window.__esoContent;
+  var hidden = (c && c.studies && Array.isArray(c.studies.hidden)) ? c.studies.hidden : [];
+  window.__esoHiddenStudies = hidden.slice();
+  var grid = document.getElementById('insights-grid');
+  if (!grid) return;
+  grid.querySelectorAll('.insight-card:not(.admin-card)').forEach(function (card) {
+    var link = card.querySelector('a.read-more, a.nav-router');
+    var href = link ? link.getAttribute('href') : '';
+    var slug = href ? href.replace(/^.*\/insights\//, '').replace(/[?#].*$/, '') : '';
+    card.style.display = (slug && hidden.indexOf(slug) !== -1) ? 'none' : '';
+  });
 };
 
 window.applyContact = function () {

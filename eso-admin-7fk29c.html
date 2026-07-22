@@ -102,14 +102,17 @@
     </div>
 
     <div class="card">
-      <h2>Add an insight article</h2>
+      <h2>Add a news article or case study</h2>
       <div id="art-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:14px;">Publishes to the News &amp; Insights page at /insights. Pick <strong>Case Study</strong> as the category for a case study. To remove one of the built-in case studies, use the section below.</p>
       <input type="hidden" id="a-id">
+      <input type="hidden" id="a-image">
       <div class="row">
         <div>
           <label for="a-cat">Category</label>
           <select id="a-cat">
             <option>Insights</option>
+            <option>Case Study</option>
             <option>Audit &amp; Assurance</option>
             <option>Tax Advisory</option>
             <option>Corporate Consulting</option>
@@ -120,6 +123,12 @@
           <label for="a-date">Date</label>
           <input type="date" id="a-date">
         </div>
+      </div>
+      <label for="a-image-file">Header image (optional) — shown at the top of the article page</label>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div id="a-image-prev" style="width:84px; height:56px; border-radius:6px; flex-shrink:0; background:#e2e8f0 center/cover no-repeat;"></div>
+        <input type="file" id="a-image-file" accept="image/*" style="flex:1;">
+        <button class="btn btn-danger" id="a-image-clear" type="button" style="white-space:nowrap;">Remove</button>
       </div>
       <label for="a-title-en">Title (English) *</label>
       <input type="text" id="a-title-en" placeholder="e.g. New VAT Guidance for 2026">
@@ -148,6 +157,14 @@
     <div class="card">
       <h2>Published articles (<span id="art-count">0</span>)</h2>
       <div id="art-list"><div class="empty">Loading…</div></div>
+    </div>
+
+    <div class="card">
+      <h2>Built-in case studies</h2>
+      <div id="studies-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">The 22 case studies that shipped with the site. Untick any you want to remove from the News &amp; Insights page, then click <strong>Save case studies</strong>. (Their wording can be edited in the Website wording section.)</p>
+      <div id="studies-list"><div class="empty">Loading…</div></div>
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="studies-save-btn">Save case studies</button></div>
     </div>
 
     <div class="card">
@@ -359,7 +376,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadStudies(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -384,16 +401,19 @@ async function loadArticleList() {
     el.querySelectorAll('button[data-edit]').forEach(b => b.addEventListener('click', () => editArticle(b.getAttribute('data-edit'))));
   } catch (e) { el.innerHTML = '<div class="empty">Could not load the list.</div>'; }
 }
+function setArtImagePreview(url) { $('a-image-prev').style.backgroundImage = url ? "url('" + url + "')" : ''; }
 function clearArticleForm() {
-  ['a-id','a-title-en','a-title-fr','a-title-ar','a-desc-en','a-desc-fr','a-desc-ar','a-body-en','a-body-fr','a-body-ar'].forEach(id => $(id).value = '');
+  ['a-id','a-image','a-title-en','a-title-fr','a-title-ar','a-desc-en','a-desc-fr','a-desc-ar','a-body-en','a-body-fr','a-body-ar'].forEach(id => $(id).value = '');
   $('a-date').value = new Date().toISOString().slice(0,10);
   $('a-cat').selectedIndex = 0;
+  setArtImagePreview('');
   $('art-save-btn').textContent = 'Save & Publish';
 }
 function editArticle(id) {
   const a = adminArticles[id]; if (!a) return;
   const g = (o,l) => (o && o[l]) || '';
   $('a-id').value = a.id; $('a-cat').value = a.category || 'Insights'; $('a-date').value = a.date || '';
+  $('a-image').value = a.image || ''; setArtImagePreview(a.image || '');
   $('a-title-en').value = g(a.title,'en'); $('a-title-fr').value = g(a.title,'fr'); $('a-title-ar').value = g(a.title,'ar');
   $('a-desc-en').value = g(a.desc,'en'); $('a-desc-fr').value = g(a.desc,'fr'); $('a-desc-ar').value = g(a.desc,'ar');
   $('a-body-en').value = g(a.body,'en'); $('a-body-fr').value = g(a.body,'fr'); $('a-body-ar').value = g(a.body,'ar');
@@ -404,6 +424,7 @@ function editArticle(id) {
 async function saveArticle() {
   const article = {
     id: $('a-id').value.trim(), category: $('a-cat').value, date: $('a-date').value,
+    image: $('a-image').value.trim(),
     title: { en:$('a-title-en').value.trim(), fr:$('a-title-fr').value.trim(), ar:$('a-title-ar').value.trim() },
     desc:  { en:$('a-desc-en').value.trim(),  fr:$('a-desc-fr').value.trim(),  ar:$('a-desc-ar').value.trim() },
     body:  { en:$('a-body-en').value.trim(),  fr:$('a-body-fr').value.trim(),  ar:$('a-body-ar').value.trim() }
@@ -422,6 +443,61 @@ async function delArticle(id) {
   if (status === 200) { flash($('art-msg'), 'Article deleted.', 'ok'); loadArticleList(); }
   else if (status === 401) { show('login'); }
   else { flash($('art-msg'), 'Delete failed: ' + (data.error || status), 'err'); }
+}
+
+// ---- Built-in case studies (show / hide) ----
+const BUILTIN_STUDIES = [
+  { slug:'mid-year-2026-compliance-review', title:'Mid-Year 2026 Compliance Review: Tax & NSSF Checkpoints' },
+  { slug:'ifrs-19-simplified-disclosures', title:'IFRS 19: Simplified Disclosures for Eligible Subsidiaries' },
+  { slug:'deposit-recovery-financial-gap-law', title:'Accounting for Deposit Recovery Under the Financial Gap Law' },
+  { slug:'e-invoicing-shift', title:'The Shift to E-Invoicing: Preparing for Digital VAT' },
+  { slug:'2026-budget-analysis', title:'2026 Budget Analysis: Navigating New Corporate Tax Brackets' },
+  { slug:'ifrs-18-transition', title:'The Transition to IFRS 18: What MENA Enterprises Need to Know' },
+  { slug:'valuation-strategies', title:'Valuation Strategies Amidst Multi-Tiered Exchange Rates' },
+  { slug:'nssf-compliance', title:'NSSF Compliance in a Hyper-Inflationary Economy' },
+  { slug:'esg-reporting-frameworks', title:'ESG Reporting Frameworks for Lebanese Corporations' },
+  { slug:'transfer-pricing-scrutiny', title:'Transfer Pricing Scrutiny in the MENA Region' },
+  { slug:'restructuring-distressed-assets', title:'Restructuring Distressed Assets: A Legal and Financial Guide' },
+  { slug:'vat-recovery-bad-debts', title:'VAT Recovery on Bad Debts in Lebanon' },
+  { slug:'ai-impact-on-auditing', title:'The Impact of AI on Automated Statutory Auditing' },
+  { slug:'holding-company-structures', title:'Holding Company Structures: Tax Optimization Strategies' },
+  { slug:'real-estate-tax-landscape', title:'Navigating the Real Estate Tax Landscape' },
+  { slug:'ma-due-diligence-pitfalls', title:'Due Diligence Pitfalls in Cross-Border M&A' },
+  { slug:'cybersecurity-financial-reporting', title:'Cybersecurity Risks in Financial Reporting' },
+  { slug:'offshore-lebanon-vs-cyprus', title:'Offshore Incorporation: Lebanon vs. Cyprus' },
+  { slug:'cryptocurrency-asset-valuation', title:'Cryptocurrency Asset Valuation for Statutory Audits' },
+  { slug:'optimizing-working-capital', title:'Optimizing Working Capital Amidst Supply Chain Shocks' },
+  { slug:'outsourced-cfo-role', title:'The Role of the Outsourced CFO for Growing SMEs' },
+  { slug:'ngo-corporate-governance', title:'Corporate Governance Requirements for NGOs' }
+];
+let hiddenStudies = [];
+function renderStudies() {
+  const el = $('studies-list');
+  el.innerHTML = BUILTIN_STUDIES.map((s) => `
+    <label style="display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--line); font-weight:400; margin:0; cursor:pointer;">
+      <input type="checkbox" data-slug="${esc(s.slug)}" ${hiddenStudies.indexOf(s.slug) === -1 ? 'checked' : ''} style="width:auto; margin-top:3px;">
+      <span style="font-size:.9rem; color:var(--navy);">${esc(s.title)}</span>
+    </label>`).join('');
+  el.querySelectorAll('input[data-slug]').forEach(cb => cb.addEventListener('change', () => {
+    const slug = cb.getAttribute('data-slug');
+    if (cb.checked) hiddenStudies = hiddenStudies.filter(x => x !== slug);
+    else if (hiddenStudies.indexOf(slug) === -1) hiddenStudies.push(slug);
+  }));
+}
+async function loadStudies() {
+  try {
+    const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json();
+    hiddenStudies = (c && c.studies && Array.isArray(c.studies.hidden)) ? c.studies.hidden.slice() : [];
+  } catch (e) { hiddenStudies = []; }
+  renderStudies();
+}
+async function saveStudies() {
+  const btn = $('studies-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-content', section:'studies', data:{ hidden: hiddenStudies } });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('studies-msg'), 'Case studies saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('studies-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
 let teamArr = [];
@@ -798,6 +874,15 @@ $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 $('upload-btn').addEventListener('click', upload);
 $('art-save-btn').addEventListener('click', saveArticle);
 $('art-clear-btn').addEventListener('click', clearArticleForm);
+$('studies-save-btn').addEventListener('click', saveStudies);
+$('a-image-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  flash($('art-msg'), 'Uploading image…', 'ok');
+  try { const url = await uploadImage(file); $('a-image').value = url; setArtImagePreview(url); flash($('art-msg'), 'Image added. Save the article to publish it.', 'ok'); }
+  catch (err) { flash($('art-msg'), 'Image upload failed: ' + err.message, 'err'); }
+  e.target.value = '';
+});
+$('a-image-clear').addEventListener('click', () => { $('a-image').value = ''; setArtImagePreview(''); });
 $('tm-add-btn').addEventListener('click', addMember);
 $('team-save-btn').addEventListener('click', saveTeam);
 $('lead-save-btn').addEventListener('click', saveLeadership);
@@ -822,7 +907,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadStudies(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); } else { show('login'); }
 })();
 </script>
 </body>
