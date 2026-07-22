@@ -168,9 +168,32 @@
       </div>
       <div style="margin-top:22px;"><button class="btn btn-primary" id="team-save-btn">Save team</button></div>
     </div>
+
+    <div class="card">
+      <h2>Website pictures</h2>
+      <div id="img-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">Replace any picture on the site. Choose a new image (JPG, PNG or WebP, up to 8 MB) and it uploads straight away, then click <strong>Save pictures</strong> to publish. Team member photos are managed in the section above.</p>
+      <div id="img-list"><div class="empty">Loading…</div></div>
+      <input type="file" id="img-file" accept="image/*" style="display:none;">
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="img-save-btn">Save pictures</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Website wording</h2>
+      <div id="text-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">Change any text on the site in English, French or Arabic. Pick a section (or search), edit the wording, then click <strong>Save wording</strong>. Leave a box empty to keep the built-in text.</p>
+      <div class="row">
+        <div><label for="text-group">Section</label><select id="text-group"></select></div>
+        <div><label for="text-search">Search all text</label><input type="text" id="text-search" placeholder="Type a word to find it"></div>
+      </div>
+      <div id="text-list" style="margin-top:16px;"><div class="empty">Loading…</div></div>
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="text-save-btn">Save wording</button></div>
+    </div>
   </div>
 </div>
 
+<!-- Built-in site wording, shared with the public site. Provides window.translations. -->
+<script src="/translations.js"></script>
 <script>
 const API_ADMIN = '/api/admin';
 const API_UPLOAD = '/api/upload';
@@ -264,7 +287,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadImages(); loadText(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -402,6 +425,127 @@ async function saveTeam() {
   else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
+// ---- Website pictures (Phase 5) ----
+const IMG_REGISTRY = [
+  { key:'team_dinner',       label:'Meet the Team, group photo',            def:'/images/eso-team-dinner.jpg' },
+  { key:'ceo_portrait',      label:'Managing Partner portrait (Team page)', def:'/images/elie-salloum-ceo.jpg' },
+  { key:'home_meeting',      label:'Home, corporate meeting',               def:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80' },
+  { key:'home_expertise',    label:'Home, our expertise',                   def:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80' },
+  { key:'home_careers',      label:'Home, careers',                         def:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80' },
+  { key:'about_consultants', label:'About, consultants reviewing data',     def:'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80' },
+  { key:'fb_inventory',      label:'F&B, inventory management',             def:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80' },
+  { key:'fb_pos',            label:'F&B, POS reconciliation',               def:'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80' },
+  { key:'fb_franchise',      label:'F&B, franchise auditing',               def:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80' }
+];
+let imgOverrides = {};
+let imgFileIdx = -1;
+function renderImages() {
+  const el = $('img-list');
+  el.innerHTML = IMG_REGISTRY.map((it, i) => {
+    const cur = imgOverrides[it.key] || it.def;
+    const changed = !!imgOverrides[it.key];
+    return `<div style="display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line);">
+      <div style="width:70px; height:52px; border-radius:6px; flex-shrink:0; background:#e2e8f0 center/cover no-repeat; background-image:url('${esc(cur)}');"></div>
+      <div style="flex:1; min-width:120px;"><div style="font-weight:600; color:var(--navy); font-size:.9rem;">${esc(it.label)}</div><div style="color:var(--muted); font-size:.75rem;">${changed ? 'Custom picture set' : 'Using the default picture'}</div></div>
+      <button class="btn" data-img="${i}" style="padding:9px 14px; background:#fff; color:var(--navy); border:1px solid var(--accent); font-size:.72rem;">Upload new</button>
+      ${changed ? `<button class="btn btn-danger" data-imgreset="${i}">Reset</button>` : ''}
+    </div>`;
+  }).join('');
+  el.querySelectorAll('button[data-img]').forEach(b => b.addEventListener('click', () => { imgFileIdx = +b.getAttribute('data-img'); $('img-file').click(); }));
+  el.querySelectorAll('button[data-imgreset]').forEach(b => b.addEventListener('click', () => { delete imgOverrides[IMG_REGISTRY[+b.getAttribute('data-imgreset')].key]; renderImages(); flash($('img-msg'), 'Reset to the default picture. Click Save pictures.', 'ok'); }));
+}
+async function loadImages() {
+  try { const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json(); imgOverrides = (c && c.images && typeof c.images === 'object' && !Array.isArray(c.images)) ? c.images : {}; }
+  catch (e) { imgOverrides = {}; }
+  renderImages();
+}
+async function saveImages() {
+  const btn = $('img-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-content', section:'images', data: imgOverrides });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('img-msg'), 'Pictures saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('img-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+
+// ---- Website wording (Phase 4) ----
+const DEF_T = (window.translations && window.translations.en) ? window.translations : { en:{}, fr:{}, ar:{} };
+const T_LANGS = [['en','English'],['fr','Français'],['ar','العربية']];
+let textCur = { en:{}, fr:{}, ar:{} };   // working overrides, only keys that differ from the built-in text
+const GROUP_LABELS = { nav:'Navigation menu', hero:'Rotating headline', home:'Home page', about:'About page', services:'Services page', clients:'Clients page', fb:'F&B specialty', careers:'Careers page', contact:'Contact page', footer:'Footer', news:'News & insights', guide:'Market guide', study:'Case studies', role:'Team roles', desc:'Team descriptions', mof:'Laws & decrees', portal:'Client portal', lebanon:'Lebanon insights', other:'Other' };
+function textGroups() {
+  const groups = {};
+  Object.keys(DEF_T.en).forEach(k => { const g = k.split('_')[0] || 'other'; (groups[g] = groups[g] || []).push(k); });
+  return groups;
+}
+function fillGroupSelect() {
+  const groups = textGroups();
+  const names = Object.keys(groups).sort((a, b) => (GROUP_LABELS[a] || a).localeCompare(GROUP_LABELS[b] || b));
+  $('text-group').innerHTML = names.map(g => `<option value="${esc(g)}">${esc(GROUP_LABELS[g] || g)} (${groups[g].length})</option>`).join('');
+}
+function currentVal(lang, k) {
+  if (Object.prototype.hasOwnProperty.call(textCur[lang], k)) return textCur[lang][k];
+  return (DEF_T[lang] && DEF_T[lang][k]) || '';
+}
+function renderTextRows(keys) {
+  const el = $('text-list');
+  if (!keys.length) { el.innerHTML = '<div class="empty">No matching text.</div>'; return; }
+  el.innerHTML = keys.map(k => {
+    const inputs = T_LANGS.map(([l, lbl]) => {
+      const rtl = l === 'ar' ? ' dir="rtl"' : '';
+      return `<div style="margin-top:6px;"><span style="font-size:.7rem; color:var(--muted); display:block;">${lbl}</span><textarea rows="2" data-tk="${esc(k)}" data-tl="${l}"${rtl} style="width:100%; font-size:.88rem; padding:8px 10px;">${esc(currentVal(l, k))}</textarea></div>`;
+    }).join('');
+    return `<div style="padding:12px 0; border-bottom:1px solid var(--line);"><div style="font-size:.72rem; color:var(--navy); font-weight:600; font-family:monospace; word-break:break-all;">${esc(k)}</div>${inputs}</div>`;
+  }).join('');
+  el.querySelectorAll('textarea[data-tk]').forEach(inp => inp.addEventListener('input', () => {
+    const k = inp.getAttribute('data-tk'), l = inp.getAttribute('data-tl'), v = inp.value;
+    const def = (DEF_T[l] && DEF_T[l][k]) || '';
+    if (v === def || v === '') delete textCur[l][k]; else textCur[l][k] = v;
+  }));
+}
+function renderTextGroup() {
+  const groups = textGroups();
+  renderTextRows((groups[$('text-group').value] || []).slice());
+}
+function renderTextSearch(q) {
+  q = q.toLowerCase();
+  const keys = Object.keys(DEF_T.en).filter(k => {
+    if (k.toLowerCase().indexOf(q) !== -1) return true;
+    return T_LANGS.some(([l]) => String((DEF_T[l] && DEF_T[l][k]) || '').toLowerCase().indexOf(q) !== -1 || String(textCur[l][k] || '').toLowerCase().indexOf(q) !== -1);
+  }).slice(0, 150);
+  renderTextRows(keys);
+}
+async function loadText() {
+  fillGroupSelect();
+  try {
+    const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json();
+    const t = (c && c.text) || {};
+    textCur = { en: Object.assign({}, t.en), fr: Object.assign({}, t.fr), ar: Object.assign({}, t.ar) };
+  } catch (e) { textCur = { en:{}, fr:{}, ar:{} }; }
+  renderTextGroup();
+}
+async function saveText() {
+  const btn = $('text-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-content', section:'text', data: textCur });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('text-msg'), 'Wording saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('text-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+
+$('img-save-btn').addEventListener('click', saveImages);
+$('img-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file || imgFileIdx < 0) return;
+  const it = IMG_REGISTRY[imgFileIdx];
+  flash($('img-msg'), 'Uploading…', 'ok');
+  try { const url = await uploadImage(file); imgOverrides[it.key] = url; renderImages(); flash($('img-msg'), 'Uploaded. Click Save pictures to publish.', 'ok'); }
+  catch (err) { flash($('img-msg'), 'Upload failed: ' + err.message, 'err'); }
+  e.target.value = ''; imgFileIdx = -1;
+});
+$('text-save-btn').addEventListener('click', saveText);
+$('text-group').addEventListener('change', renderTextGroup);
+$('text-search').addEventListener('input', (e) => { const q = e.target.value.trim(); if (q) renderTextSearch(q); else renderTextGroup(); });
+
 $('login-btn').addEventListener('click', doLogin);
 $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 $('upload-btn').addEventListener('click', upload);
@@ -423,7 +567,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadImages(); loadText(); } else { show('login'); }
 })();
 </script>
 </body>

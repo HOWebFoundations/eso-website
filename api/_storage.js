@@ -40,7 +40,13 @@ export async function deleteObject(path) {
 }
 
 export async function fetchJson(path) {
-  const r = await fetch(publicUrl(path), { cache: 'no-store' });
+  // Read from the authenticated object endpoint (not the /public/ CDN URL) so
+  // reads are never served a stale cached copy. This gives read-after-write
+  // consistency, which the content.json read-modify-write in save-content needs.
+  const r = await fetch(`${base()}/storage/v1/object/${BUCKET}/${path}`, {
+    headers: authHeaders(),
+    cache: 'no-store',
+  });
   if (!r.ok) return null;
   return r.json().catch(() => null);
 }
