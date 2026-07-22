@@ -713,6 +713,7 @@ window.loadContent = function () {
         if (L.photo) { c.images = c.images || {}; c.images.ceo_portrait = L.photo; }
       }
       window.applyImageOverrides();       // Phase 5
+      window.applyContact();              // Contact details
       window.renderTeam();                // Phase 3
       if (typeof window.setLanguage === 'function') window.setLanguage(document.documentElement.lang || 'en');
     })
@@ -735,6 +736,38 @@ window.applyImageOverrides = function () {
       }
     });
   });
+};
+
+window.applyContact = function () {
+  var c = window.__esoContent;
+  if (!c || !c.contact || typeof c.contact !== 'object') return;
+  var ct = c.contact;
+  var setText = function (id, val) { var el = document.getElementById(id); if (el && val != null && String(val).trim() !== '') el.textContent = val; };
+  setText('contact-address', ct.address);
+  setText('contact-pobox', ct.poBox);
+  var phones = ct.phones;
+  if (typeof phones === 'string') phones = phones.split(/[\n,]+/);
+  if (Array.isArray(phones)) {
+    phones = phones.map(function (p) { return String(p).trim(); }).filter(Boolean);
+    var pc = document.getElementById('contact-phones');
+    if (pc && phones.length) {
+      pc.innerHTML = '';
+      phones.forEach(function (p, i) {
+        if (i) pc.appendChild(document.createElement('br'));
+        var a = document.createElement('a');
+        a.href = 'tel:' + p.replace(/[^\d+]/g, '');
+        a.textContent = p;
+        a.style.cssText = 'color: var(--eso-text-dark); text-decoration: none; display: inline-block; padding: 10px 0; position: relative; z-index: 10000;';
+        pc.appendChild(a);
+      });
+    }
+  }
+  if (ct.email && String(ct.email).trim()) {
+    var email = String(ct.email).trim();
+    var em = document.getElementById('contact-email');
+    if (em) { em.textContent = email; em.setAttribute('href', 'mailto:' + email); }
+    document.querySelectorAll('.contact-form-submit').forEach(function (f) { f.setAttribute('action', 'https://formsubmit.co/' + email); });
+  }
 };
 
 window.renderTeam = function () {

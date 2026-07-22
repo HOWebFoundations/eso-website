@@ -198,6 +198,21 @@
     </div>
 
     <div class="card">
+      <h2>Contact details</h2>
+      <div id="contact-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">The address, phone numbers and email shown on the Contact page (the contact forms also send to this email). Click <strong>Save contact details</strong> to publish.</p>
+      <label for="ct-address">Address</label>
+      <input type="text" id="ct-address" placeholder="e.g. Jal El Dib, Lebanon">
+      <label for="ct-pobox">P.O. Box</label>
+      <input type="text" id="ct-pobox" placeholder="e.g. 60-468">
+      <label for="ct-phones">Phone numbers (one per line)</label>
+      <textarea id="ct-phones" rows="3" placeholder="+961 4 725 730&#10;+961 4 725 740&#10;+961 4 725 840"></textarea>
+      <label for="ct-email">Email</label>
+      <input type="text" id="ct-email" placeholder="e.g. info@eso-acc.com">
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="ct-save-btn">Save contact details</button></div>
+    </div>
+
+    <div class="card">
       <h2>Website pictures</h2>
       <div id="img-msg" class="msg"></div>
       <p class="hint" style="margin-bottom:12px;">Replace any picture on the site. Choose a new image (JPG, PNG or WebP, up to 8 MB) and it uploads straight away, then click <strong>Save pictures</strong> to publish. Team member photos are managed in the section above.</p>
@@ -315,7 +330,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadImages(); loadText(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadImages(); loadText(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -505,31 +520,118 @@ async function saveLeadership() {
   else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
+// ---- Contact details ----
+const CONTACT_DEFAULT = { address:'Jal El Dib, Lebanon', poBox:'60-468', phones:['+961 4 725 730','+961 4 725 740','+961 4 725 840'], email:'info@eso-acc.com' };
+async function loadContact() {
+  let ct = CONTACT_DEFAULT;
+  try {
+    const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json();
+    if (c && c.contact && typeof c.contact === 'object') {
+      const cc = c.contact;
+      ct = {
+        address: cc.address || CONTACT_DEFAULT.address,
+        poBox: cc.poBox || CONTACT_DEFAULT.poBox,
+        phones: Array.isArray(cc.phones) ? cc.phones : (cc.phones ? String(cc.phones).split(/[\n,]+/) : CONTACT_DEFAULT.phones),
+        email: cc.email || CONTACT_DEFAULT.email
+      };
+    }
+  } catch (e) {}
+  $('ct-address').value = ct.address;
+  $('ct-pobox').value = ct.poBox;
+  $('ct-phones').value = (ct.phones || []).map(p => String(p).trim()).filter(Boolean).join('\n');
+  $('ct-email').value = ct.email;
+}
+async function saveContact() {
+  const data = {
+    address: $('ct-address').value.trim(),
+    poBox: $('ct-pobox').value.trim(),
+    phones: $('ct-phones').value.split('\n').map(p => p.trim()).filter(Boolean),
+    email: $('ct-email').value.trim()
+  };
+  const btn = $('ct-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data: resp } = await postAdmin({ action:'save-content', section:'contact', data });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('contact-msg'), 'Contact details saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('contact-msg'), 'Save failed: ' + (resp.error || status), 'err'); }
+}
+
 // ---- Website pictures (Phase 5) ----
 const IMG_REGISTRY = [
-  { key:'team_dinner',       label:'Meet the Team, group photo',            def:'/images/eso-team-dinner.jpg' },
-  { key:'home_meeting',      label:'Home, corporate meeting',               def:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80' },
-  { key:'home_expertise',    label:'Home, our expertise',                   def:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80' },
-  { key:'home_careers',      label:'Home, careers',                         def:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80' },
-  { key:'about_consultants', label:'About, consultants reviewing data',     def:'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80' },
-  { key:'fb_inventory',      label:'F&B, inventory management',             def:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80' },
-  { key:'fb_pos',            label:'F&B, POS reconciliation',               def:'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80' },
-  { key:'fb_franchise',      label:'F&B, franchise auditing',               def:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80' }
+  { key:'team_dinner', label:'Meet the Team, group photo', def:'/images/eso-team-dinner.jpg', group:'Team' },
+  { key:'home_meeting', label:'Home, corporate meeting', def:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80', group:'Home' },
+  { key:'home_expertise', label:'Home, our expertise', def:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80', group:'Home' },
+  { key:'home_careers', label:'Home, careers', def:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80', group:'Home' },
+  { key:'about_consultants', label:'About, consultants', def:'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80', group:'About' },
+  { key:'fb_inventory', label:'F&B, inventory', def:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80', group:'Services & F&B' },
+  { key:'fb_pos', label:'F&B, POS reconciliation', def:'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80', group:'Services & F&B' },
+  { key:'fb_franchise', label:'F&B, franchise auditing', def:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80', group:'Services & F&B' },
+  { key:'img_001', label:'About header', def:'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80', group:'About' },
+  { key:'img_002', label:'About background', def:'https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80', group:'About' },
+  { key:'img_003', label:'About background', def:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80', group:'About' },
+  { key:'img_004', label:'About background', def:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80', group:'About' },
+  { key:'img_005', label:'Clients header', def:'/images/business-handshake.webp', group:'Clients' },
+  { key:'img_006', label:'F&B clients background', def:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80', group:'Clients (F&B)' },
+  { key:'img_007', label:'Tax advisory and optimization services for Lebanese business', def:'/images/tax-advisory.jpg', group:'Clients (F&B)' },
+  { key:'img_008', label:'Team header', def:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80', group:'Team' },
+  { key:'img_009', label:'Services header', def:'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80', group:'Services & F&B' },
+  { key:'img_010', label:'Financial consulting', def:'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1000&q=80', group:'Services & F&B' },
+  { key:'img_011', label:'Audit service background', def:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80', group:'Audit service' },
+  { key:'img_012', label:'Tax service background', def:'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1920&q=80', group:'Tax service' },
+  { key:'img_013', label:'Accounting service background', def:'/images/service-accounting.webp', group:'Accounting service' },
+  { key:'img_014', label:'Consulting service background', def:'/images/service-consulting.jpg', group:'Consulting service' },
+  { key:'img_015', label:'Market guide header', def:'/images/lebanon-guide-header.jpg', group:'Market guide' },
+  { key:'img_016', label:'Market guide background', def:'/images/nejmeh-square-beirut.jpg', group:'Market guide' },
+  { key:'img_017', label:'Decrees portal background', def:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80', group:'Decrees portal' },
+  { key:'img_018', label:'News header', def:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80', group:'News' },
+  { key:'img_019', label:'Article page background', def:'/images/nejmeh-square-beirut.jpg', group:'Article page' },
+  { key:'img_020', label:'Case study 1 background', def:'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80', group:'Case study 1' },
+  { key:'img_021', label:'Case study 2 background', def:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80', group:'Case study 2' },
+  { key:'img_022', label:'Case study 3 background', def:'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80', group:'Case study 3' },
+  { key:'img_023', label:'Case study 4 background', def:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80', group:'Case study 4' },
+  { key:'img_024', label:'Case study 5 background', def:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80', group:'Case study 5' },
+  { key:'img_025', label:'Case study 6 background', def:'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=80', group:'Case study 6' },
+  { key:'img_026', label:'Case study 7 background', def:'https://images.unsplash.com/photo-1556761175-5973dc0f32d7?auto=format&fit=crop&w=1920&q=80', group:'Case study 7' },
+  { key:'img_027', label:'Case study 8 background', def:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80', group:'Case study 8' },
+  { key:'img_028', label:'Case study 9 background', def:'https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=1920&q=80', group:'Case study 9' },
+  { key:'img_029', label:'Case study 10 background', def:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80', group:'Case study 10' },
+  { key:'img_030', label:'Case study 11 background', def:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1920&q=80', group:'Case study 11' },
+  { key:'img_031', label:'Case study 12 background', def:'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1920&q=80', group:'Case study 12' },
+  { key:'img_032', label:'Case study 13 background', def:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1920&q=80', group:'Case study 13' },
+  { key:'img_033', label:'Case study 14 background', def:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1920&q=80', group:'Case study 14' },
+  { key:'img_034', label:'Case study 15 background', def:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1920&q=80', group:'Case study 15' },
+  { key:'img_035', label:'Case study 16 background', def:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=80', group:'Case study 16' },
+  { key:'img_036', label:'Case study 17 background', def:'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1920&q=80', group:'Case study 17' },
+  { key:'img_037', label:'Case study 18 background', def:'https://images.unsplash.com/photo-1598550874175-4d0ef43ee90d?auto=format&fit=crop&w=1920&q=80', group:'Case study 18' },
+  { key:'img_038', label:'Case study 19 background', def:'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80', group:'Case study 19' },
+  { key:'img_039', label:'Case study 20 background', def:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80', group:'Case study 20' },
+  { key:'img_040', label:'Case study 21 background', def:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80', group:'Case study 21' },
+  { key:'img_041', label:'Case study 22 background', def:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80', group:'Case study 22' },
+  { key:'img_042', label:'Careers header', def:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1920&q=80', group:'Careers' },
+  { key:'img_043', label:'Team collaborating', def:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80', group:'Careers' },
+  { key:'img_044', label:'Client portal header', def:'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80', group:'Client portal' }
 ];
 let imgOverrides = {};
 let imgFileIdx = -1;
 function renderImages() {
   const el = $('img-list');
-  el.innerHTML = IMG_REGISTRY.map((it, i) => {
+  let html = '', lastGroup = null;
+  IMG_REGISTRY.forEach((it, i) => {
     const cur = imgOverrides[it.key] || it.def;
     const changed = !!imgOverrides[it.key];
-    return `<div style="display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line);">
+    const grp = it.group || 'Other';
+    if (grp !== lastGroup) {
+      html += `<div style="font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-weight:700; margin:18px 0 4px; padding-top:10px; border-top:2px solid var(--line);">${esc(grp)}</div>`;
+      lastGroup = grp;
+    }
+    html += `<div style="display:flex; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line);">
       <div style="width:70px; height:52px; border-radius:6px; flex-shrink:0; background:#e2e8f0 center/cover no-repeat; background-image:url('${esc(cur)}');"></div>
       <div style="flex:1; min-width:120px;"><div style="font-weight:600; color:var(--navy); font-size:.9rem;">${esc(it.label)}</div><div style="color:var(--muted); font-size:.75rem;">${changed ? 'Custom picture set' : 'Using the default picture'}</div></div>
       <button class="btn" data-img="${i}" style="padding:9px 14px; background:#fff; color:var(--navy); border:1px solid var(--accent); font-size:.72rem;">Upload new</button>
       ${changed ? `<button class="btn btn-danger" data-imgreset="${i}">Reset</button>` : ''}
     </div>`;
-  }).join('');
+  });
+  el.innerHTML = html;
   el.querySelectorAll('button[data-img]').forEach(b => b.addEventListener('click', () => { imgFileIdx = +b.getAttribute('data-img'); $('img-file').click(); }));
   el.querySelectorAll('button[data-imgreset]').forEach(b => b.addEventListener('click', () => { delete imgOverrides[IMG_REGISTRY[+b.getAttribute('data-imgreset')].key]; renderImages(); flash($('img-msg'), 'Reset to the default picture. Click Save pictures.', 'ok'); }));
 }
@@ -612,6 +714,7 @@ async function saveText() {
   else { flash($('text-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
+$('ct-save-btn').addEventListener('click', saveContact);
 $('img-save-btn').addEventListener('click', saveImages);
 $('img-file').addEventListener('change', async (e) => {
   const file = e.target.files[0]; if (!file || imgFileIdx < 0) return;
@@ -654,7 +757,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadImages(); loadText(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadImages(); loadText(); } else { show('login'); }
 })();
 </script>
 </body>
