@@ -700,6 +700,18 @@ window.loadContent = function () {
           }
         });
       }
+      // Phase 3: leadership (Founder & CEO) card overrides
+      if (c.leadership && typeof c.leadership === 'object') {
+        var L = c.leadership;
+        if (window.translations) {
+          ['en', 'fr', 'ar'].forEach(function (l) {
+            if (L.role && L.role[l]) window.translations[l].role_founder = L.role[l];
+            if (L.bio && L.bio[l]) window.translations[l].desc_founder = L.bio[l];
+          });
+        }
+        if (L.name) { var nmEl = document.getElementById('lead-name'); if (nmEl) nmEl.textContent = L.name; }
+        if (L.photo) { c.images = c.images || {}; c.images.ceo_portrait = L.photo; }
+      }
       window.applyImageOverrides();       // Phase 5
       window.renderTeam();                // Phase 3
       if (typeof window.setLanguage === 'function') window.setLanguage(document.documentElement.lang || 'en');

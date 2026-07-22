@@ -153,6 +153,34 @@
     <div class="card">
       <h2>Team members</h2>
       <div id="team-msg" class="msg"></div>
+
+      <div style="border:1px solid var(--line); border-radius:8px; padding:16px 18px; margin-bottom:22px; background:#fbfdff;">
+        <h3 style="font-size:1rem; color:var(--navy); margin-bottom:4px;">Founder &amp; CEO</h3>
+        <p class="hint" style="margin-bottom:12px;">The large leadership card at the top of the Team page. Fill in each language; leave a box blank to keep the built-in text. Click <strong>Save Founder &amp; CEO</strong> to publish.</p>
+        <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;">
+          <div id="lead-photo-prev" style="width:92px; height:92px; border-radius:8px; flex-shrink:0; background:#e2e8f0 center top / cover no-repeat;"></div>
+          <div style="flex:1; min-width:220px;">
+            <label for="lead-name-in" style="margin-top:0;">Name</label>
+            <input type="text" id="lead-name-in" placeholder="e.g. Elie Salloum">
+            <label for="lead-photo-file">Photo</label>
+            <input type="file" id="lead-photo-file" accept="image/*">
+          </div>
+        </div>
+        <label>Role / title</label>
+        <div class="row">
+          <div><input type="text" id="lead-role-en" placeholder="English, e.g. Founder &amp; CEO"></div>
+          <div><input type="text" id="lead-role-fr" placeholder="Français"></div>
+          <div><input type="text" id="lead-role-ar" placeholder="العربية" dir="rtl"></div>
+        </div>
+        <label>Short bio</label>
+        <textarea id="lead-bio-en" rows="2" placeholder="English"></textarea>
+        <textarea id="lead-bio-fr" rows="2" placeholder="Français" style="margin-top:8px;"></textarea>
+        <textarea id="lead-bio-ar" rows="2" placeholder="العربية" dir="rtl" style="margin-top:8px;"></textarea>
+        <div style="margin-top:14px;"><button class="btn btn-primary" id="lead-save-btn">Save Founder &amp; CEO</button></div>
+      </div>
+
+      <hr style="border:0; border-top:1px solid var(--line); margin:0 0 18px;">
+      <h3 style="font-size:1rem; color:var(--navy); margin-bottom:10px;">Staff members</h3>
       <p class="hint" style="margin-bottom:12px;">Edit names, reorder with the arrows, change a photo, or remove a member. Click <strong>Save team</strong> to publish.</p>
       <div id="team-list"></div>
       <input type="file" id="tm-rowphoto" accept="image/*" style="display:none;">
@@ -287,7 +315,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadImages(); loadText(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadImages(); loadText(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -425,10 +453,61 @@ async function saveTeam() {
   else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
+// ---- Founder & CEO leadership card (Phase 3) ----
+function leadDefaults() {
+  const T = window.translations || { en:{}, fr:{}, ar:{} };
+  const g = (l, k) => (T[l] && T[l][k]) || '';
+  return {
+    name: 'Elie Salloum',
+    photo: '/images/elie-salloum-ceo.jpg',
+    role: { en:g('en','role_founder'), fr:g('fr','role_founder'), ar:g('ar','role_founder') },
+    bio:  { en:g('en','desc_founder'), fr:g('fr','desc_founder'), ar:g('ar','desc_founder') }
+  };
+}
+let leadObj = leadDefaults();
+function fillLead() {
+  $('lead-name-in').value = leadObj.name || '';
+  $('lead-role-en').value = (leadObj.role && leadObj.role.en) || '';
+  $('lead-role-fr').value = (leadObj.role && leadObj.role.fr) || '';
+  $('lead-role-ar').value = (leadObj.role && leadObj.role.ar) || '';
+  $('lead-bio-en').value = (leadObj.bio && leadObj.bio.en) || '';
+  $('lead-bio-fr').value = (leadObj.bio && leadObj.bio.fr) || '';
+  $('lead-bio-ar').value = (leadObj.bio && leadObj.bio.ar) || '';
+  $('lead-photo-prev').style.backgroundImage = "url('" + (leadObj.photo || '') + "')";
+}
+async function loadLeadership() {
+  const d = leadDefaults();
+  try {
+    const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json();
+    const L = c && c.leadership;
+    if (L && typeof L === 'object') {
+      leadObj = { name: L.name || d.name, photo: L.photo || d.photo,
+        role: Object.assign({}, d.role, L.role), bio: Object.assign({}, d.bio, L.bio) };
+    } else { leadObj = d; }
+  } catch (e) { leadObj = d; }
+  fillLead();
+}
+function readLead() {
+  return {
+    name: $('lead-name-in').value.trim(),
+    photo: leadObj.photo || '',
+    role: { en:$('lead-role-en').value.trim(), fr:$('lead-role-fr').value.trim(), ar:$('lead-role-ar').value.trim() },
+    bio:  { en:$('lead-bio-en').value.trim(),  fr:$('lead-bio-fr').value.trim(),  ar:$('lead-bio-ar').value.trim() }
+  };
+}
+async function saveLeadership() {
+  const payload = readLead();
+  const btn = $('lead-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-content', section:'leadership', data: payload });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { leadObj = Object.assign({}, leadObj, payload); flash($('team-msg'), 'Founder & CEO saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+
 // ---- Website pictures (Phase 5) ----
 const IMG_REGISTRY = [
   { key:'team_dinner',       label:'Meet the Team, group photo',            def:'/images/eso-team-dinner.jpg' },
-  { key:'ceo_portrait',      label:'Managing Partner portrait (Team page)', def:'/images/elie-salloum-ceo.jpg' },
   { key:'home_meeting',      label:'Home, corporate meeting',               def:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80' },
   { key:'home_expertise',    label:'Home, our expertise',                   def:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80' },
   { key:'home_careers',      label:'Home, careers',                         def:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80' },
@@ -553,6 +632,14 @@ $('art-save-btn').addEventListener('click', saveArticle);
 $('art-clear-btn').addEventListener('click', clearArticleForm);
 $('tm-add-btn').addEventListener('click', addMember);
 $('team-save-btn').addEventListener('click', saveTeam);
+$('lead-save-btn').addEventListener('click', saveLeadership);
+$('lead-photo-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  flash($('team-msg'), 'Uploading photo…', 'ok');
+  try { const url = await uploadImage(file); leadObj.photo = url; $('lead-photo-prev').style.backgroundImage = "url('" + url + "')"; flash($('team-msg'), 'Photo uploaded. Click Save Founder & CEO.', 'ok'); }
+  catch (err) { flash($('team-msg'), 'Photo upload failed: ' + err.message, 'err'); }
+  e.target.value = '';
+});
 $('tm-rowphoto').addEventListener('change', async (e) => {
   const file = e.target.files[0]; if (!file || photoEditIdx < 0) return;
   try { const url = await uploadImage(file); teamArr[photoEditIdx].photo = url; renderTeamAdmin(); flash($('team-msg'), 'Photo updated. Click Save team.', 'ok'); }
@@ -567,7 +654,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadImages(); loadText(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadImages(); loadText(); } else { show('login'); }
 })();
 </script>
 </body>
