@@ -89,5 +89,21 @@ export default async function handler(req, res) {
     return;
   }
 
+  // --- CMS content overrides: text (Phase 4), images (Phase 5), team (Phase 3) ---
+  if (action === 'save-content') {
+    const section = String(body.section || '');
+    if (['text', 'images', 'team'].indexOf(section) === -1) { json(res, 400, { error: 'bad_section' }); return; }
+    try {
+      let content = await fetchJson('site/content.json');
+      if (!content || typeof content !== 'object' || Array.isArray(content)) content = {};
+      content[section] = body.data;
+      await uploadObject('site/content.json', Buffer.from(JSON.stringify(content)), 'application/json');
+      json(res, 200, { ok: true });
+    } catch (e) {
+      json(res, 500, { error: 'store_failed', message: String((e && e.message) || e) });
+    }
+    return;
+  }
+
   json(res, 400, { error: 'unknown_action' });
 }

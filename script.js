@@ -2386,6 +2386,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof window.loadArticles === 'function') {
     window.loadArticles();
   }
+  if (typeof window.loadContent === 'function') {
+    window.loadContent();
+  }
 
 });
 
@@ -2647,4 +2650,79 @@ window.renderArticleCards = function () {
     frag.appendChild(card);
   });
   grid.insertBefore(frag, grid.firstChild);
+};
+
+
+// ============================================================================
+//  CMS content overrides (text, images, team) from the admin, applied live
+// ============================================================================
+window.__esoContent = null;
+
+window.loadContent = function () {
+  var ctrl = new AbortController();
+  var timer = setTimeout(function () { ctrl.abort(); }, 8000);
+  fetch('/api/content', { signal: ctrl.signal })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+    .then(function (c) {
+      clearTimeout(timer);
+      if (!c || typeof c !== 'object') return;
+      window.__esoContent = c;
+      // Phase 4: text overrides merged onto the built-in translations
+      if (c.text && window.translations) {
+        ['en', 'fr', 'ar'].forEach(function (l) {
+          if (c.text[l] && window.translations[l]) {
+            for (var k in c.text[l]) if (c.text[l][k] != null && c.text[l][k] !== '') window.translations[l][k] = c.text[l][k];
+          }
+        });
+      }
+      window.applyImageOverrides();       // Phase 5
+      window.renderTeam();                // Phase 3
+      if (typeof window.setLanguage === 'function') window.setLanguage(document.documentElement.lang || 'en');
+    })
+    .catch(function () { clearTimeout(timer); });
+};
+
+window.applyImageOverrides = function () {
+  var c = window.__esoContent;
+  if (!c || !c.images) return;
+  Object.keys(c.images).forEach(function (key) {
+    var url = c.images[key];
+    if (!url) return;
+    document.querySelectorAll('[data-img-key="' + key + '"]').forEach(function (el) {
+      if (el.tagName === 'IMG') { el.src = url; return; }
+      var cur = getComputedStyle(el).backgroundImage;
+      if (cur && cur.indexOf('url(') !== -1) {
+        el.style.backgroundImage = cur.replace(/url\((['"]?)[^)]*\1\)/, "url('" + url + "')");
+      } else {
+        el.style.backgroundImage = "url('" + url + "')";
+      }
+    });
+  });
+};
+
+window.renderTeam = function () {
+  var grid = document.getElementById('staff-grid');
+  var c = window.__esoContent;
+  if (!grid || !c || !Array.isArray(c.team) || !c.team.length) return;
+  var team = c.team.slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+  grid.innerHTML = '';
+  team.forEach(function (m) {
+    var card = document.createElement('div'); card.className = 'team-card';
+    var img = document.createElement('div'); img.className = 'team-img';
+    img.setAttribute('role', 'img');
+    img.setAttribute('aria-label', (m.name || '') + ', ESO Auditors and Consultants');
+    img.style.backgroundImage = "url('" + (m.photo || '') + "')";
+    img.style.backgroundPosition = 'center top';
+    var info = document.createElement('div'); info.className = 'team-info text-center';
+    var h3 = document.createElement('h3'); h3.textContent = m.name || '';
+    info.appendChild(h3);
+    if (m.title) {
+      var pr = document.createElement('p');
+      pr.style.cssText = 'color:var(--eso-text-muted);font-size:0.85rem;margin-top:4px;';
+      pr.textContent = m.title;
+      info.appendChild(pr);
+    }
+    card.appendChild(img); card.appendChild(info);
+    grid.appendChild(card);
+  });
 };

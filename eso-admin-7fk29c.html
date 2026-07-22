@@ -149,6 +149,25 @@
       <h2>Published articles (<span id="art-count">0</span>)</h2>
       <div id="art-list"><div class="empty">Loading…</div></div>
     </div>
+
+    <div class="card">
+      <h2>Team members</h2>
+      <div id="team-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">Edit names, reorder with the arrows, change a photo, or remove a member. Click <strong>Save team</strong> to publish.</p>
+      <div id="team-list"></div>
+      <input type="file" id="tm-rowphoto" accept="image/*" style="display:none;">
+      <div style="border-top:1px solid var(--line); margin-top:20px; padding-top:16px;">
+        <h3 style="font-size:1rem; color:var(--navy); margin-bottom:10px;">Add a member</h3>
+        <div class="row">
+          <div><label for="tm-name">Name</label><input type="text" id="tm-name" placeholder="e.g. Rita Karam"></div>
+          <div><label for="tm-title">Title / role (optional)</label><input type="text" id="tm-title" placeholder="e.g. Senior Auditor"></div>
+        </div>
+        <label for="tm-photo">Photo</label>
+        <input type="file" id="tm-photo" accept="image/*">
+        <div style="margin-top:14px;"><button class="btn" id="tm-add-btn" style="background:#fff;color:var(--navy);border:1px solid var(--accent);">Add member</button></div>
+      </div>
+      <div style="margin-top:22px;"><button class="btn btn-primary" id="team-save-btn">Save team</button></div>
+    </div>
   </div>
 </div>
 
@@ -245,7 +264,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -310,11 +329,92 @@ async function delArticle(id) {
   else { flash($('art-msg'), 'Delete failed: ' + (data.error || status), 'err'); }
 }
 
+let teamArr = [];
+let photoEditIdx = -1;
+const SEED_TEAM = [
+  { name:'Simon Kawlakian', title:'', photo:'/images/team-simon-kawlakian.jpg' },
+  { name:'Nancy Tannoury', title:'', photo:'/images/team-nancy-tannoury.jpg' },
+  { name:'Imane Filfli', title:'', photo:'/images/team-imane-filfli.jpg' },
+  { name:'Jessica Hosny', title:'', photo:'/images/team-jessica-hosny.jpg' },
+  { name:'Pamela Tansi', title:'', photo:'/images/team-pamela-tansi.jpg' },
+  { name:'Dunia Zaiter', title:'', photo:'/images/team-dunia-zaiter.jpg' },
+  { name:'Giselle Balaa', title:'', photo:'/images/team-giselle-balaa.jpg' }
+];
+function seedTeam() { return SEED_TEAM.map((m, i) => ({ id:'seed'+i, name:m.name, title:m.title, photo:m.photo, order:i })); }
+async function loadTeam() {
+  try {
+    const r = await fetch('/api/content', { cache:'no-store' });
+    const c = await r.json();
+    teamArr = (c && Array.isArray(c.team) && c.team.length) ? c.team.slice() : seedTeam();
+  } catch (e) { teamArr = seedTeam(); }
+  renderTeamAdmin();
+}
+function reindexTeam() { teamArr.forEach((m, i) => { m.order = i; }); }
+function moveTeam(i, dir) { const j = i + dir; if (j < 0 || j >= teamArr.length) return; const t = teamArr[i]; teamArr[i] = teamArr[j]; teamArr[j] = t; reindexTeam(); renderTeamAdmin(); }
+function renderTeamAdmin() {
+  const el = $('team-list');
+  teamArr.sort((a, b) => (a.order || 0) - (b.order || 0));
+  el.innerHTML = teamArr.map((m, i) => `
+    <div style="display:flex; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line);">
+      <div style="width:46px; height:46px; border-radius:8px; flex-shrink:0; background:#e2e8f0 center top / cover no-repeat; background-image:url('${esc(m.photo || '')}');"></div>
+      <input type="text" value="${esc(m.name || '')}" data-i="${i}" data-f="name" style="flex:2; min-width:90px;">
+      <input type="text" value="${esc(m.title || '')}" placeholder="title" data-i="${i}" data-f="title" style="flex:2; min-width:80px;">
+      <button class="btn" data-photo="${i}" style="padding:8px 10px; background:#fff; color:var(--navy); border:1px solid var(--line); font-size:.7rem;">Photo</button>
+      <button class="btn" data-up="${i}" style="padding:8px 11px; background:#fff; color:var(--navy); border:1px solid var(--line);">&uarr;</button>
+      <button class="btn" data-down="${i}" style="padding:8px 11px; background:#fff; color:var(--navy); border:1px solid var(--line);">&darr;</button>
+      <button class="btn btn-danger" data-rem="${i}">&times;</button>
+    </div>`).join('') || '<div class="empty">No members.</div>';
+  el.querySelectorAll('input[data-f]').forEach(inp => inp.addEventListener('input', () => { teamArr[+inp.getAttribute('data-i')][inp.getAttribute('data-f')] = inp.value; }));
+  el.querySelectorAll('button[data-up]').forEach(b => b.addEventListener('click', () => moveTeam(+b.getAttribute('data-up'), -1)));
+  el.querySelectorAll('button[data-down]').forEach(b => b.addEventListener('click', () => moveTeam(+b.getAttribute('data-down'), 1)));
+  el.querySelectorAll('button[data-rem]').forEach(b => b.addEventListener('click', () => { if (confirm('Remove this member?')) { teamArr.splice(+b.getAttribute('data-rem'), 1); reindexTeam(); renderTeamAdmin(); } }));
+  el.querySelectorAll('button[data-photo]').forEach(b => b.addEventListener('click', () => { photoEditIdx = +b.getAttribute('data-photo'); $('tm-rowphoto').click(); }));
+}
+async function uploadImage(file) {
+  const fd = new FormData(); fd.append('image', file);
+  const r = await fetch('/api/upload-image', { method:'POST', body: fd });
+  const d = await r.json().catch(() => ({}));
+  if (r.status !== 200) throw new Error(d.error || ('HTTP ' + r.status));
+  return d.url;
+}
+async function addMember() {
+  const name = $('tm-name').value.trim();
+  const title = $('tm-title').value.trim();
+  const file = $('tm-photo').files[0];
+  if (!name) { flash($('team-msg'), 'Enter a name.', 'err'); return; }
+  const btn = $('tm-add-btn'); btn.disabled = true; const t = btn.textContent; btn.textContent = 'Adding…';
+  let photo = '';
+  try { if (file) photo = await uploadImage(file); }
+  catch (e) { btn.disabled = false; btn.textContent = t; flash($('team-msg'), 'Photo upload failed: ' + e.message, 'err'); return; }
+  teamArr.push({ id: 'm' + Date.now().toString(36), name, title, photo, order: teamArr.length });
+  $('tm-name').value = ''; $('tm-title').value = ''; $('tm-photo').value = '';
+  btn.disabled = false; btn.textContent = t;
+  renderTeamAdmin();
+  flash($('team-msg'), 'Added. Click Save team to publish.', 'ok');
+}
+async function saveTeam() {
+  reindexTeam();
+  const btn = $('team-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-content', section:'team', data: teamArr });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('team-msg'), 'Team saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+
 $('login-btn').addEventListener('click', doLogin);
 $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 $('upload-btn').addEventListener('click', upload);
 $('art-save-btn').addEventListener('click', saveArticle);
 $('art-clear-btn').addEventListener('click', clearArticleForm);
+$('tm-add-btn').addEventListener('click', addMember);
+$('team-save-btn').addEventListener('click', saveTeam);
+$('tm-rowphoto').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file || photoEditIdx < 0) return;
+  try { const url = await uploadImage(file); teamArr[photoEditIdx].photo = url; renderTeamAdmin(); flash($('team-msg'), 'Photo updated. Click Save team.', 'ok'); }
+  catch (err) { flash($('team-msg'), 'Photo upload failed: ' + err.message, 'err'); }
+  e.target.value = ''; photoEditIdx = -1;
+});
 $('logout-btn').addEventListener('click', async () => { await postAdmin({ action:'logout' }); show('login'); });
 ['type','number','origin','description'].forEach(id => $(id).addEventListener('input', updatePreview));
 
@@ -323,7 +423,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); } else { show('login'); }
 })();
 </script>
 </body>
