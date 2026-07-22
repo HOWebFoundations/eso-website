@@ -16,7 +16,7 @@
   .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:28px; margin-bottom:24px; box-shadow:0 6px 20px rgba(0,0,0,.04); }
   .card h2 { color:var(--navy); font-size:1.2rem; margin-bottom:18px; }
   label { display:block; font-size:.82rem; font-weight:600; color:var(--navy); margin:14px 0 6px; }
-  input[type=text], input[type=date], input[type=password], select { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:.95rem; font-family:inherit; background:#fff; }
+  input[type=text], input[type=date], input[type=password], select, textarea { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:.95rem; font-family:inherit; background:#fff; }
   input[type=file] { width:100%; padding:12px; border:1px dashed var(--line); border-radius:6px; background:#fbfdff; }
   input:focus, select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
   .row { display:flex; gap:16px; flex-wrap:wrap; }
@@ -100,6 +100,55 @@
       <h2>Published (<span id="count">0</span>)</h2>
       <div id="list"><div class="empty">Loading…</div></div>
     </div>
+
+    <div class="card">
+      <h2>Add an insight article</h2>
+      <div id="art-msg" class="msg"></div>
+      <input type="hidden" id="a-id">
+      <div class="row">
+        <div>
+          <label for="a-cat">Category</label>
+          <select id="a-cat">
+            <option>Insights</option>
+            <option>Audit &amp; Assurance</option>
+            <option>Tax Advisory</option>
+            <option>Corporate Consulting</option>
+            <option>Accounting &amp; Payroll</option>
+          </select>
+        </div>
+        <div>
+          <label for="a-date">Date</label>
+          <input type="date" id="a-date">
+        </div>
+      </div>
+      <label for="a-title-en">Title (English) *</label>
+      <input type="text" id="a-title-en" placeholder="e.g. New VAT Guidance for 2026">
+      <label for="a-title-fr">Title (Français)</label>
+      <input type="text" id="a-title-fr">
+      <label for="a-title-ar">Title (العربية)</label>
+      <input type="text" id="a-title-ar" dir="rtl">
+      <label for="a-desc-en">Short summary (English) — shown on the card</label>
+      <input type="text" id="a-desc-en">
+      <label for="a-desc-fr">Short summary (Français)</label>
+      <input type="text" id="a-desc-fr">
+      <label for="a-desc-ar">Short summary (العربية)</label>
+      <input type="text" id="a-desc-ar" dir="rtl">
+      <label for="a-body-en">Article body (English) — leave a blank line between paragraphs</label>
+      <textarea id="a-body-en" rows="7"></textarea>
+      <label for="a-body-fr">Article body (Français)</label>
+      <textarea id="a-body-fr" rows="7"></textarea>
+      <label for="a-body-ar">Article body (العربية)</label>
+      <textarea id="a-body-ar" rows="7" dir="rtl"></textarea>
+      <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn btn-primary" id="art-save-btn">Save &amp; Publish</button>
+        <button class="btn" id="art-clear-btn" style="background:#fff; color:var(--navy); border:1px solid var(--line);">Clear / New</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Published articles (<span id="art-count">0</span>)</h2>
+      <div id="art-list"><div class="empty">Loading…</div></div>
+    </div>
   </div>
 </div>
 
@@ -107,6 +156,7 @@
 const API_ADMIN = '/api/admin';
 const API_UPLOAD = '/api/upload';
 const API_LIST = '/api/decrees';
+const API_LIST_ART = '/api/articles';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -195,13 +245,76 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
+}
+
+let adminArticles = {};
+async function loadArticleList() {
+  const el = $('art-list');
+  try {
+    const r = await fetch(API_LIST_ART, { cache:'no-store' });
+    const items = await r.json();
+    $('art-count').textContent = items.length;
+    adminArticles = {};
+    if (!items.length) { el.innerHTML = '<div class="empty">No articles yet. Add your first one above.</div>'; return; }
+    el.innerHTML = '<table><thead><tr><th>Article</th><th>Date</th><th></th></tr></thead><tbody>' +
+      items.map(it => { adminArticles[it.id] = it; return `<tr>
+        <td><div class="k">${esc(it.title && it.title.en || '')}</div><div class="d">${esc(it.category || '')} &middot; /insights/${esc(it.slug)}</div></td>
+        <td class="d">${esc(it.date)}</td>
+        <td style="text-align:right; white-space:nowrap;">
+          <button class="btn" data-edit="${esc(it.id)}" style="background:#fff;color:var(--navy);border:1px solid var(--line);padding:8px 14px;font-size:.72rem;margin-right:6px;">Edit</button>
+          <button class="btn btn-danger" data-del="${esc(it.id)}">Delete</button></td>
+      </tr>`; }).join('') + '</tbody></table>';
+    el.querySelectorAll('button[data-del]').forEach(b => b.addEventListener('click', () => delArticle(b.getAttribute('data-del'))));
+    el.querySelectorAll('button[data-edit]').forEach(b => b.addEventListener('click', () => editArticle(b.getAttribute('data-edit'))));
+  } catch (e) { el.innerHTML = '<div class="empty">Could not load the list.</div>'; }
+}
+function clearArticleForm() {
+  ['a-id','a-title-en','a-title-fr','a-title-ar','a-desc-en','a-desc-fr','a-desc-ar','a-body-en','a-body-fr','a-body-ar'].forEach(id => $(id).value = '');
+  $('a-date').value = new Date().toISOString().slice(0,10);
+  $('a-cat').selectedIndex = 0;
+  $('art-save-btn').textContent = 'Save & Publish';
+}
+function editArticle(id) {
+  const a = adminArticles[id]; if (!a) return;
+  const g = (o,l) => (o && o[l]) || '';
+  $('a-id').value = a.id; $('a-cat').value = a.category || 'Insights'; $('a-date').value = a.date || '';
+  $('a-title-en').value = g(a.title,'en'); $('a-title-fr').value = g(a.title,'fr'); $('a-title-ar').value = g(a.title,'ar');
+  $('a-desc-en').value = g(a.desc,'en'); $('a-desc-fr').value = g(a.desc,'fr'); $('a-desc-ar').value = g(a.desc,'ar');
+  $('a-body-en').value = g(a.body,'en'); $('a-body-fr').value = g(a.body,'fr'); $('a-body-ar').value = g(a.body,'ar');
+  $('art-save-btn').textContent = 'Update';
+  flash($('art-msg'), 'Editing: ' + g(a.title,'en'), 'ok');
+  $('a-title-en').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+async function saveArticle() {
+  const article = {
+    id: $('a-id').value.trim(), category: $('a-cat').value, date: $('a-date').value,
+    title: { en:$('a-title-en').value.trim(), fr:$('a-title-fr').value.trim(), ar:$('a-title-ar').value.trim() },
+    desc:  { en:$('a-desc-en').value.trim(),  fr:$('a-desc-fr').value.trim(),  ar:$('a-desc-ar').value.trim() },
+    body:  { en:$('a-body-en').value.trim(),  fr:$('a-body-fr').value.trim(),  ar:$('a-body-ar').value.trim() }
+  };
+  if (!article.title.en) { flash($('art-msg'), 'An English title is required.', 'err'); return; }
+  const btn = $('art-save-btn'); const label = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data } = await postAdmin({ action:'save-article', article });
+  btn.disabled = false; btn.textContent = label;
+  if (status === 200) { flash($('art-msg'), 'Article published.', 'ok'); clearArticleForm(); loadArticleList(); }
+  else if (status === 401) { show('login'); }
+  else { flash($('art-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+async function delArticle(id) {
+  if (!confirm('Delete this article?')) return;
+  const { status, data } = await postAdmin({ action:'delete-article', id });
+  if (status === 200) { flash($('art-msg'), 'Article deleted.', 'ok'); loadArticleList(); }
+  else if (status === 401) { show('login'); }
+  else { flash($('art-msg'), 'Delete failed: ' + (data.error || status), 'err'); }
 }
 
 $('login-btn').addEventListener('click', doLogin);
 $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 $('upload-btn').addEventListener('click', upload);
+$('art-save-btn').addEventListener('click', saveArticle);
+$('art-clear-btn').addEventListener('click', clearArticleForm);
 $('logout-btn').addEventListener('click', async () => { await postAdmin({ action:'logout' }); show('login'); });
 ['type','number','origin','description'].forEach(id => $(id).addEventListener('input', updatePreview));
 
@@ -210,7 +323,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); } else { show('login'); }
 })();
 </script>
 </body>

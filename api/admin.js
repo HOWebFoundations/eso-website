@@ -1,5 +1,6 @@
-// POST /api/admin, JSON actions: session | login | logout | delete
-import { fetchJson, deleteObject } from './_storage.js';
+// POST /api/admin, JSON actions: session | login | logout | delete | save-article | delete-article
+import crypto from 'node:crypto';
+import { fetchJson, deleteObject, uploadObject } from './_storage.js';
 import { passwordOk, signSession, isAuthed, setSessionCookie, readJson, json } from './_lib.js';
 
 export default async function handler(req, res) {
@@ -49,6 +50,42 @@ export default async function handler(req, res) {
     } catch (e) {
       json(res, 500, { error: 'delete_failed' });
     }
+    return;
+  }
+
+  // --- create or update an insight article (trilingual) ---
+  if (action === 'save-article') {
+    const langs = ['en', 'fr', 'ar'];
+    const b = body.article || {};
+    const clip = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
+    const pick = (o, n) => { const r = {}; langs.forEach(l => { r[l] = clip(o && o[l], n); }); return r; };
+    const title = pick(b.title, 300);
+    if (!title.en) { json(res, 400, { error: 'no_title_en' }); return; }
+    const slugify = (s) => String(s || '').toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 80);
+    const id = clip(b.id, 12).replace(/[^a-z0-9]/gi, '') || crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+    const slug = slugify(b.slug || title.en) || id;
+    let date = String(b.date || '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) date = new Date().toISOString().slice(0, 10);
+    const article = {
+      id, slug, date,
+      category: clip(b.category || 'Insights', 60),
+      title, desc: pick(b.desc, 500), body: pick(b.body, 20000),
+      updated: new Date().toISOString()
+    };
+    try {
+      await uploadObject(`articles/${id}.json`, Buffer.from(JSON.stringify(article)), 'application/json');
+      json(res, 200, { ok: true, article });
+    } catch (e) {
+      json(res, 500, { error: 'store_failed', message: String((e && e.message) || e) });
+    }
+    return;
+  }
+
+  if (action === 'delete-article') {
+    const id = String(body.id || '');
+    if (!id) { json(res, 400, { error: 'missing_id' }); return; }
+    try { await deleteObject(`articles/${id}.json`); json(res, 200, { ok: true }); }
+    catch (e) { json(res, 500, { error: 'delete_failed' }); }
     return;
   }
 

@@ -2070,11 +2070,40 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentLang = 'en';
   let booted = false;
 
+  let currentArticleSlug = '';
   function pathForId(id, lang) {
-    const slug = SLUG[id] || '';
     const prefix = (lang && lang !== 'en') ? '/' + lang : '';
+    if (id === 'article-page') return prefix + '/' + (currentArticleSlug || 'insights');
+    const slug = SLUG[id] || '';
     if (slug === '') return prefix || '/';
     return prefix + '/' + slug;
+  }
+  function findArticle(slug) {
+    var arts = window.__esoArticles || [];
+    for (var i = 0; i < arts.length; i++) if ('insights/' + arts[i].slug === slug) return arts[i];
+    return null;
+  }
+  function renderArticle(art) {
+    var sec = document.getElementById('article-page');
+    if (!sec || !art) return;
+    var L = currentLang;
+    var pick = function (o) { return (o && (o[L] || o.en)) || ''; };
+    var q = function (sel) { return sec.querySelector(sel); };
+    var title = pick(art.title);
+    if (q('#article-title')) q('#article-title').textContent = title;
+    if (q('#article-crumb')) q('#article-crumb').textContent = title;
+    var d = new Date(art.date + 'T00:00:00');
+    var loc = { en: 'en-US', fr: 'fr-FR', ar: 'ar' }[L] || 'en-US';
+    if (q('#article-date')) q('#article-date').textContent = isNaN(d.getTime()) ? art.date : d.toLocaleDateString(loc, { year: 'numeric', month: 'long', day: 'numeric' });
+    if (q('#article-cat')) q('#article-cat').textContent = art.category || 'Insights';
+    var bodyEl = q('#article-body');
+    if (bodyEl) {
+      bodyEl.innerHTML = '';
+      String(pick(art.body)).split(/\n\s*\n/).forEach(function (par) {
+        par = par.trim(); if (!par) return;
+        var p = document.createElement('p'); p.textContent = par; bodyEl.appendChild(p);
+      });
+    }
   }
 
   // Resolve any path (real URL or an English href in the markup) to a route.
@@ -2093,6 +2122,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = document.getElementById(slug);            // legacy /service-audit, /study-1
     if (el && el.classList.contains('page-view'))
       return { lang: lang, id: slug, legacy: true };
+    if (findArticle(slug))                               // admin-published article
+      return { lang: lang, id: 'article-page', slug: slug, legacy: false };
     return { lang: lang, id: 'home', legacy: false };
   }
 
@@ -2188,6 +2219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     currentRouteId = info.id;
     currentLang = info.lang;
+    if (info.id === 'article-page') { currentArticleSlug = info.slug; renderArticle(findArticle(info.slug)); }
 
     document.querySelectorAll('.page-view').forEach((page) => page.classList.remove('active'));
     const targetSection = document.getElementById(info.id);
@@ -2216,7 +2248,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const href = link.getAttribute('href');
     if (!href || href[0] !== '/' || href[1] === '/') return;
     e.preventDefault();
-    const target = pathForId(resolvePath(href).id, currentLang);
+    const rinfo = resolvePath(href);
+    const target = (rinfo.id === 'article-page')
+      ? ((currentLang && currentLang !== 'en' ? '/' + currentLang : '') + '/' + rinfo.slug)
+      : pathForId(rinfo.id, currentLang);
     if (target !== location.pathname) history.pushState({}, '', target);
     handleRouting();
   });
@@ -2233,6 +2268,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Let the language switcher refresh the current page's title/description.
   window.__esoApplyMeta = () => applyMeta(currentRouteId);
+  window.__esoRerouteArticles = function () {
+    var info = resolvePath(location.pathname);
+    if (info.id === 'article-page' && currentRouteId !== 'article-page') handleRouting();
+  };
 
   handleRouting();
 
@@ -2344,6 +2383,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof window.loadDecrees === 'function') {
     window.loadDecrees();
   }
+  if (typeof window.loadArticles === 'function') {
+    window.loadArticles();
+  }
 
 });
 
@@ -2380,6 +2422,9 @@ window.setLanguage = function(lang) {
   // Keep live-loaded decrees in sync with the chosen language
   if (window.__esoDecrees && typeof window.renderDecrees === 'function') {
     window.renderDecrees();
+  }
+  if (typeof window.renderArticleCards === 'function') {
+    window.renderArticleCards();
   }
 
   // Refresh the current page's title/description in the chosen language
@@ -2553,3 +2598,53 @@ window.renderDecrees = function () {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeroCanvas);
   else initHeroCanvas();
 })();
+
+
+// ============================================================================
+//  Admin-published insight articles: live loading, card injection & routing
+// ============================================================================
+window.__esoArticles = null;
+
+window.loadArticles = function () {
+  var ctrl = new AbortController();
+  var timer = setTimeout(function () { ctrl.abort(); }, 8000);
+  fetch('/api/articles', { signal: ctrl.signal })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+    .then(function (items) {
+      clearTimeout(timer);
+      if (Array.isArray(items)) {
+        window.__esoArticles = items;
+        if (typeof window.renderArticleCards === 'function') window.renderArticleCards();
+        if (typeof window.__esoRerouteArticles === 'function') window.__esoRerouteArticles();
+      }
+    })
+    .catch(function () { clearTimeout(timer); });
+};
+
+window.renderArticleCards = function () {
+  var grid = document.getElementById('insights-grid');
+  if (!grid || !Array.isArray(window.__esoArticles)) return;
+  grid.querySelectorAll('.insight-card.admin-card').forEach(function (c) { c.remove(); });
+  var lang = document.documentElement.lang || 'en';
+  var pick = function (o) { return (o && (o[lang] || o.en)) || ''; };
+  var loc = { en: 'en-US', fr: 'fr-FR', ar: 'ar' }[lang] || 'en-US';
+  var readLabel = { en: 'Read Full Study \u2192', fr: 'Lire l\'\u00e9tude \u2192', ar: '\u0627\u0642\u0631\u0623 \u0627\u0644\u0645\u0642\u0627\u0644 \u2190' }[lang] || 'Read Full Study \u2192';
+  var frag = document.createDocumentFragment();
+  window.__esoArticles.forEach(function (a) {
+    var card = document.createElement('div');
+    card.className = 'insight-card no-image reveal active admin-card';
+    var d = new Date(a.date + 'T00:00:00');
+    var dateStr = isNaN(d.getTime()) ? a.date : d.toLocaleDateString(loc, { year: 'numeric', month: 'long', day: 'numeric' });
+    var href = '/insights/' + a.slug;
+    var content = document.createElement('div');
+    content.className = 'insight-content';
+    var sp = document.createElement('span'); sp.className = 'date'; sp.textContent = dateStr;
+    var h3 = document.createElement('h3'); h3.textContent = pick(a.title);
+    var p = document.createElement('p'); p.textContent = pick(a.desc);
+    var link = document.createElement('a'); link.className = 'read-more nav-router'; link.setAttribute('href', href); link.textContent = readLabel;
+    content.appendChild(sp); content.appendChild(h3); content.appendChild(p); content.appendChild(link);
+    card.appendChild(content);
+    frag.appendChild(card);
+  });
+  grid.insertBefore(frag, grid.firstChild);
+};

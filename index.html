@@ -876,7 +876,7 @@
             <p style="color: var(--eso-text-muted);" data-i18n="news_indepth_reports">In-depth reports and briefs on compliance, tax strategy, and audit standards.</p>
           </div>
 
-          <div class="grid-3">
+          <div class="grid-3" id="insights-grid">
             <div class="insight-card no-image reveal">
               <div class="insight-content">
                 <span class="date" data-i18n="date_jul10_26">July 10, 2026</span>
@@ -1057,6 +1057,27 @@
         </div>
       </div>
     </section>
+
+    <section id="article-page" class="page-view study-view bg-silver">
+      <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/nejmeh-square-beirut.jpg') center/cover;">
+        <div class="container text-center reveal">
+          <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>&rarr;</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>&rarr;</span> <span class="current" id="article-crumb"></span></div>
+          <h1 class="page-title" id="article-title" style="font-size: clamp(2rem, 4vw, 3.5rem);"></h1>
+          <span class="date" id="article-date" style="color: var(--eso-accent); display: block; margin-top: 15px;"></span>
+        </div>
+      </div>
+      <div class="container reveal">
+        <div class="study-article">
+          <a href="/insights" class="btn btn-outline-dark nav-router" style="margin-bottom: 40px; font-size: 0.75rem; padding: 10px 20px;" data-i18n="back_to_news">&larr; Back to News</a>
+          <div class="study-byline" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:32px;">
+            <span id="article-cat" style="background:var(--eso-navy); color:#fff; padding:5px 14px; border-radius:20px; font-size:0.72rem; letter-spacing:.06em; text-transform:uppercase; font-weight:600;"></span>
+            <span style="color:var(--eso-text-muted, #64748b); font-size:0.85rem; font-weight:500;">ESO Auditors and Consultants</span>
+          </div>
+          <div id="article-body"></div>
+        </div>
+      </div>
+    </section>
+
 
     <section id="study-1" class="page-view study-view bg-silver">
       <div class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80') center/cover;">
