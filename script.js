@@ -575,11 +575,20 @@ window.renderDecrees = function () {
       canvas.height = Math.floor(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       W = w; H = h;
-      var n = Math.max(18, Math.min(60, Math.round(w / 32)));
+      var inten = (window.__esoAnim && +window.__esoAnim.intensity) || 1;
+      inten = Math.max(0.2, Math.min(2.5, inten));
+      var n = Math.max(4, Math.min(120, Math.round(w / 32 * inten)));
       parts = [];
       for (var i = 0; i < n; i++) parts.push(make(true));
     }
     size();
+    // Let the CMS toggle the animation on/off and re-density it live.
+    window.__heroApply = function () {
+      var cfg = window.__esoAnim || {};
+      canvas.style.display = (cfg.enabled === false) ? 'none' : '';
+      if (cfg.enabled !== false) size();
+    };
+    window.__heroApply();
 
     function paint(p) {
       var x = p.x + Math.sin(p.phase) * p.amp;
@@ -712,6 +721,7 @@ window.loadContent = function () {
         if (L.name) { var nmEl = document.getElementById('lead-name'); if (nmEl) nmEl.textContent = L.name; }
         if (L.photo) { c.images = c.images || {}; c.images.ceo_portrait = L.photo; }
       }
+      window.applyTheme();                // Design: colours, fonts, animation
       window.applyImageOverrides();       // Phase 5
       window.applyContact();              // Contact details
       window.renderTeam();                // Phase 3
@@ -736,6 +746,51 @@ window.applyImageOverrides = function () {
       }
     });
   });
+};
+
+// Font presets shared with the admin (see FONT_PRESETS there). Keep in sync.
+window.ESO_FONTS = {
+  default:  { head: "'Montserrat', sans-serif", body: "'Inter', sans-serif" },
+  inter:    { head: "'Inter', sans-serif",      body: "'Inter', sans-serif" },
+  playfair: { head: "'Playfair Display', serif", body: "'Inter', sans-serif", google: 'Playfair+Display:wght@500;600;700' },
+  lora:     { head: "'Lora', serif",            body: "'Inter', sans-serif", google: 'Lora:wght@500;600;700' },
+  poppins:  { head: "'Poppins', sans-serif",    body: "'Poppins', sans-serif", google: 'Poppins:wght@300;400;500;600;700' },
+  system:   { head: "system-ui, -apple-system, Segoe UI, sans-serif", body: "system-ui, -apple-system, Segoe UI, sans-serif" },
+  georgia:  { head: "Georgia, 'Times New Roman', serif", body: "Georgia, 'Times New Roman', serif" }
+};
+
+window.applyTheme = function () {
+  var c = window.__esoContent;
+  if (!c || !c.theme || typeof c.theme !== 'object') return;
+  var th = c.theme, root = document.documentElement;
+  // Colours
+  if (th.colors && typeof th.colors === 'object') {
+    if (th.colors.navy) root.style.setProperty('--eso-logo-navy', th.colors.navy);
+    if (th.colors.accent) root.style.setProperty('--eso-accent', th.colors.accent);
+    if (th.colors.heroNavy) root.style.setProperty('--eso-navy', th.colors.heroNavy);
+  }
+  // Fonts
+  var preset = window.ESO_FONTS[th.fontPreset];
+  if (preset) {
+    if (preset.google) {
+      var id = 'eso-font-' + th.fontPreset;
+      if (!document.getElementById(id)) {
+        var link = document.createElement('link'); link.id = id; link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=' + preset.google + '&display=swap';
+        document.head.appendChild(link);
+      }
+    }
+    var st = document.getElementById('eso-theme-fonts');
+    if (!st) { st = document.createElement('style'); st.id = 'eso-theme-fonts'; document.head.appendChild(st); }
+    st.textContent =
+      "body,p,a,span,li,td,th,div,input,textarea,button,select,label,.btn,.subtitle,.simple-nav-link{font-family:" + preset.body + " !important;}" +
+      "h1,h2,h3,h4,h5,h6,.canvas-title,.adv-icon,.stat-number{font-family:" + preset.head + " !important;}";
+  }
+  // Money animation
+  if (th.animation && typeof th.animation === 'object') {
+    window.__esoAnim = { enabled: th.animation.enabled !== false, intensity: +th.animation.intensity || 1 };
+    if (typeof window.__heroApply === 'function') window.__heroApply();
+  }
 };
 
 window.applyContact = function () {

@@ -213,6 +213,35 @@
     </div>
 
     <div class="card">
+      <h2>Design</h2>
+      <div id="theme-msg" class="msg"></div>
+      <p class="hint" style="margin-bottom:12px;">Brand colours, the site font, and the homepage money animation. Not sure about a change? Click <strong>Reset to defaults</strong>, then <strong>Save design</strong> to publish.</p>
+      <label>Brand colours</label>
+      <div class="row">
+        <div><span style="font-weight:400;font-size:.75rem;color:var(--muted);">Primary (header/footer)</span><input type="color" id="th-navy" style="height:46px;padding:4px;width:100%;"></div>
+        <div><span style="font-weight:400;font-size:.75rem;color:var(--muted);">Accent</span><input type="color" id="th-accent" style="height:46px;padding:4px;width:100%;"></div>
+        <div><span style="font-weight:400;font-size:.75rem;color:var(--muted);">Hero background</span><input type="color" id="th-hero" style="height:46px;padding:4px;width:100%;"></div>
+      </div>
+      <label for="th-font">Font</label>
+      <select id="th-font">
+        <option value="default">Montserrat + Inter (current)</option>
+        <option value="inter">Inter (clean, modern)</option>
+        <option value="poppins">Poppins (friendly)</option>
+        <option value="playfair">Playfair Display + Inter (elegant)</option>
+        <option value="lora">Lora + Inter (editorial)</option>
+        <option value="system">System font (fastest)</option>
+        <option value="georgia">Georgia (classic serif)</option>
+      </select>
+      <label style="display:flex;align-items:center;gap:10px;margin-top:16px;"><input type="checkbox" id="th-anim" style="width:auto;margin:0;"> Show the money animation on the homepage</label>
+      <label for="th-intensity">Animation amount</label>
+      <input type="range" id="th-intensity" min="0.3" max="2" step="0.1" value="1" style="width:100%;padding:0;">
+      <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="th-save-btn">Save design</button>
+        <button class="btn" id="th-reset-btn" style="background:#fff;color:var(--navy);border:1px solid var(--line);">Reset to defaults</button>
+      </div>
+    </div>
+
+    <div class="card">
       <h2>Website pictures</h2>
       <div id="img-msg" class="msg"></div>
       <p class="hint" style="margin-bottom:12px;">Replace any picture on the site. Choose a new image (JPG, PNG or WebP, up to 8 MB) and it uploads straight away, then click <strong>Save pictures</strong> to publish. Team member photos are managed in the section above.</p>
@@ -330,7 +359,7 @@ async function upload() {
 async function doLogin() {
   const pw = $('pw').value;
   const { status } = await postAdmin({ action:'login', password: pw });
-  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadImages(); loadText(); }
+  if (status === 200) { $('pw').value = ''; show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); }
   else { flash($('login-msg'), 'Incorrect password.', 'err'); }
 }
 
@@ -518,6 +547,40 @@ async function saveLeadership() {
   if (status === 200) { leadObj = Object.assign({}, leadObj, payload); flash($('team-msg'), 'Founder & CEO saved and published.', 'ok'); }
   else if (status === 401) { show('login'); }
   else { flash($('team-msg'), 'Save failed: ' + (data.error || status), 'err'); }
+}
+
+// ---- Design: colours, fonts, animation ----
+const THEME_DEFAULT = { colors:{ navy:'#22345e', accent:'#38bdf8', heroNavy:'#15182b' }, fontPreset:'default', animation:{ enabled:true, intensity:1 } };
+function fillTheme(th) {
+  th = th || THEME_DEFAULT;
+  const col = th.colors || {};
+  $('th-navy').value = col.navy || THEME_DEFAULT.colors.navy;
+  $('th-accent').value = col.accent || THEME_DEFAULT.colors.accent;
+  $('th-hero').value = col.heroNavy || THEME_DEFAULT.colors.heroNavy;
+  $('th-font').value = th.fontPreset || 'default';
+  $('th-anim').checked = !(th.animation && th.animation.enabled === false);
+  $('th-intensity').value = (th.animation && th.animation.intensity) || 1;
+}
+async function loadTheme() {
+  let th = THEME_DEFAULT;
+  try { const r = await fetch('/api/content', { cache:'no-store' }); const c = await r.json(); if (c && c.theme && typeof c.theme === 'object') th = c.theme; } catch (e) {}
+  fillTheme(th);
+}
+function readTheme() {
+  return {
+    colors: { navy: $('th-navy').value, accent: $('th-accent').value, heroNavy: $('th-hero').value },
+    fontPreset: $('th-font').value,
+    animation: { enabled: $('th-anim').checked, intensity: +$('th-intensity').value }
+  };
+}
+async function saveTheme() {
+  const data = readTheme();
+  const btn = $('th-save-btn'); const t = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
+  const { status, data: resp } = await postAdmin({ action:'save-content', section:'theme', data });
+  btn.disabled = false; btn.textContent = t;
+  if (status === 200) { flash($('theme-msg'), 'Design saved and published.', 'ok'); }
+  else if (status === 401) { show('login'); }
+  else { flash($('theme-msg'), 'Save failed: ' + (resp.error || status), 'err'); }
 }
 
 // ---- Contact details ----
@@ -714,6 +777,8 @@ async function saveText() {
   else { flash($('text-msg'), 'Save failed: ' + (data.error || status), 'err'); }
 }
 
+$('th-save-btn').addEventListener('click', saveTheme);
+$('th-reset-btn').addEventListener('click', () => { fillTheme(THEME_DEFAULT); flash($('theme-msg'), 'Reset to defaults. Click Save design to publish.', 'ok'); });
 $('ct-save-btn').addEventListener('click', saveContact);
 $('img-save-btn').addEventListener('click', saveImages);
 $('img-file').addEventListener('change', async (e) => {
@@ -757,7 +822,7 @@ $('date').value = new Date().toISOString().slice(0, 10);
 updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
-  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadImages(); loadText(); } else { show('login'); }
+  if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); } else { show('login'); }
 })();
 </script>
 </body>

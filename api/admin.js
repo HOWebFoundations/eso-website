@@ -92,7 +92,7 @@ export default async function handler(req, res) {
   // --- CMS content overrides: text (Phase 4), images (Phase 5), team + leadership (Phase 3) ---
   if (action === 'save-content') {
     const section = String(body.section || '');
-    if (['text', 'images', 'team', 'leadership', 'contact'].indexOf(section) === -1) { json(res, 400, { error: 'bad_section' }); return; }
+    if (['text', 'images', 'team', 'leadership', 'contact', 'theme'].indexOf(section) === -1) { json(res, 400, { error: 'bad_section' }); return; }
     try {
       let content = await fetchJson('site/content.json');
       if (!content || typeof content !== 'object' || Array.isArray(content)) content = {};
