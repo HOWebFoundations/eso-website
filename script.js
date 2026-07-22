@@ -27,7 +27,7 @@ const translations = {
     hero_accounting: "Accounting",
     hero_consulting: "Consulting",
     hero_fb_specialty: "F&B Specialty",
-    hero_mof_decrees: "MoF Decrees",
+    hero_mof_decrees: "Laws and Decrees",
     hero_schedule_consultation: "SCHEDULE A CONSULTATION",
     hero_latest_insights: "Latest Insights",
     hero_recent_studies: "Recent studies & market analysis.",
@@ -686,7 +686,7 @@ const translations = {
     hero_accounting: "Comptabilité",
     hero_consulting: "Conseil / Consulting",
     hero_fb_specialty: "Spécialité Restauration",
-    hero_mof_decrees: "Décrets du MdF",
+    hero_mof_decrees: "Lois et Décrets",
     hero_schedule_consultation: "PRENDRE RENDEZ-VOUS",
     hero_latest_insights: "Dernières Analyses",
     hero_recent_studies: "Études récentes et analyse du marché.",
@@ -1345,7 +1345,7 @@ const translations = {
     hero_accounting: "المحاسبة",
     hero_consulting: "الاستشارات الإدارية",
     hero_fb_specialty: "تخصص قطاع المطاعم",
-    hero_mof_decrees: "قرارات وزارة المالية",
+    hero_mof_decrees: "القوانين والمراسيم",
     hero_schedule_consultation: "احجز استشارة",
     hero_latest_insights: "أحدث الرؤى",
     hero_recent_studies: "أحدث الدراسات وتحليلات السوق.",
@@ -2456,3 +2456,80 @@ window.renderDecrees = function () {
       </div>`;
   }).join('');
 };
+
+// ============================================================================
+//  Homepage hero: animated financial-data background (money / auditing theme)
+//  A calm, low-opacity stream of figures and currency symbols on navy. Pauses
+//  when the hero is off-screen; respects prefers-reduced-motion.
+// ============================================================================
+(function () {
+  function initHeroCanvas() {
+    var canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // bias heavily toward digits, with currency symbols sprinkled in
+    var chars = '0123456789 0123456789 $ 0123456789 % 0123456789 £ 0123456789 € 0123456789 ¥ 8,204 1,375.00'.replace(/ /g, '').split('');
+    var money = ['$', '£', '€', '¥', '%'];
+    var fontSize = 16, gap = fontSize * 1.5, columns = 0, drops = [], dpr = 1;
+
+    function size() {
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      if (!w || !h) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      columns = Math.ceil(w / gap);
+      drops = [];
+      for (var i = 0; i < columns; i++) drops[i] = Math.random() * -40;
+    }
+    size();
+
+    function pick() {
+      // ~1 in 9 glyphs is a currency/percent symbol, rest are digits
+      return (Math.random() < 0.11) ? money[(Math.random() * money.length) | 0]
+                                    : chars[(Math.random() * chars.length) | 0];
+    }
+
+    if (reduce) {
+      // static, faint field of figures (no motion)
+      ctx.font = fontSize + 'px "Courier New", monospace';
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.10)';
+      for (var y = fontSize; y < canvas.clientHeight; y += gap * 1.2)
+        for (var x = 4; x < canvas.clientWidth; x += gap)
+          ctx.fillText(pick(), x, y);
+      return;
+    }
+
+    var last = 0, interval = 1000 / 20; // calm ~20fps
+    function draw(t) {
+      if (!canvas.isConnected) return;
+      if (canvas.offsetParent === null || !columns) { requestAnimationFrame(draw); return; } // hidden route
+      if (t - last < interval) { requestAnimationFrame(draw); return; }
+      last = t;
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.fillStyle = 'rgba(21, 24, 43, 0.16)';   // navy fade -> soft trails
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = fontSize + 'px "Courier New", monospace';
+      for (var i = 0; i < columns; i++) {
+        var x = i * gap + 4, y = drops[i] * gap;
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.55)';   // leading glyph
+        ctx.fillText(pick(), x, y);
+        ctx.fillStyle = 'rgba(125, 211, 252, 0.14)';  // faint one above
+        ctx.fillText(pick(), x, y - gap);
+        if (y > h && Math.random() > 0.975) drops[i] = Math.random() * -18;
+        drops[i] += 0.5;   // slow fall
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 200); });
+    window.addEventListener('load', size);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeroCanvas);
+  else initHeroCanvas();
+})();
