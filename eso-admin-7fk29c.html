@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>ESO Decrees, Admin</title>
+<title>ESO Laws &amp; Decrees, Admin</title>
 <style>
-  :root { --navy:#15182b; --accent:#38bdf8; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
+  :root { --navy:#22345e; --accent:#38bdf8; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:-apple-system,Segoe UI,Roboto,Inter,sans-serif; background:var(--bg); color:#334155; line-height:1.5; }
   .topbar { background:var(--navy); color:#fff; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; }
@@ -16,9 +16,9 @@
   .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:28px; margin-bottom:24px; box-shadow:0 6px 20px rgba(0,0,0,.04); }
   .card h2 { color:var(--navy); font-size:1.2rem; margin-bottom:18px; }
   label { display:block; font-size:.82rem; font-weight:600; color:var(--navy); margin:14px 0 6px; }
-  input[type=text], input[type=date], input[type=password] { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:.95rem; font-family:inherit; }
+  input[type=text], input[type=date], input[type=password], select { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:.95rem; font-family:inherit; background:#fff; }
   input[type=file] { width:100%; padding:12px; border:1px dashed var(--line); border-radius:6px; background:#fbfdff; }
-  input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
+  input:focus, select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
   .row { display:flex; gap:16px; flex-wrap:wrap; }
   .row > div { flex:1; min-width:160px; }
   .btn { display:inline-block; border:none; cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase; padding:13px 26px; border-radius:6px; transition:.2s; }
@@ -40,6 +40,8 @@
   .empty { color:var(--muted); text-align:center; padding:26px 0; }
   .login-wrap { max-width:400px; margin:9vh auto; }
   .hint { font-size:.78rem; color:var(--muted); margin-top:8px; }
+  .preview { background:#f1f5f9; border-left:3px solid var(--accent); padding:12px 14px; border-radius:6px; margin-top:16px; font-size:.9rem; color:var(--navy); }
+  .preview span { font-weight:600; }
   .hidden { display:none; }
 </style>
 </head>
@@ -48,45 +50,54 @@
 <!-- LOGIN -->
 <div id="login-view" class="login-wrap hidden">
   <div class="card">
-    <h2>ESO Decrees, Admin</h2>
+    <h2>ESO Laws &amp; Decrees, Admin</h2>
     <div id="login-msg" class="msg"></div>
     <label for="pw">Password</label>
     <input type="password" id="pw" autocomplete="current-password" autofocus>
     <div style="margin-top:20px;"><button class="btn btn-primary" id="login-btn" style="width:100%;">Log In</button></div>
-    <p class="hint">Manage the Ministry of Finance decrees shown on the website.</p>
+    <p class="hint">Manage the laws, decrees and decisions shown on the website.</p>
   </div>
 </div>
 
 <!-- MANAGER -->
 <div id="admin-view" class="hidden">
   <div class="topbar">
-    <h1>ESO Decrees <span class="badge">Admin</span></h1>
+    <h1>ESO Laws &amp; Decrees <span class="badge">Admin</span></h1>
     <button class="btn btn-ghost" id="logout-btn">Log out</button>
   </div>
   <div class="wrap">
     <div id="msg" class="msg"></div>
 
     <div class="card">
-      <h2>Add a decree</h2>
-      <label for="title">Title *</label>
-      <input type="text" id="title" placeholder="e.g. VAT Deadline Extension">
+      <h2>Add a law, decree or decision</h2>
       <div class="row">
         <div>
-          <label for="karar">Decree number (optional)</label>
-          <input type="text" id="karar" placeholder="e.g. Karar No. 456/1">
+          <label for="type">Type *</label>
+          <select id="type">
+            <option value="Law">Law</option>
+            <option value="Decree" selected>Decree</option>
+            <option value="Decision">Decision</option>
+          </select>
         </div>
         <div>
-          <label for="date">Publication date</label>
-          <input type="date" id="date">
+          <label for="number">Number *</label>
+          <input type="text" id="number" placeholder="e.g. 3402">
         </div>
       </div>
+      <label for="origin">Origin (issuing body)</label>
+      <input type="text" id="origin" placeholder="e.g. Ministry of Finance, Ministry of Work, NSSF">
+      <label for="description">Description *</label>
+      <input type="text" id="description" placeholder="e.g. VAT deadline extension">
+      <label for="date">Publication date</label>
+      <input type="date" id="date">
       <label for="pdf">PDF file * (max 25 MB)</label>
       <input type="file" id="pdf" accept="application/pdf,.pdf">
+      <div class="preview">On the website: <span id="preview">Decree #3402, VAT deadline extension - Ministry of Finance</span></div>
       <div style="margin-top:22px;"><button class="btn btn-primary" id="upload-btn">Upload &amp; Publish</button></div>
     </div>
 
     <div class="card">
-      <h2>Published decrees (<span id="count">0</span>)</h2>
+      <h2>Published (<span id="count">0</span>)</h2>
       <div id="list"><div class="empty">Loading…</div></div>
     </div>
   </div>
@@ -106,6 +117,14 @@ function show(view) {
 }
 function flash(el, text, kind) { el.textContent = text; el.className = 'msg ' + kind; if (kind === 'ok') setTimeout(() => { el.className = 'msg'; }, 4000); }
 
+// Live preview of exactly how the entry will read on the website.
+function formatEntry(type, number, description, origin) {
+  return (type || 'Decree') + (number ? ' #' + number : '') + ', ' + (description || 'description') + (origin ? ' - ' + origin : '');
+}
+function updatePreview() {
+  $('preview').textContent = formatEntry($('type').value, $('number').value.trim(), $('description').value.trim(), $('origin').value.trim());
+}
+
 async function postAdmin(payload) {
   const r = await fetch(API_ADMIN, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
   return { status: r.status, data: await r.json().catch(() => ({})) };
@@ -117,14 +136,19 @@ async function loadList() {
     const r = await fetch(API_LIST, { cache:'no-store' });
     const items = await r.json();
     $('count').textContent = items.length;
-    if (!items.length) { listEl.innerHTML = '<div class="empty">No decrees yet. Add your first one above.</div>'; return; }
-    listEl.innerHTML = '<table><thead><tr><th>Decree</th><th>Date</th><th>PDF</th><th></th></tr></thead><tbody>' +
-      items.map(it => `<tr>
-        <td><div class="k">${esc(it.title)}</div>${it.karar ? `<div class="d">${esc(it.karar)}</div>` : ''}</td>
+    if (!items.length) { listEl.innerHTML = '<div class="empty">Nothing published yet. Add your first entry above.</div>'; return; }
+    listEl.innerHTML = '<table><thead><tr><th>Entry</th><th>Date</th><th>PDF</th><th></th></tr></thead><tbody>' +
+      items.map(it => {
+        const label = esc(it.type || 'Decree') + (it.number ? ' #' + esc(it.number) : '');
+        const desc  = esc(it.description != null ? it.description : it.title);
+        const orig  = it.origin ? ' - ' + esc(it.origin) : '';
+        return `<tr>
+        <td><div class="k">${label}</div><div class="d">${desc}${orig}</div></td>
         <td class="d">${esc(it.date)}</td>
         <td><a class="file" href="${esc(it.url)}" target="_blank" rel="noopener">view ↗</a></td>
         <td style="text-align:right;"><button class="btn btn-danger" data-id="${esc(it.id)}">Delete</button></td>
-      </tr>`).join('') + '</tbody></table>';
+      </tr>`;
+      }).join('') + '</tbody></table>';
     listEl.querySelectorAll('button[data-id]').forEach(b => b.addEventListener('click', () => del(b.getAttribute('data-id'))));
   } catch (e) {
     listEl.innerHTML = '<div class="empty">Could not load the list.</div>';
@@ -132,30 +156,33 @@ async function loadList() {
 }
 
 async function del(id) {
-  if (!confirm('Delete this decree and its PDF?')) return;
+  if (!confirm('Delete this entry and its PDF?')) return;
   const { status, data } = await postAdmin({ action:'delete', id });
-  if (status === 200) { flash($('msg'), 'Decree removed.', 'ok'); loadList(); }
+  if (status === 200) { flash($('msg'), 'Removed.', 'ok'); loadList(); }
   else if (status === 401) { show('login'); }
   else { flash($('msg'), 'Delete failed: ' + (data.error || status), 'err'); }
 }
 
 async function upload() {
-  const title = $('title').value.trim();
+  const description = $('description').value.trim();
   const file = $('pdf').files[0];
-  if (!title) { flash($('msg'), 'Please enter a title.', 'err'); return; }
+  if (!description) { flash($('msg'), 'Please enter a description.', 'err'); return; }
   if (!file) { flash($('msg'), 'Please choose a PDF file.', 'err'); return; }
   const btn = $('upload-btn'); btn.disabled = true; btn.textContent = 'Uploading…';
   const fd = new FormData();
-  fd.append('title', title);
-  fd.append('karar', $('karar').value.trim());
+  fd.append('type', $('type').value);
+  fd.append('number', $('number').value.trim());
+  fd.append('origin', $('origin').value.trim());
+  fd.append('description', description);
   fd.append('date', $('date').value);
   fd.append('pdf', file);
   try {
     const r = await fetch(API_UPLOAD, { method:'POST', body: fd });
     const data = await r.json().catch(() => ({}));
     if (r.status === 200) {
-      flash($('msg'), 'Decree added and published.', 'ok');
-      $('title').value = ''; $('karar').value = ''; $('pdf').value = '';
+      flash($('msg'), 'Published.', 'ok');
+      $('number').value = ''; $('origin').value = ''; $('description').value = ''; $('pdf').value = '';
+      updatePreview();
       loadList();
     } else if (r.status === 401) { show('login'); }
     else { flash($('msg'), 'Upload failed: ' + (data.error || r.status) + (data.message ? ', ' + data.message : ''), 'err'); }
@@ -175,9 +202,11 @@ $('login-btn').addEventListener('click', doLogin);
 $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 $('upload-btn').addEventListener('click', upload);
 $('logout-btn').addEventListener('click', async () => { await postAdmin({ action:'logout' }); show('login'); });
+['type','number','origin','description'].forEach(id => $(id).addEventListener('input', updatePreview));
 
 // Boot: default date = today, check session.
 $('date').value = new Date().toISOString().slice(0, 10);
+updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
   if (data && data.authed) { show('admin'); loadList(); } else { show('login'); }

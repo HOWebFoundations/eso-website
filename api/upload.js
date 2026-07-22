@@ -44,10 +44,15 @@ export default async function handler(req, res) {
   if (tooBig) { json(res, 413, { error: 'too_large', message: `PDF exceeds ${MAX_BYTES / 1048576} MB` }); return; }
   if (!gotFile || !fileBuf || !fileBuf.length) { json(res, 400, { error: 'no_file' }); return; }
 
-  const title = String(fields.title || '').trim().slice(0, 200);
-  const karar = String(fields.karar || '').trim().slice(0, 60);
+  // 4 fields: number, type (Law/Decree/Decision), origin, description (+ date, pdf)
+  const description = String(fields.description || fields.title || '').trim().slice(0, 400);
+  const number = String(fields.number || fields.karar || '').trim().slice(0, 60);
+  const origin = String(fields.origin || '').trim().slice(0, 120);
+  const ALLOWED = ['Law', 'Decree', 'Decision'];
+  let type = String(fields.type || 'Decree').trim();
+  if (!ALLOWED.includes(type)) type = 'Decree';
   let date = String(fields.date || '').trim();
-  if (!title) { json(res, 400, { error: 'no_title' }); return; }
+  if (!description) { json(res, 400, { error: 'no_description' }); return; }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) date = new Date().toISOString().slice(0, 10);
 
   // Must be a real PDF.
@@ -61,9 +66,9 @@ export default async function handler(req, res) {
     const pdfPath = `pdf/${id}.pdf`;
     await uploadObject(pdfPath, fileBuf, 'application/pdf');
     const url = publicUrl(pdfPath);
-    const meta = { id, karar, title, date, url, uploaded: new Date().toISOString() };
+    const meta = { id, number, type, origin, description, date, url, uploaded: new Date().toISOString() };
     await uploadObject(`meta/${id}.json`, Buffer.from(JSON.stringify(meta)), 'application/json');
-    json(res, 200, { ok: true, decree: { id, karar, title, date, url } });
+    json(res, 200, { ok: true, decree: { id, number, type, origin, description, date, url } });
   } catch (e) {
     json(res, 500, { error: 'store_failed', message: String((e && e.message) || e) });
   }

@@ -18,8 +18,10 @@ export default async function handler(req, res) {
           if (!m) return null;
           return {
             id: m.id || '',
-            karar: m.karar || '',
-            title: m.title || '',
+            number: m.number || m.karar || '',
+            type: m.type || 'Decree',
+            origin: m.origin || '',
+            description: m.description || m.title || '',
             date: m.date || '',
             url: m.url || '',
           };
