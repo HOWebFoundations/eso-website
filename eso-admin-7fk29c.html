@@ -139,7 +139,8 @@ async function loadList() {
     if (!items.length) { listEl.innerHTML = '<div class="empty">Nothing published yet. Add your first entry above.</div>'; return; }
     listEl.innerHTML = '<table><thead><tr><th>Entry</th><th>Date</th><th>PDF</th><th></th></tr></thead><tbody>' +
       items.map(it => {
-        const label = esc(it.type || 'Decree') + (it.number ? ' #' + esc(it.number) : '');
+        const numRaw = String(it.number || '').replace(/^#\s*/, '');
+        const label = esc(it.type || 'Decree') + (numRaw ? ' #' + esc(numRaw) : '');
         const desc  = esc(it.description != null ? it.description : it.title);
         const orig  = it.origin ? ' - ' + esc(it.origin) : '';
         return `<tr>

@@ -2442,7 +2442,8 @@ window.renderDecrees = function () {
   list.innerHTML = items.map((it, i) => {
     const border  = i < items.length - 1 ? 'border-bottom: 1px solid #f1f5f9;' : '';
     // Format: "Type #number, description - origin"  (e.g. Decree #3402, VAT extension - M.O. Work)
-    const label   = '<strong>' + esc(it.type || 'Decree') + (it.number ? ' #' + esc(it.number) : '') + '</strong>';
+    const numRaw  = String(it.number || '').replace(/^#\s*/, '');
+    const label   = '<strong>' + esc(it.type || 'Decree') + (numRaw ? ' #' + esc(numRaw) : '') + '</strong>';
     const desc    = it.description != null ? esc(it.description) : esc(it.title);
     const orig    = it.origin ? ' <span style="color: var(--eso-text-muted);">- ' + esc(it.origin) + '</span>' : '';
     const heading = label + ', ' + desc + orig;
