@@ -1,0 +1,182 @@
+{
+  "_readme": "One entry per route. Canonical = domain + path. Every page's <head> must use ITS OWN title, description, canonical, og:title, og:description, og:url. No route may reuse the homepage head. og:image falls back to defaults.ogImage unless overridden.",
+  "domain": "https://eso-acc.com",
+  "defaults": {
+    "siteName": "ESO | Auditors & Consultants",
+    "ogImage": "https://eso-acc.com/images/eso-homepage.jpg",
+    "ogType": "website",
+    "locale": "en_US"
+  },
+  "routes": {
+    "/": {
+      "title": "ESO | Auditors & Consultants in Lebanon",
+      "description": "ESO Auditors & Consultants: Big 4 caliber audit, tax, accounting and advisory for enterprises in Lebanon and the MENA region. Trusted since 2001."
+    },
+    "/about": {
+      "title": "About ESO | Audit, Tax & Advisory Firm in Lebanon",
+      "description": "A full-service audit and advisory firm serving clients globally since 2001. Partner-led engagements, ISA audits, IFRS reporting, LACPA membership."
+    },
+    "/team": {
+      "title": "Leadership & Team | ESO Auditors & Consultants",
+      "description": "Meet the partners and senior staff behind ESO's audit, tax and consulting practices, led by Founder & CEO Elie Salloum since 2001."
+    },
+    "/services": {
+      "title": "Audit, Tax, Accounting & Consulting Services | ESO",
+      "description": "Four core pillars: statutory audit and assurance, tax advisory and VAT compliance, accounting and payroll, and corporate consulting for enterprises."
+    },
+    "/services/audit-assurance": {
+      "title": "Audit & Assurance Services in Lebanon | ESO",
+      "description": "Statutory and independent audits under ISA, IFRS compliance and transition support, internal control reviews, and agreed-upon procedures."
+    },
+    "/services/tax-advisory": {
+      "title": "Tax Advisory & VAT Compliance in Lebanon | ESO",
+      "description": "Corporate tax planning, VAT compliance and restructuring, Ministry of Finance decree consulting, and defense during official tax audits."
+    },
+    "/services/accounting-payroll": {
+      "title": "Accounting & Payroll Services in Lebanon | ESO",
+      "description": "Comprehensive bookkeeping, NSSF-compliant payroll processing, multi-currency reconciliation, and monthly management reporting."
+    },
+    "/services/corporate-consulting": {
+      "title": "Corporate Consulting & Valuation Services | ESO",
+      "description": "M&A due diligence, enterprise valuations with DCF modeling, outsourced CFO services, and operational restructuring for critical inflection points."
+    },
+    "/industries": {
+      "title": "Industries We Serve | ESO Auditors & Consultants",
+      "description": "Audit, tax and advisory expertise across 15+ sectors including F&B, manufacturing, real estate, healthcare, financial services, tech and NGOs."
+    },
+    "/industries/food-and-beverage": {
+      "title": "F&B Accounting & Audit Specialists in Lebanon | ESO",
+      "description": "Prime-cost diagnostics, POS and aggregator reconciliation, franchise auditing, and NSSF-optimized payroll for restaurants and F&B groups."
+    },
+    "/lebanon-market-guide": {
+      "title": "Lebanon Market Guide: Tax, VAT, NSSF & IFRS | ESO",
+      "description": "How to operate in Lebanon: business structures, corporate tax, VAT and e-invoicing, NSSF payroll, real estate, IFRS reporting and MOF decrees."
+    },
+    "/ministry-of-finance-decrees": {
+      "title": "Laws & Decrees: Lebanon MOF Kararat Archive | ESO",
+      "description": "A curated, viewable archive of official Lebanese regulatory documents — Ministry of Finance decrees, labor decisions and NSSF circulars."
+    },
+    "/insights": {
+      "title": "Market Insights & Technical Studies | ESO",
+      "description": "In-depth reports and briefs on Lebanese and MENA compliance, tax strategy, IFRS standards, and audit practice from the ESO team."
+    },
+    "/careers": {
+      "title": "Careers at ESO | Audit, Tax & Consulting Jobs",
+      "description": "Open positions for senior auditors, tax associates and summer interns at a partner-led audit and advisory firm in Jal El Dib, Lebanon."
+    },
+    "/contact": {
+      "title": "Contact ESO | Auditors & Consultants, Jal El Dib",
+      "description": "Reach ESO Auditors & Consultants in Jal El Dib, Lebanon. Schedule a consultation on audit, tax, accounting or advisory engagements."
+    },
+    "/insights/mid-year-2026-compliance-review": {
+      "title": "Mid-Year 2026 Compliance Review: Tax & NSSF | ESO",
+      "description": "A practical half-year checklist covering income tax instalments, VAT filing cycles, and NSSF declarations to avoid year-end penalties.",
+      "ogType": "article"
+    },
+    "/insights/ifrs-19-simplified-disclosures": {
+      "title": "IFRS 19: Simplified Disclosures for Subsidiaries | ESO",
+      "description": "How subsidiaries without public accountability can reduce disclosure volume under IFRS 19 while remaining fully IFRS-compliant.",
+      "ogType": "article"
+    },
+    "/insights/deposit-recovery-financial-gap-law": {
+      "title": "Deposit Recovery & the Financial Gap Law | ESO",
+      "description": "Guidance on valuing, provisioning, and disclosing trapped Lebanese bank deposits under IFRS 9 as recovery mechanisms take shape.",
+      "ogType": "article"
+    },
+    "/insights/e-invoicing-shift": {
+      "title": "E-Invoicing & Digital VAT: How to Prepare | ESO",
+      "description": "Why mandatory electronic invoicing is coming to the region, and the system, data, and process changes businesses should start now.",
+      "ogType": "article"
+    },
+    "/insights/2026-budget-analysis": {
+      "title": "2026 Lebanon Budget: New Corporate Tax Brackets | ESO",
+      "description": "A study of the Ministry of Finance's 2026 fiscal decrees, revised corporate income tax brackets, and strategic tax modeling for enterprises.",
+      "ogType": "article"
+    },
+    "/insights/ifrs-18-transition": {
+      "title": "IFRS 18 Transition Guide for MENA Enterprises | ESO",
+      "description": "Presentation and disclosure changes under IFRS 18: new P&L categories, management performance measures, and how groups should prepare.",
+      "ogType": "article"
+    },
+    "/insights/valuation-strategies": {
+      "title": "SME Valuation Amid Multi-Tier Exchange Rates | ESO",
+      "description": "How to bridge historical book value and hyper-inflationary reality when valuing Lebanese SME portfolios for investors and lenders.",
+      "ogType": "article"
+    },
+    "/insights/nssf-compliance": {
+      "title": "NSSF Compliance in a Hyper-Inflationary Economy | ESO",
+      "description": "Strategies for managing payroll deductions and NSSF declarations as contribution ceilings shift in Lebanon.",
+      "ogType": "article"
+    },
+    "/insights/esg-reporting-frameworks": {
+      "title": "ESG Reporting for Lebanese Corporations | ESO",
+      "description": "Why ESG reporting is becoming a financing prerequisite for Lebanese firms, and how to benchmark operations against GRI standards.",
+      "ogType": "article"
+    },
+    "/insights/transfer-pricing-scrutiny": {
+      "title": "Transfer Pricing Scrutiny in MENA | ESO",
+      "description": "How MENA tax authorities are enforcing the arm's length principle, and the documentation that protects intercompany transactions.",
+      "ogType": "article"
+    },
+    "/insights/restructuring-distressed-assets": {
+      "title": "Restructuring Distressed Assets: A Guide | ESO",
+      "description": "Accounting maneuvers and debt-to-equity swaps for rescuing distressed assets, with the valuation and tax steps that make them hold up.",
+      "ogType": "article"
+    },
+    "/insights/vat-recovery-bad-debts": {
+      "title": "VAT Recovery on Bad Debts in Lebanon | ESO",
+      "description": "A technical bulletin on legally reclaiming VAT remitted on uncollectible invoices, and the evidence file a successful claim requires.",
+      "ogType": "article"
+    },
+    "/insights/ai-impact-on-auditing": {
+      "title": "AI in Statutory Auditing | ESO",
+      "description": "How artificial intelligence is changing sample sizes, anomaly detection, and fraud prevention in assurance work.",
+      "ogType": "article"
+    },
+    "/insights/holding-company-structures": {
+      "title": "Holding Company Tax Strategies: Lebanon vs UAE | ESO",
+      "description": "Tax benefits of a Lebanese SAL Holding versus a UAE Freezone entity for family offices and investment portfolios.",
+      "ogType": "article"
+    },
+    "/insights/real-estate-tax-landscape": {
+      "title": "Real Estate Tax Planning in Lebanon | ESO",
+      "description": "Essential tax planning for property developers: registration fees, built-property tax, and contract structuring at acquisition.",
+      "ogType": "article"
+    },
+    "/insights/ma-due-diligence-pitfalls": {
+      "title": "Due Diligence Pitfalls in Cross-Border M&A | ESO",
+      "description": "Common financial blindspots in MENA startup acquisitions, and why vendor due diligence closes deals faster.",
+      "ogType": "article"
+    },
+    "/insights/cybersecurity-financial-reporting": {
+      "title": "Cybersecurity Risks in Financial Reporting | ESO",
+      "description": "Why the integrity of financial statements depends on IT controls: access management, segregation of duties, and audit trails.",
+      "ogType": "article"
+    },
+    "/insights/offshore-lebanon-vs-cyprus": {
+      "title": "Offshore Incorporation: Lebanon vs Cyprus | ESO",
+      "description": "A comparative study of corporate tax rates, maintenance costs, and banking compliance for internationally facing service providers.",
+      "ogType": "article"
+    },
+    "/insights/cryptocurrency-asset-valuation": {
+      "title": "Crypto Asset Valuation for Statutory Audits | ESO",
+      "description": "Determining fair value and recognizing impairment for corporate treasuries holding digital assets under IFRS.",
+      "ogType": "article"
+    },
+    "/insights/optimizing-working-capital": {
+      "title": "Optimizing Working Capital After Supply Shocks | ESO",
+      "description": "Cash flow modeling strategies to extend payables, accelerate receivables, and free trapped liquidity without new financing.",
+      "ogType": "article"
+    },
+    "/insights/outsourced-cfo-role": {
+      "title": "The Outsourced CFO for Growing SMEs | ESO",
+      "description": "Why mid-sized family businesses are shifting to fractional financial leadership, and when the model pays off.",
+      "ogType": "article"
+    },
+    "/insights/ngo-corporate-governance": {
+      "title": "Corporate Governance for NGOs | ESO",
+      "description": "Audit and governance requirements NGOs must meet to secure and keep international donor funding.",
+      "ogType": "article"
+    }
+  }
+}

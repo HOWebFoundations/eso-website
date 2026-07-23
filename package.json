@@ -5,6 +5,7 @@
   "type": "module",
   "description": "ESO Auditors & Consultants website + decrees admin (Vercel serverless functions).",
   "dependencies": {
-    "busboy": "^1.6.0"
+    "busboy": "^1.6.0",
+    "node-html-parser": "^6.1.13"
   }
 }
