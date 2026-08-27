@@ -368,6 +368,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Contact form → POST /api/contact (sends via ESO's Microsoft 365)
+  document.querySelectorAll('.js-contact-form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const status = form.querySelector('.form-status');
+      const btn = form.querySelector('button[type=submit]');
+      const val = (n) => { const el = form.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+      const show = (msg, ok) => {
+        if (!status) return;
+        status.textContent = msg; status.style.display = 'block';
+        status.style.background = ok ? '#ecfdf5' : '#fef2f2';
+        status.style.color = ok ? '#065f46' : '#991b1b';
+        status.style.border = '1px solid ' + (ok ? '#a7f3d0' : '#fecaca');
+      };
+      const data = { name: val('Name'), email: val('Email'), subject: val('Subject'), message: val('Message'), company: val('company') };
+      if (!data.name || !data.email || !data.message) { show('Please fill in your name, email and message.', false); return; }
+      const label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
+        .then((res) => {
+          if (res.ok && res.d && res.d.ok) { show('Thank you — your message has been sent. We will get back to you shortly.', true); form.reset(); }
+          else { show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false); }
+        })
+        .catch(() => show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false))
+        .then(() => { if (btn) { btn.disabled = false; btn.textContent = label; } });
+    });
+  });
+
   // 5. Careers Apply Button Logic
   const applyBtns = document.querySelectorAll('.apply-btn');
   const positionSelect = document.getElementById('position');

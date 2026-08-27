@@ -130,6 +130,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Contact form → POST /api/contact (sends via ESO's Microsoft 365)
+  document.querySelectorAll('.js-contact-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = form.querySelector('.form-status');
+      var btn = form.querySelector('button[type=submit]');
+      var val = function (n) { var el = form.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+      function show(msg, ok) {
+        if (!status) return;
+        status.textContent = msg; status.style.display = 'block';
+        status.style.background = ok ? '#ecfdf5' : '#fef2f2';
+        status.style.color = ok ? '#065f46' : '#991b1b';
+        status.style.border = '1px solid ' + (ok ? '#a7f3d0' : '#fecaca');
+      }
+      var data = { name: val('Name'), email: val('Email'), subject: val('Subject'), message: val('Message'), company: val('company') };
+      if (!data.name || !data.email || !data.message) { show('Please fill in your name, email and message.', false); return; }
+      var label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.d && res.d.ok) { show('Thank you — your message has been sent. We will get back to you shortly.', true); form.reset(); }
+          else { show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false); }
+        })
+        .catch(function () { show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false); })
+        .then(function () { if (btn) { btn.disabled = false; btn.textContent = label; } });
+    });
+  });
+
   // Careers "Apply" buttons: preselect role + scroll to form
   var positionSelect = document.getElementById('position');
   document.querySelectorAll('.apply-btn').forEach(function (btn) {

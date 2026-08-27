@@ -1936,8 +1936,9 @@
 
             <div class="contact-form" style="background: #fff; padding: 50px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.08);">
               <h3 style="margin-bottom: 25px; font-size: 1.8rem; color: var(--eso-navy);" data-i18n="portal_send_msg">Send a Direct Message</h3>
-              <form class="contact-form-submit" action="https://formsubmit.co/info@eso-acc.com" method="POST">
-                <input type="hidden" name="_subject" value="New Website Inquiry">
+              <form class="js-contact-form" novalidate>
+                <div class="form-status" style="display:none; padding:13px 16px; border-radius:4px; margin-bottom:18px; font-size:0.95rem;"></div>
+                <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
                 <input type="text" name="Name" data-i18n-placeholder="placeholder_full_name" placeholder="Full Name" required style="padding: 16px; margin-bottom: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; width: 100%; font-family: 'Inter', sans-serif;">
                 <input type="email" name="Email" data-i18n-placeholder="placeholder_corp_email" placeholder="Corporate email" required style="padding: 16px; margin-bottom: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; width: 100%; font-family: 'Inter', sans-serif;">
                 <input type="text" name="Subject" data-i18n-placeholder="placeholder_subject" placeholder="Subject / Inquiry Type" required style="padding: 16px; margin-bottom: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; width: 100%; font-family: 'Inter', sans-serif;">
