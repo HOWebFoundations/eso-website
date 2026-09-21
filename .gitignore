@@ -15,3 +15,7 @@ dist/
 
 # Local CMS fixture for testing the static build (never deployed)
 scripts/.cms-mock.json
+
+# Local dev servers / logs (not deployed)
+dist_server.mjs
+*.log

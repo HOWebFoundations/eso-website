@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "ESO Auditors & Consultants website + decrees admin (Vercel serverless functions).",
+  "scripts": {
+    "build": "node scripts/build-static.mjs"
+  },
   "dependencies": {
     "busboy": "^1.6.0",
     "node-html-parser": "^6.1.13"
