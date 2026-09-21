@@ -13,8 +13,8 @@ Thumbs.db
 # Static build output
 dist/
 
-# Local CMS fixture for testing the static build (never deployed)
-scripts/.cms-mock.json
+# Local CMS fixture for testing the static build, and any moved-aside copies (never deployed)
+scripts/.cms-mock*
 
 # Local dev servers / logs (not deployed)
 dist_server.mjs
