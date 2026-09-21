@@ -121,7 +121,27 @@
     <section id="home" class="page-view active">
 
       <div class="advisory-hero">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-slideshow" role="group" aria-label="Featured photos">
+          <div class="hero-slide is-active" data-img-key="hero_slide_1" style="background-image: url('/images/business-handshake.webp');"></div>
+          <div class="hero-slide" data-img-key="hero_slide_2" style="background-image: url('/images/nejmeh-square-beirut.jpg');"></div>
+          <div class="hero-slide" data-img-key="hero_slide_3" style="background-image: url('/images/service-consulting.jpg');"></div>
+        </div>
+        <div class="hero-caption">
+          <div class="hero-quotes">
+            <blockquote class="hero-quote is-active" data-i18n="hero_quote_1">Numbers tell a story. We help you read it clearly.</blockquote>
+            <blockquote class="hero-quote" data-i18n="hero_quote_2">Precision today builds the confidence you rely on tomorrow.</blockquote>
+            <blockquote class="hero-quote" data-i18n="hero_quote_3">Big-firm rigor, delivered with the care of a trusted partner.</blockquote>
+          </div>
+          <div class="hero-controls">
+            <button class="hero-arrow prev" type="button" aria-label="Previous photo">&#8249;</button>
+            <div class="hero-dots">
+              <button class="hero-dot is-active" type="button" data-i="0" aria-label="Photo 1"></button>
+              <button class="hero-dot" type="button" data-i="1" aria-label="Photo 2"></button>
+              <button class="hero-dot" type="button" data-i="2" aria-label="Photo 3"></button>
+            </div>
+            <button class="hero-arrow next" type="button" aria-label="Next photo">&#8250;</button>
+          </div>
+        </div>
         <div class="hero-content-wrapper">
 
           <div class="advisory-glass-panel left-panel">

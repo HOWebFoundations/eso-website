@@ -581,104 +581,34 @@ window.renderDecrees = function () {
 };
 
 // ============================================================================
-//  Homepage hero: animated money background (floating coins & currency)
-//  Gentle rising coins and currency symbols in gold and cyan over the navy.
-//  Pauses when the hero is off-screen; respects prefers-reduced-motion.
+//  Homepage hero: rotating photo slideshow (one quote per photo)
 // ============================================================================
 (function () {
-  function initHeroCanvas() {
-    var canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var SYMS = ['$', '$', '$', '\u20ac', '\u00a3', '\u00a5'];   // money-dominant ($ EUR GBP JPY)
-    var GOLD = '212, 175, 55', CYAN = '56, 189, 248';
-    var W = 0, H = 0, dpr = 1, parts = [];
-
-    function rnd(a, b) { return a + Math.random() * (b - a); }
-    function make(anywhere) {
-      return {
-        x: rnd(0, W || 1),
-        y: anywhere ? rnd(0, H || 1) : (H || 1) + rnd(10, 70),
-        r: rnd(9, 22),
-        vy: rnd(0.15, 0.5),
-        phase: rnd(0, Math.PI * 2),
-        drift: rnd(0.004, 0.011),
-        amp: rnd(6, 22),
-        op: rnd(0.10, 0.34),
-        coin: Math.random() < 0.4,
-        sym: SYMS[(Math.random() * SYMS.length) | 0],
-        col: Math.random() < 0.62 ? GOLD : CYAN
-      };
+  function initHeroSlideshow() {
+    var show = document.querySelector('.hero-slideshow');
+    if (!show) return;
+    var slides = [].slice.call(show.querySelectorAll('.hero-slide'));
+    var quotes = [].slice.call(document.querySelectorAll('.hero-quote'));
+    var dots = [].slice.call(document.querySelectorAll('.hero-dot'));
+    var prev = document.querySelector('.hero-arrow.prev'), next = document.querySelector('.hero-arrow.next');
+    var n = slides.length;
+    if (!n) return;
+    var i = 0, timer = null, DELAY = 6000;
+    function go(idx) {
+      i = (idx + n) % n;
+      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      quotes.forEach(function (q, k) { q.classList.toggle('is-active', k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
     }
-    function size() {
-      var w = canvas.clientWidth, h = canvas.clientHeight;
-      if (!w || !h) return;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      W = w; H = h;
-      var inten = (window.__esoAnim && +window.__esoAnim.intensity) || 1;
-      inten = Math.max(0.2, Math.min(2.5, inten));
-      var n = Math.max(4, Math.min(120, Math.round(w / 32 * inten)));
-      parts = [];
-      for (var i = 0; i < n; i++) parts.push(make(true));
-    }
-    size();
-    // Let the CMS toggle the animation on/off and re-density it live.
-    window.__heroApply = function () {
-      var cfg = window.__esoAnim || {};
-      canvas.style.display = (cfg.enabled === false) ? 'none' : '';
-      if (cfg.enabled !== false) size();
-    };
-    window.__heroApply();
-
-    function paint(p) {
-      var x = p.x + Math.sin(p.phase) * p.amp;
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      if (p.coin) {
-        ctx.beginPath(); ctx.arc(x, p.y, p.r, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(' + p.col + ',' + p.op + ')'; ctx.lineWidth = 1.4; ctx.stroke();
-        ctx.fillStyle = 'rgba(' + p.col + ',' + (p.op * 0.85) + ')';
-        ctx.font = '600 ' + Math.round(p.r * 1.05) + 'px "Courier New", monospace';
-        ctx.fillText('$', x, p.y + 1);
-      } else {
-        ctx.fillStyle = 'rgba(' + p.col + ',' + p.op + ')';
-        ctx.font = '600 ' + Math.round(p.r * 1.7) + 'px "Courier New", monospace';
-        ctx.fillText(p.sym, x, p.y);
-      }
-    }
-
-    if (reduce) {
-      for (var i = 0; i < parts.length; i++) paint(parts[i]);
-      return;
-    }
-
-    var last = 0, interval = 1000 / 30;
-    function draw(t) {
-      if (!canvas.isConnected) return;
-      if (canvas.offsetParent === null || !W) { requestAnimationFrame(draw); return; }
-      if (t - last < interval) { requestAnimationFrame(draw); return; }
-      last = t;
-      ctx.clearRect(0, 0, W, H);
-      for (var i = 0; i < parts.length; i++) {
-        var p = parts[i];
-        p.y -= p.vy; p.phase += p.drift;
-        if (p.y < -30) { parts[i] = make(false); continue; }
-        paint(p);
-      }
-      requestAnimationFrame(draw);
-    }
-    requestAnimationFrame(draw);
-
-    var rt;
-    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 200); });
-    window.addEventListener('load', size);
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() { stop(); if (n > 1) timer = setInterval(function () { go(i + 1); }, DELAY); }
+    if (prev) prev.addEventListener('click', function () { go(i - 1); start(); });
+    if (next) next.addEventListener('click', function () { go(i + 1); start(); });
+    dots.forEach(function (d) { d.addEventListener('click', function () { go(+d.getAttribute('data-i')); start(); }); });
+    go(0); start();
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeroCanvas);
-  else initHeroCanvas();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeroSlideshow);
+  else initHeroSlideshow();
 })();
 
 
@@ -831,11 +761,6 @@ window.applyTheme = function () {
     st.textContent =
       "body,p,a,span,li,td,th,div,input,textarea,button,select,label,.btn,.subtitle,.simple-nav-link{font-family:" + preset.body + " !important;}" +
       "h1,h2,h3,h4,h5,h6,.canvas-title,.adv-icon,.stat-number{font-family:" + preset.head + " !important;}";
-  }
-  // Money animation
-  if (th.animation && typeof th.animation === 'object') {
-    window.__esoAnim = { enabled: th.animation.enabled !== false, intensity: +th.animation.intensity || 1 };
-    if (typeof window.__heroApply === 'function') window.__heroApply();
   }
 };
 
