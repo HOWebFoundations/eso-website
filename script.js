@@ -897,7 +897,7 @@ window.renderTeam = function () {
     img.setAttribute('role', 'img');
     img.setAttribute('aria-label', (m.name || '') + ', ESO Auditors and Consultants');
     img.style.backgroundImage = "url('" + (m.photo || '') + "')";
-    img.style.backgroundPosition = 'center top';
+    img.style.backgroundPosition = 'center 20%';
     var info = document.createElement('div'); info.className = 'team-info text-center';
     var h3 = document.createElement('h3'); h3.textContent = m.name || '';
     info.appendChild(h3);
