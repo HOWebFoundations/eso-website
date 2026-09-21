@@ -10,7 +10,7 @@
 //  local scripts/.cms-mock.json, the build still runs on baked defaults.
 // ============================================================================
 import { parse } from 'node-html-parser';
-import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -255,7 +255,12 @@ for (const path of ROUTES) for (const lang of LANGS) { const out = outFile(lang,
 for (const a of ARTICLES) for (const lang of LANGS) { const out = outFile(lang, '/insights/' + a.slug); mkdirSync(dirname(out), { recursive: true }); writeFileSync(out, buildArticlePage(a, lang)); count++; }
 
 // ---- Copy static assets ----
-for (const asset of ['style.css', 'static-site.js', 'favicon.svg', 'robots.txt', 'llms.txt']) { const src = join(ROOT, asset); if (existsSync(src)) cpSync(src, join(DIST, asset)); }
+// eso-admin-*.html is the CMS admin (its own app); translations.js is loaded
+// by that admin at runtime, so both must ship even though the public pages
+// have their text baked in and never load translations.js.
+const assets = ['style.css', 'static-site.js', 'favicon.svg', 'robots.txt', 'llms.txt', 'translations.js'];
+for (const f of readdirSync(ROOT)) if (/^eso-admin-.*\.html$/.test(f)) assets.push(f);
+for (const asset of assets) { const src = join(ROOT, asset); if (existsSync(src)) cpSync(src, join(DIST, asset)); }
 if (existsSync(join(ROOT, 'images'))) cpSync(join(ROOT, 'images'), join(DIST, 'images'), { recursive: true });
 
 console.log(`Generated ${count} pages: ${ROUTES.length} routes + ${ARTICLES.length} article(s), x ${LANGS.length} langs.`);
