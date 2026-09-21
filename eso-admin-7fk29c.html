@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>ESO Laws &amp; Decrees, Admin</title>
+<title>ESO Website Admin</title>
 <style>
   :root { --navy:#22345e; --accent:#38bdf8; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -43,6 +43,15 @@
   .preview { background:#f1f5f9; border-left:3px solid var(--accent); padding:12px 14px; border-radius:6px; margin-top:16px; font-size:.9rem; color:var(--navy); }
   .preview span { font-weight:600; }
   .hidden { display:none; }
+  /* Section menu (tabs) */
+  .admin-tabs { position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 2px 10px rgba(0,0,0,.03); display:flex; gap:4px; overflow-x:auto; padding:0 20px; -webkit-overflow-scrolling:touch; }
+  .admin-tabs::-webkit-scrollbar { height:0; }
+  .admin-tab { flex:0 0 auto; border:none; background:transparent; cursor:pointer; font-family:inherit; font-size:.9rem; font-weight:600; color:var(--muted); padding:16px 16px 13px; border-bottom:3px solid transparent; white-space:nowrap; transition:.15s; }
+  .admin-tab:hover { color:var(--navy); }
+  .admin-tab.active { color:var(--navy); border-bottom-color:var(--accent); }
+  .admin-tab .ico { margin-right:6px; }
+  .card.is-hidden { display:none; }
+  @media (max-width:600px) { .admin-tab { padding:14px 12px 11px; font-size:.82rem; } }
 </style>
 </head>
 <body>
@@ -50,21 +59,22 @@
 <!-- LOGIN -->
 <div id="login-view" class="login-wrap hidden">
   <div class="card">
-    <h2>ESO Laws &amp; Decrees, Admin</h2>
+    <h2>ESO Website Admin</h2>
     <div id="login-msg" class="msg"></div>
     <label for="pw">Password</label>
     <input type="password" id="pw" autocomplete="current-password" autofocus>
     <div style="margin-top:20px;"><button class="btn btn-primary" id="login-btn" style="width:100%;">Log In</button></div>
-    <p class="hint">Manage the laws, decrees and decisions shown on the website.</p>
+    <p class="hint">Manage all the content shown on the ESO website.</p>
   </div>
 </div>
 
 <!-- MANAGER -->
 <div id="admin-view" class="hidden">
   <div class="topbar">
-    <h1>ESO Laws &amp; Decrees <span class="badge">Admin</span></h1>
+    <h1>ESO Website <span class="badge">Admin</span></h1>
     <button class="btn btn-ghost" id="logout-btn">Log out</button>
   </div>
+  <nav class="admin-tabs" id="admin-tabs" aria-label="Sections"></nav>
   <div class="wrap">
     <div id="msg" class="msg"></div>
 
@@ -905,6 +915,46 @@ updatePreview();
 (async () => {
   const { data } = await postAdmin({ action:'session' });
   if (data && data.authed) { show('admin'); loadList(); loadArticleList(); loadStudies(); loadTeam(); loadLeadership(); loadContact(); loadTheme(); loadImages(); loadText(); } else { show('login'); }
+})();
+
+// ---- Section menu: group the existing cards into tabs so the admin isn't one long scroll ----
+(function () {
+  var GROUPS = [
+    { id:'pictures', ico:'🖼', label:'Pictures',  m:['Website pictures'] },
+    { id:'wording',  ico:'✍️', label:'Text',      m:['Website wording'] },
+    { id:'team',     ico:'👥', label:'Team',      m:['Team members'] },
+    { id:'contact',  ico:'📞', label:'Contact',   m:['Contact details'] },
+    { id:'design',   ico:'🎨', label:'Design',    m:['Design'] },
+    { id:'articles', ico:'📰', label:'Articles',  m:['Add a news article','Published articles','Built-in case studies'] },
+    { id:'decrees',  ico:'⚖️', label:'Decrees',   m:['Add a law','Published ('] }
+  ];
+  var nav = $('admin-tabs');
+  var wrap = document.querySelector('#admin-view .wrap');
+  if (!nav || !wrap) return;
+  var cards = [].slice.call(wrap.querySelectorAll('.card'));
+  cards.forEach(function (card) {
+    var h2 = card.querySelector('h2'); var t = h2 ? h2.textContent.trim() : '';
+    for (var i = 0; i < GROUPS.length; i++) {
+      if (GROUPS[i].m.some(function (s) { return t.indexOf(s) !== -1; })) { card.dataset.group = GROUPS[i].id; break; }
+    }
+  });
+  var present = GROUPS.filter(function (g) { return cards.some(function (c) { return c.dataset.group === g.id; }); });
+  function activate(id) {
+    cards.forEach(function (c) { if (c.dataset.group) c.classList.toggle('is-hidden', c.dataset.group !== id); });
+    [].slice.call(nav.children).forEach(function (b) { b.classList.toggle('active', b.dataset.tab === id); });
+    try { localStorage.setItem('eso-admin-tab', id); } catch (e) {}
+    window.scrollTo(0, 0);
+  }
+  present.forEach(function (g) {
+    var b = document.createElement('button');
+    b.className = 'admin-tab'; b.type = 'button'; b.dataset.tab = g.id;
+    b.innerHTML = '<span class="ico">' + g.ico + '</span>' + g.label;
+    b.addEventListener('click', function () { activate(g.id); });
+    nav.appendChild(b);
+  });
+  var saved = null; try { saved = localStorage.getItem('eso-admin-tab'); } catch (e) {}
+  var initial = present.some(function (g) { return g.id === saved; }) ? saved : (present[0] && present[0].id);
+  if (initial) activate(initial);
 })();
 </script>
 </body>
