@@ -340,7 +340,9 @@ header .hamburger span { background-color: var(--eso-logo-navy); }
   .study-article { transform: translateY(-30px); padding: 40px 20px; }
   .pdf-modal-content { height: 85vh; margin: 10% auto; width: 95%; }
 
-  .hero-content-wrapper { flex-direction: column; justify-content: center; gap: 40px; padding-left: 0; perspective: none; height: auto; padding-top: 120px; padding-bottom: 60px; }
+  .hero-content-wrapper { flex-direction: column; justify-content: center; gap: 40px; padding-left: 0; perspective: none; height: auto; padding-top: 120px; padding-bottom: 230px; }
+  /* Stacked panels: reserve room at the bottom so the slideshow caption never overlaps the last panel. */
+  .hero-caption { bottom: 24px; }
   .advisory-glass-panel { flex: none; width: 90%; max-width: 450px; margin: 0 auto; transform: none !important; }
   .advisory-glass-panel.left-panel { left: 0; margin-top: 0; }
   .advisory-glass-panel.right-panel { width: 90%; max-width: 450px; padding: 40px 30px; margin-top: 0; }
