@@ -121,4 +121,17 @@ document.addEventListener('DOMContentLoaded', function () {
       if (form) form.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Careers form (formsubmit relay): come back to this same page afterwards instead of a
+  // formsubmit page, and show the baked, translated thank-you when we do.
+  document.querySelectorAll('form.contact-form-submit').forEach(function (form) {
+    var next = document.createElement('input');
+    next.type = 'hidden'; next.name = '_next';
+    next.value = location.origin + location.pathname + '?sent=1';
+    form.appendChild(next);
+  });
+  if (/[?&]sent=1(&|$)/.test(location.search)) {
+    var thanks = document.querySelector('.careers-status');
+    if (thanks) { thanks.style.display = 'block'; thanks.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }
 });
