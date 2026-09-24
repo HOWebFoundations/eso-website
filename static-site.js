@@ -44,6 +44,11 @@ window.switchLanguage = function (lang) {
 
 // ---- Page interactivity ----
 document.addEventListener('DOMContentLoaded', function () {
+  // Language buttons (the build strips inline onclick handlers so the Content-Security-Policy can stay strict)
+  document.querySelectorAll('.lang-btn[data-lang]').forEach(function (btn) {
+    btn.addEventListener('click', function () { window.switchLanguage(btn.getAttribute('data-lang')); });
+  });
+
   // Reveal-on-scroll
   function triggerReveals() {
     var reveals = document.querySelectorAll('.reveal');

@@ -121,7 +121,7 @@
     <section id="home" class="page-view active">
 
       <div class="advisory-hero light">
-        <div class="hero-slideshow" role="group" aria-label="Featured photos">
+        <div class="hero-slideshow" aria-hidden="true">
           <div class="hero-slide is-active" data-img-key="hero_slide_1" style="background-image: url('/images/hero-review-daylight.jpg');"></div>
           <div class="hero-slide" data-img-key="hero_slide_2" style="background-image: url('/images/hero-desk-still-life.jpg');"></div>
           <div class="hero-slide" data-img-key="hero_slide_3" style="background-image: url('/images/hero-advisory-meeting.jpg');"></div>
@@ -200,7 +200,11 @@
         </div>
         <!-- Quote + controls sit in normal flow BELOW the panels so they can never overlap them -->
         <div class="hero-caption">
-          <p class="hero-tagline" data-i18n="hero_tagline">Clarity you can build on.</p>
+          <div class="hero-quotes">
+            <blockquote class="hero-quote is-active" data-i18n="hero_quote_1">Every figure checked. Every risk understood.</blockquote>
+            <blockquote class="hero-quote" data-i18n="hero_quote_2">Clarity you can build on.</blockquote>
+            <blockquote class="hero-quote" data-i18n="hero_quote_3">Straight answers from advisors who know Lebanon.</blockquote>
+          </div>
           <div class="hero-controls">
             <button class="hero-arrow prev" type="button" aria-label="Previous photo">&#8249;</button>
             <div class="hero-dots">
@@ -255,7 +259,7 @@
             <a href="/about" class="btn btn-outline-dark nav-router" data-i18n="home_discover_firm">Discover Our Firm</a>
           </div>
           <div class="split-image">
-            <img data-img-key="home_meeting" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80" alt="Corporate Meeting">
+            <img data-img-key="home_meeting" src="/images/stock/photo-1600880292203-757bb62b4baf.jpg" alt="Corporate Meeting">
           </div>
         </div>
       </div>
@@ -269,7 +273,7 @@
             <a href="/services" class="btn btn-outline-dark nav-router" data-i18n="home_explore_services">Explore Services</a>
           </div>
           <div class="split-image">
-            <img data-img-key="home_expertise" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80" alt="Global commerce">
+            <img data-img-key="home_expertise" src="/images/stock/photo-1504384308090-c894fdcc538d.jpg" alt="Global commerce">
           </div>
         </div>
       </div>
@@ -283,7 +287,7 @@
             <a href="/careers" class="btn btn-primary nav-router" data-i18n="home_view_open_positions">View Open Positions</a>
           </div>
           <div class="split-image">
-            <img data-img-key="home_careers" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80" alt="Professionals working">
+            <img data-img-key="home_careers" src="/images/stock/photo-1573496359142-b8d87734a5a2.jpg" alt="Professionals working">
           </div>
         </div>
       </div>
@@ -292,7 +296,7 @@
 
     <section id="about" class="page-view">
 
-      <div data-img-key="img_001" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_001" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1497215728101-856f4ea42174.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_about">About Us</span></div>
           <h1 class="page-title" data-i18n="about_title">About ESO</h1>
@@ -309,7 +313,7 @@
             <p data-i18n="about_whether_multinational">Whether you are a multinational corporation navigating complex tax jurisdictions, or a growing enterprise needing robust financial modeling, our expert consultants act as an extension of your team. We don't just report on the past; we architect your financial future.</p>
           </div>
           <div class="split-image">
-            <img data-img-key="about_consultants" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80" alt="Consultants reviewing data">
+            <img data-img-key="about_consultants" src="/images/stock/photo-1552664730-d307ca884978.jpg" alt="Consultants reviewing data">
           </div>
         </div>
       </div>
@@ -336,19 +340,19 @@
           </div>
           <div class="grid-3">
             <div class="advantage-card">
-              <div data-img-key="img_002" class="adv-image" style="background-image: url('https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80');"></div>
+              <div data-img-key="img_002" class="adv-image" style="background-image: url('/images/stock/photo-1553484771-371a605b060b.jpg');"></div>
               <div class="adv-icon">01</div>
               <h3 data-i18n="adv_proactive_title">Proactive Strategy</h3>
               <p data-i18n="adv_proactive_desc">We don't just report history; we architect futures. Our modeling anticipates market shifts so you can navigate volatility safely.</p>
             </div>
             <div class="advantage-card">
-              <div data-img-key="img_003" class="adv-image" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80');"></div>
+              <div data-img-key="img_003" class="adv-image" style="background-image: url('/images/stock/photo-1450101499163-c8848c66ca85.jpg');"></div>
               <div class="adv-icon">02</div>
               <h3 data-i18n="adv_compliance_title">Absolute Compliance</h3>
               <p data-i18n="adv_compliance_desc">Eliminate regulatory blindspots. Our rigorous multi-tier audit processes guarantee pristine ledgers across borders.</p>
             </div>
             <div class="advantage-card">
-              <div data-img-key="img_004" class="adv-image" style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80');"></div>
+              <div data-img-key="img_004" class="adv-image" style="background-image: url('/images/stock/photo-1521737604893-d14cc237f11d.jpg');"></div>
               <div class="adv-icon">03</div>
               <h3 data-i18n="adv_local_title">Local Mastery</h3>
               <p data-i18n="adv_local_desc">Global standards meet granular local insight. We decode complex MENA jurisdictions to optimize your operational footprint.</p>
@@ -396,7 +400,7 @@
     </section>
 
     <section id="client-fb" class="page-view study-view bg-silver">
-      <div data-img-key="img_006" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_006" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1414235077428-338989a2e8c0.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/industries" class="nav-router" data-i18n="nav_clients">Our Clients</a> <span>→</span> <span class="current" data-i18n="fb_breadcrumb">Food & Beverage</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="fb_page_title">Food and Beverage Sector</h1>
@@ -414,21 +418,21 @@
           <h3 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--eso-navy);" data-i18n="fb_specialized_caps">Our Specialized F&B Capabilities</h3>
           <div class="fb-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px;">
             <div class="fb-service-block">
-              <img data-img-key="fb_inventory" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="Inventory Management" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
+              <img data-img-key="fb_inventory" src="/images/stock/photo-1556742049-0cfed4f6a45d.jpg" alt="Inventory Management" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
               <div class="fb-service-content">
                 <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--eso-navy);" data-i18n="fb_inventory_title">Inventory & Yield Management</h4>
                 <p style="font-size: 1rem; color: var(--eso-text-dark); line-height: 1.6;" data-i18n="fb_inventory_desc">Food cost is the silent killer of profitability.</p>
               </div>
             </div>
             <div class="fb-service-block">
-              <img data-img-key="fb_pos" src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=800&q=80" alt="POS Reconciliation" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
+              <img data-img-key="fb_pos" src="/images/stock/photo-1556742044-3c52d6e88c62.jpg" alt="POS Reconciliation" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
               <div class="fb-service-content">
                 <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--eso-navy);" data-i18n="fb_pos_title">POS & Aggregator Reconciliation</h4>
                 <p style="font-size: 1rem; color: var(--eso-text-dark); line-height: 1.6;" data-i18n="fb_pos_desc">Delivery platforms create accounting chaos.</p>
               </div>
             </div>
             <div class="fb-service-block">
-              <img data-img-key="fb_franchise" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Franchise Auditing" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
+              <img data-img-key="fb_franchise" src="/images/stock/photo-1517248135467-4c7edcad34c4.jpg" alt="Franchise Auditing" class="fb-img-element" style="width:100%; border-radius: 8px; margin-bottom: 15px;">
               <div class="fb-service-content">
                 <h4 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--eso-navy);" data-i18n="fb_franchise_title">Franchise & Multi-Unit Auditing</h4>
                 <p style="font-size: 1rem; color: var(--eso-text-dark); line-height: 1.6;" data-i18n="fb_franchise_desc">Comprehensive royalty compliance audits.</p>
@@ -480,7 +484,7 @@
     </section>
 
     <section id="team" class="page-view">
-      <div data-img-key="img_008" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_008" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1522071820081-009f0129c71c.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/about" class="nav-router" data-i18n="nav_about">About Us</a> <span>→</span> <span class="current" data-i18n="team_breadcrumb">Our Team</span></div>
           <h1 class="page-title" data-i18n="team_title">Leadership & Experts</h1>
@@ -558,7 +562,7 @@
     </section>
 
     <section id="services" class="page-view">
-      <div data-img-key="img_009" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_009" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1542744173-8e7e53415bb0.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_services">Our Services</span></div>
           <h1 class="page-title" data-i18n="services_title">Firm Expertise</h1>
@@ -575,7 +579,7 @@
             <p data-i18n="services_select_service">Select a service below to discover how our dedicated expert teams can optimize your operations.</p>
           </div>
           <div class="split-image">
-            <img data-img-key="img_010" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1000&q=80" alt="Financial consulting">
+            <img data-img-key="img_010" src="/images/stock/photo-1554224155-8d04cb21cd6c.jpg" alt="Financial consulting">
           </div>
         </div>
       </div>
@@ -587,13 +591,13 @@
             <h2 style="color: #fff;" data-i18n="services_explore_services">Explore Our Services</h2>
           </div>
           <div class="grid-4 reveal">
-            <a href="/services/audit-assurance" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');">
+            <a href="/services/audit-assurance" class="expertise-card nav-router" style="background-image: url('/images/stock/photo-1454165804606-c3d57bc86b40.jpg');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_audit_title">Audit & Assurance</h3>
                 <p data-i18n="card_audit_desc">Independent statutory audits and IFRS compliance ensuring absolute integrity. Click to explore.</p>
               </div>
             </a>
-            <a href="/services/tax-advisory" class="expertise-card nav-router" style="background-image: url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=800&q=80');">
+            <a href="/services/tax-advisory" class="expertise-card nav-router" style="background-image: url('/images/stock/photo-1554224154-26032ffc0d07.jpg');">
               <div class="expertise-overlay">
                 <h3 data-i18n="card_tax_title">Tax Advisory</h3>
                 <p data-i18n="card_tax_desc">Strategic tax planning, VAT compliance, and defense against regulatory audits. Click to explore.</p>
@@ -617,7 +621,7 @@
     </section>
 
     <section id="service-audit" class="page-view study-view bg-silver">
-      <div data-img-key="img_011" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_011" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1454165804606-c3d57bc86b40.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/services" class="nav-router" data-i18n="nav_services">Our Services</a> <span>→</span> <span class="current" data-i18n="audit_breadcrumb">Audit & Assurance</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="audit_page_title">Audit & Assurance</h1>
@@ -646,7 +650,7 @@
     </section>
 
     <section id="service-tax" class="page-view study-view bg-silver">
-      <div data-img-key="img_012" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_012" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1554224154-26032ffc0d07.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/services" class="nav-router" data-i18n="nav_services">Our Services</a> <span>→</span> <span class="current" data-i18n="tax_breadcrumb">Tax Advisory</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="tax_page_title">Tax Advisory</h1>
@@ -819,7 +823,7 @@
     </section>
 
     <section id="kararat-portal" class="page-view bg-silver-light">
-      <div data-img-key="img_017" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_017" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1450101499163-c8848c66ca85.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_mof_decrees">MoF Decrees</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="mof_page_title">Laws and Decrees</h1>
@@ -880,7 +884,7 @@
     </section>
 
     <section id="news" class="page-view">
-      <div data-img-key="img_018" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_018" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1611974789855-9c2a0a7236a3.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_news">News</span></div>
           <h1 class="page-title" data-i18n="news_page_title">Market Insights</h1>
@@ -1099,7 +1103,7 @@
 
 
     <section id="study-1" class="page-view study-view bg-silver">
-      <div data-img-key="img_020" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_020" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1554224155-8d04cb21cd6c.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_budget_2026">2026 Budget Analysis</h1>
@@ -1133,7 +1137,7 @@
     </section>
 
     <section id="study-2" class="page-view study-view bg-silver">
-      <div data-img-key="img_021" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_021" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1454165804606-c3d57bc86b40.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ifrs18">The Transition to IFRS 18</h1>
@@ -1166,7 +1170,7 @@
     </section>
 
     <section id="study-3" class="page-view study-view bg-silver">
-      <div data-img-key="img_022" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_022" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1552664730-d307ca884978.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_valuation">Valuation Strategies</h1>
@@ -1199,7 +1203,7 @@
     </section>
 
     <section id="study-4" class="page-view study-view bg-silver">
-      <div data-img-key="img_023" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_023" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1600880292203-757bb62b4baf.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_nssf">NSSF Compliance</h1>
@@ -1232,7 +1236,7 @@
     </section>
 
     <section id="study-5" class="page-view study-view bg-silver">
-      <div data-img-key="img_024" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_024" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1460925895917-afdab827c52f.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_esg">ESG Reporting Frameworks</h1>
@@ -1265,7 +1269,7 @@
     </section>
 
     <section id="study-6" class="page-view study-view bg-silver">
-      <div data-img-key="img_025" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_025" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1507679799987-c73779587ccf.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_transfer">Transfer Pricing Scrutiny</h1>
@@ -1298,7 +1302,7 @@
     </section>
 
     <section id="study-7" class="page-view study-view bg-silver">
-      <div data-img-key="img_026" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32d7?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_026" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1497366216548-37526070297c.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_distressed">Restructuring Distressed Assets</h1>
@@ -1331,7 +1335,7 @@
     </section>
 
     <section id="study-8" class="page-view study-view bg-silver">
-      <div data-img-key="img_027" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_027" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1504384308090-c894fdcc538d.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_vat_bad">VAT Recovery on Bad Debts</h1>
@@ -1364,7 +1368,7 @@
     </section>
 
     <section id="study-9" class="page-view study-view bg-silver">
-      <div data-img-key="img_028" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_028" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1553484771-371a605b060b.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ai">The Impact of AI on Auditing</h1>
@@ -1397,7 +1401,7 @@
     </section>
 
     <section id="study-10" class="page-view study-view bg-silver">
-      <div data-img-key="img_029" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_029" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1521737604893-d14cc237f11d.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_holding">Holding Company Structures</h1>
@@ -1430,7 +1434,7 @@
     </section>
 
     <section id="study-11" class="page-view study-view bg-silver">
-      <div data-img-key="img_030" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_030" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1507003211169-0a1dd7228f2d.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_real_estate">Real Estate Tax Landscape</h1>
@@ -1463,7 +1467,7 @@
     </section>
 
     <section id="study-12" class="page-view study-view bg-silver">
-      <div data-img-key="img_031" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_031" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1580489944761-15a19d654956.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_dd">Due Diligence Pitfalls in M&A</h1>
@@ -1496,7 +1500,7 @@
     </section>
 
     <section id="study-13" class="page-view study-view bg-silver">
-      <div data-img-key="img_032" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_032" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1500648767791-00dcc994a43e.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_cyber">Cybersecurity Risks in Financial Reporting</h1>
@@ -1529,7 +1533,7 @@
     </section>
 
     <section id="study-14" class="page-view study-view bg-silver">
-      <div data-img-key="img_033" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_033" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1534528741775-53994a69daeb.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_offshore">Offshore Incorporation: Lebanon vs. Cyprus</h1>
@@ -1562,7 +1566,7 @@
     </section>
 
     <section id="study-15" class="page-view study-view bg-silver">
-      <div data-img-key="img_034" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_034" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1506794778202-cad84cf45f1d.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_crypto">Cryptocurrency Asset Valuation</h1>
@@ -1595,7 +1599,7 @@
     </section>
 
     <section id="study-16" class="page-view study-view bg-silver">
-      <div data-img-key="img_035" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_035" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1573497019940-1c28c88b4f3e.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_wc">Optimizing Working Capital</h1>
@@ -1628,7 +1632,7 @@
     </section>
 
     <section id="study-17" class="page-view study-view bg-silver">
-      <div data-img-key="img_036" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_036" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1517841905240-472988babdf9.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_cfo">The Role of the Outsourced CFO</h1>
@@ -1661,7 +1665,7 @@
     </section>
 
     <section id="study-18" class="page-view study-view bg-silver">
-      <div data-img-key="img_037" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1598550874175-4d0ef43ee90d?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_037" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1552664730-d307ca884978.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ngo">Corporate Governance Requirements for NGOs</h1>
@@ -1694,7 +1698,7 @@
     </section>
 
     <section id="study-19" class="page-view study-view bg-silver">
-      <div data-img-key="img_038" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_038" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1554224155-8d04cb21cd6c.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_midyear">Mid-Year 2026 Compliance Review</h1>
@@ -1727,7 +1731,7 @@
     </section>
 
     <section id="study-20" class="page-view study-view bg-silver">
-      <div data-img-key="img_039" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_039" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1454165804606-c3d57bc86b40.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_ifrs19">IFRS 19: Simplified Disclosures</h1>
@@ -1760,7 +1764,7 @@
     </section>
 
     <section id="study-21" class="page-view study-view bg-silver">
-      <div data-img-key="img_040" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_040" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1450101499163-c8848c66ca85.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_gaplaw">Deposit Recovery & the Financial Gap Law</h1>
@@ -1793,7 +1797,7 @@
     </section>
 
     <section id="study-22" class="page-view study-view bg-silver">
-      <div data-img-key="img_041" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80') center/cover;">
+      <div data-img-key="img_041" class="study-header" style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/images/stock/photo-1460925895917-afdab827c52f.jpg') center/cover;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <a href="/insights" class="nav-router" data-i18n="nav_news">News</a> <span>→</span> <span class="current" data-i18n="nav_study">Study</span></div>
           <h1 class="page-title" style="font-size: clamp(2rem, 4vw, 3.5rem);" data-i18n="study_title_einvoice">The Shift to E-Invoicing</h1>
@@ -1826,7 +1830,7 @@
     </section>
 
     <section id="careers" class="page-view">
-      <div data-img-key="img_042" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_042" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1573496359142-b8d87734a5a2.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_careers">Careers</span></div>
           <h1 class="page-title" data-i18n="careers_title">Build Your Career</h1>
@@ -1843,7 +1847,7 @@
             <p data-i18n="careers_p2">Whether you are a seasoned auditor looking to lead global engagements, or a bright university student seeking a rigorous summer internship, ESO provides the platform, the mentorship, and the high-stakes environment to accelerate your professional growth.</p>
           </div>
           <div class="split-image">
-            <img data-img-key="img_043" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Team collaborating">
+            <img data-img-key="img_043" src="/images/stock/photo-1522071820081-009f0129c71c.jpg" alt="Team collaborating">
           </div>
         </div>
       </div>
@@ -1914,7 +1918,7 @@
     </section>
 
     <section id="client-portal" class="page-view">
-      <div data-img-key="img_044" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat !important;">
+      <div data-img-key="img_044" class="page-header" style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('/images/stock/photo-1497366216548-37526070297c.jpg') center/cover no-repeat !important;">
         <div class="container text-center reveal">
           <div class="breadcrumbs"><a href="/" class="nav-router" data-i18n="nav_home">Home</a> <span>→</span> <span class="current" data-i18n="nav_client_portal">Client Portal</span></div>
           <h1 class="page-title" data-i18n="portal_title">Client Portal</h1>

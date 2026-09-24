@@ -192,7 +192,7 @@ header .hamburger span { background-color: var(--eso-logo-navy); }
 .advisory-hero.light .glowing-action-btn { color: #fff; background: var(--eso-navy); border-color: var(--eso-navy); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22); }
 .advisory-hero.light .glowing-action-btn:hover { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
 .advisory-hero.light .date-badge { background: var(--eso-navy); color: #fff; }
-.advisory-hero.light .hero-tagline { color: var(--eso-navy); font-weight: 600; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
+.advisory-hero.light .hero-tagline, .advisory-hero.light .hero-quote { color: var(--eso-navy); font-weight: 600; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
 .advisory-hero.light .hero-arrow { background: rgba(255, 255, 255, 0.75); border-color: rgba(15, 23, 42, 0.15); color: var(--eso-navy); }
 .advisory-hero.light .hero-arrow:hover { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
 .advisory-hero.light .hero-dot { background: rgba(15, 23, 42, 0.25); }

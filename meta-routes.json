@@ -1,5 +1,5 @@
 {
-  "_readme": "One entry per route. Canonical = domain + path. Every page's <head> must use ITS OWN title, description, canonical, og:title, og:description, og:url. No route may reuse the homepage head. og:image falls back to defaults.ogImage unless overridden.",
+  "_readme": "One entry per route. Canonical = domain + path. Every page's <head> must use ITS OWN title, description, canonical, og:title, og:description, og:url. No route may reuse the homepage head. og:image falls back to defaults.ogImage unless overridden. `fr` and `ar` blocks hold the localised title/description for those language versions; English is the fallback.",
   "domain": "https://eso-acc.com",
   "defaults": {
     "siteName": "ESO | Auditors & Consultants",
@@ -10,173 +10,247 @@
   "routes": {
     "/": {
       "title": "ESO | Auditors & Consultants in Lebanon",
-      "description": "ESO Auditors & Consultants: Big 4 caliber audit, tax, accounting and advisory for enterprises in Lebanon and the MENA region. Trusted since 2001."
+      "description": "ESO Auditors & Consultants: Big 4 caliber audit, tax, accounting and advisory for enterprises in Lebanon and the MENA region. Trusted since 2001.",
+      "fr": { "title": "ESO | Auditeurs et Consultants au Liban", "description": "ESO Auditors & Consultants : audit, fiscalité, comptabilité et conseil de calibre Big 4 pour les entreprises au Liban et dans la région MENA. Depuis 2001." },
+      "ar": { "title": "ESO | مدققون ومستشارون في لبنان", "description": "ESO للتدقيق والاستشارات: خدمات تدقيق وضرائب ومحاسبة واستشارات بمستوى الشركات الأربع الكبرى للمؤسسات في لبنان ومنطقة الشرق الأوسط. منذ 2001." }
     },
     "/about": {
       "title": "About ESO | Audit, Tax & Advisory Firm in Lebanon",
-      "description": "A full-service audit and advisory firm serving clients globally since 2001. Partner-led engagements, ISA audits, IFRS reporting, LACPA membership."
+      "description": "A full-service audit and advisory firm serving clients globally since 2001. Partner-led engagements, ISA audits, IFRS reporting, LACPA membership.",
+      "fr": { "title": "À propos d'ESO | Cabinet d'audit, fiscalité et conseil", "description": "Cabinet d'audit et de conseil à service complet depuis 2001 : missions dirigées par les associés, audits ISA, reporting IFRS, membre de la LACPA." },
+      "ar": { "title": "عن ESO | شركة تدقيق وضرائب واستشارات في لبنان", "description": "شركة تدقيق واستشارات متكاملة تخدم عملاءها منذ 2001: مهام يقودها الشركاء، تدقيق وفق معايير ISA، تقارير IFRS، وعضوية نقابة خبراء المحاسبة المجازين في لبنان." }
     },
     "/team": {
       "title": "Leadership & Team | ESO Auditors & Consultants",
-      "description": "Meet the partners and senior staff behind ESO's audit, tax and consulting practices, led by Founder & CEO Elie Salloum since 2001."
+      "description": "Meet the partners and senior staff behind ESO's audit, tax and consulting practices, led by Founder & CEO Elie Salloum since 2001.",
+      "fr": { "title": "Direction et équipe | ESO Auditors & Consultants", "description": "Découvrez les associés et les cadres derrière les pratiques d'audit, de fiscalité et de conseil d'ESO, dirigées par le fondateur et PDG Elie Salloum depuis 2001." },
+      "ar": { "title": "القيادة والفريق | ESO للتدقيق والاستشارات", "description": "تعرّف على الشركاء وكبار الموظفين وراء خدمات التدقيق والضرائب والاستشارات في ESO، بقيادة المؤسس والرئيس التنفيذي إيلي سلوم منذ 2001." }
     },
     "/services": {
       "title": "Audit, Tax, Accounting & Consulting Services | ESO",
-      "description": "Four core pillars: statutory audit and assurance, tax advisory and VAT compliance, accounting and payroll, and corporate consulting for enterprises."
+      "description": "Four core pillars: statutory audit and assurance, tax advisory and VAT compliance, accounting and payroll, and corporate consulting for enterprises.",
+      "fr": { "title": "Services d'audit, fiscalité, comptabilité et conseil | ESO", "description": "Quatre piliers : audit légal et assurance, conseil fiscal et conformité TVA, comptabilité et paie, et conseil aux entreprises." },
+      "ar": { "title": "خدمات التدقيق والضرائب والمحاسبة والاستشارات | ESO", "description": "أربع ركائز أساسية: التدقيق القانوني والتأكيد، الاستشارات الضريبية والامتثال لضريبة القيمة المضافة، المحاسبة والرواتب، والاستشارات المؤسسية." }
     },
     "/services/audit-assurance": {
       "title": "Audit & Assurance Services in Lebanon | ESO",
-      "description": "Statutory and independent audits under ISA, IFRS compliance and transition support, internal control reviews, and agreed-upon procedures."
+      "description": "Statutory and independent audits under ISA, IFRS compliance and transition support, internal control reviews, and agreed-upon procedures.",
+      "fr": { "title": "Audit et assurance au Liban | ESO", "description": "Audits légaux et indépendants selon les normes ISA, accompagnement IFRS, revues du contrôle interne et procédures convenues." },
+      "ar": { "title": "خدمات التدقيق والتأكيد في لبنان | ESO", "description": "تدقيق قانوني ومستقل وفق معايير ISA، دعم الامتثال والانتقال إلى IFRS، مراجعة الرقابة الداخلية، وإجراءات متفق عليها." }
     },
     "/services/tax-advisory": {
       "title": "Tax Advisory & VAT Compliance in Lebanon | ESO",
-      "description": "Corporate tax planning, VAT compliance and restructuring, Ministry of Finance decree consulting, and defense during official tax audits."
+      "description": "Corporate tax planning, VAT compliance and restructuring, Ministry of Finance decree consulting, and defense during official tax audits.",
+      "fr": { "title": "Conseil fiscal et conformité TVA au Liban | ESO", "description": "Planification fiscale des sociétés, conformité et restructuration TVA, conseil sur les décrets du ministère des Finances et défense lors des contrôles fiscaux." },
+      "ar": { "title": "الاستشارات الضريبية والامتثال لضريبة القيمة المضافة | ESO", "description": "تخطيط ضريبي للشركات، امتثال وإعادة هيكلة ضريبة القيمة المضافة، استشارات حول قرارات وزارة المالية، والدفاع خلال التدقيق الضريبي الرسمي." }
     },
     "/services/accounting-payroll": {
       "title": "Accounting & Payroll Services in Lebanon | ESO",
-      "description": "Comprehensive bookkeeping, NSSF-compliant payroll processing, multi-currency reconciliation, and monthly management reporting."
+      "description": "Comprehensive bookkeeping, NSSF-compliant payroll processing, multi-currency reconciliation, and monthly management reporting.",
+      "fr": { "title": "Comptabilité et paie au Liban | ESO", "description": "Tenue de comptabilité complète, traitement de la paie conforme à la CNSS, rapprochements multidevises et reporting de gestion mensuel." },
+      "ar": { "title": "خدمات المحاسبة والرواتب في لبنان | ESO", "description": "مسك دفاتر شامل، معالجة رواتب متوافقة مع الضمان الاجتماعي، تسويات متعددة العملات، وتقارير إدارية شهرية." }
     },
     "/services/corporate-consulting": {
       "title": "Corporate Consulting & Valuation Services | ESO",
-      "description": "M&A due diligence, enterprise valuations with DCF modeling, outsourced CFO services, and operational restructuring for critical inflection points."
+      "description": "M&A due diligence, enterprise valuations with DCF modeling, outsourced CFO services, and operational restructuring for critical inflection points.",
+      "fr": { "title": "Conseil aux entreprises et évaluation | ESO", "description": "Due diligence en fusions-acquisitions, évaluations d'entreprise par DCF, direction financière externalisée et restructuration opérationnelle." },
+      "ar": { "title": "الاستشارات المؤسسية وتقييم الشركات | ESO", "description": "العناية الواجبة في عمليات الاندماج والاستحواذ، تقييم الشركات بنماذج التدفقات النقدية المخصومة، خدمات المدير المالي الخارجي، وإعادة الهيكلة التشغيلية." }
     },
     "/industries": {
       "title": "Industries We Serve | ESO Auditors & Consultants",
-      "description": "Audit, tax and advisory expertise across 15+ sectors including F&B, manufacturing, real estate, healthcare, financial services, tech and NGOs."
+      "description": "Audit, tax and advisory expertise across 15+ sectors including F&B, manufacturing, real estate, healthcare, financial services, tech and NGOs.",
+      "fr": { "title": "Secteurs d'activité | ESO Auditors & Consultants", "description": "Expertise en audit, fiscalité et conseil dans plus de 15 secteurs : restauration, industrie, immobilier, santé, services financiers, technologie et ONG." },
+      "ar": { "title": "القطاعات التي نخدمها | ESO للتدقيق والاستشارات", "description": "خبرة في التدقيق والضرائب والاستشارات في أكثر من 15 قطاعاً: المطاعم والأغذية، الصناعة، العقارات، الرعاية الصحية، الخدمات المالية، التكنولوجيا والمنظمات غير الحكومية." }
     },
     "/industries/food-and-beverage": {
       "title": "F&B Accounting & Audit Specialists in Lebanon | ESO",
-      "description": "Prime-cost diagnostics, POS and aggregator reconciliation, franchise auditing, and NSSF-optimized payroll for restaurants and F&B groups."
+      "description": "Prime-cost diagnostics, POS and aggregator reconciliation, franchise auditing, and NSSF-optimized payroll for restaurants and F&B groups.",
+      "fr": { "title": "Comptabilité et audit pour la restauration au Liban | ESO", "description": "Diagnostic du coût de revient, rapprochement POS et plateformes de livraison, audit de franchises et paie optimisée CNSS pour restaurants et groupes F&B." },
+      "ar": { "title": "محاسبة وتدقيق قطاع المطاعم والأغذية في لبنان | ESO", "description": "تحليل التكلفة الأساسية، تسوية أنظمة نقاط البيع ومنصات التوصيل، تدقيق الامتيازات، ورواتب محسّنة للضمان الاجتماعي للمطاعم ومجموعات الأغذية والمشروبات." }
     },
     "/lebanon-market-guide": {
       "title": "Lebanon Market Guide: Tax, VAT, NSSF & IFRS | ESO",
-      "description": "How to operate in Lebanon: business structures, corporate tax, VAT and e-invoicing, NSSF payroll, real estate, IFRS reporting and MOF decrees."
+      "description": "How to operate in Lebanon: business structures, corporate tax, VAT and e-invoicing, NSSF payroll, real estate, IFRS reporting and MOF decrees.",
+      "fr": { "title": "Guide du marché libanais : impôts, TVA, CNSS, IFRS | ESO", "description": "Opérer au Liban : formes juridiques, impôt sur les sociétés, TVA et facturation électronique, paie CNSS, immobilier, reporting IFRS et décrets du MdF." },
+      "ar": { "title": "دليل السوق اللبناني: ضرائب، قيمة مضافة، ضمان، IFRS | ESO", "description": "كيف تعمل في لبنان: الهياكل القانونية، ضريبة الشركات، ضريبة القيمة المضافة والفوترة الإلكترونية، رواتب الضمان الاجتماعي، العقارات، تقارير IFRS وقرارات وزارة المالية." }
     },
     "/ministry-of-finance-decrees": {
       "title": "Laws & Decrees: Lebanon MOF Kararat Archive | ESO",
-      "description": "A curated, viewable archive of official Lebanese regulatory documents — Ministry of Finance decrees, labor decisions and NSSF circulars."
+      "description": "A curated, viewable archive of official Lebanese regulatory documents: Ministry of Finance decrees, labor decisions and NSSF circulars.",
+      "fr": { "title": "Lois et décrets : archive des « Kararat » du MdF libanais | ESO", "description": "Une archive consultable et sélectionnée de documents réglementaires libanais officiels : décrets du ministère des Finances, décisions du travail et circulaires CNSS." },
+      "ar": { "title": "القوانين والقرارات: أرشيف قرارات وزارة المالية اللبنانية | ESO", "description": "أرشيف منسّق وقابل للاطلاع للوثائق التنظيمية اللبنانية الرسمية: قرارات وزارة المالية، قرارات وزارة العمل، وتعاميم الضمان الاجتماعي." }
     },
     "/insights": {
       "title": "Market Insights & Technical Studies | ESO",
-      "description": "In-depth reports and briefs on Lebanese and MENA compliance, tax strategy, IFRS standards, and audit practice from the ESO team."
+      "description": "In-depth reports and briefs on Lebanese and MENA compliance, tax strategy, IFRS standards, and audit practice from the ESO team.",
+      "fr": { "title": "Analyses de marché et études techniques | ESO", "description": "Rapports et notes approfondis sur la conformité au Liban et dans la région MENA, la stratégie fiscale, les normes IFRS et la pratique de l'audit, par l'équipe ESO." },
+      "ar": { "title": "رؤى السوق والدراسات التقنية | ESO", "description": "تقارير وموجزات معمّقة حول الامتثال في لبنان ومنطقة الشرق الأوسط، الاستراتيجية الضريبية، معايير IFRS، وممارسات التدقيق من فريق ESO." }
     },
     "/careers": {
       "title": "Careers at ESO | Audit, Tax & Consulting Jobs",
-      "description": "Open positions for senior auditors, tax associates and summer interns at a partner-led audit and advisory firm in Jal El Dib, Lebanon."
+      "description": "Open positions for senior and junior auditors, accountants and summer interns at a partner-led audit and advisory firm in Jal El Dib, Lebanon.",
+      "fr": { "title": "Carrières chez ESO | Emplois en audit, fiscalité et conseil", "description": "Postes ouverts pour auditeurs seniors et juniors, comptables et stagiaires d'été dans un cabinet d'audit et de conseil dirigé par ses associés à Jal El Dib, Liban." },
+      "ar": { "title": "وظائف في ESO | فرص عمل في التدقيق والضرائب والاستشارات", "description": "وظائف شاغرة لمدققين أوائل ومبتدئين ومحاسبين ومتدربين صيفيين في شركة تدقيق واستشارات يقودها شركاؤها في جل الديب، لبنان." }
     },
     "/contact": {
       "title": "Contact ESO | Auditors & Consultants, Jal El Dib",
-      "description": "Reach ESO Auditors & Consultants in Jal El Dib, Lebanon. Schedule a consultation on audit, tax, accounting or advisory engagements."
+      "description": "Reach ESO Auditors & Consultants in Jal El Dib, Lebanon. Schedule a consultation on audit, tax, accounting or advisory engagements.",
+      "fr": { "title": "Contacter ESO | Auditeurs et Consultants, Jal El Dib", "description": "Contactez ESO Auditors & Consultants à Jal El Dib, Liban. Planifiez une consultation en audit, fiscalité, comptabilité ou conseil." },
+      "ar": { "title": "اتصل بـ ESO | مدققون ومستشارون، جل الديب", "description": "تواصل مع ESO للتدقيق والاستشارات في جل الديب، لبنان. احجز استشارة في التدقيق أو الضرائب أو المحاسبة أو الاستشارات." }
     },
     "/insights/mid-year-2026-compliance-review": {
       "title": "Mid-Year 2026 Compliance Review: Tax & NSSF | ESO",
       "description": "A practical half-year checklist covering income tax instalments, VAT filing cycles, and NSSF declarations to avoid year-end penalties.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Bilan de conformité mi-2026 : impôts et CNSS | ESO", "description": "Liste de contrôle semestrielle pratique : acomptes d'impôt sur le revenu, cycles de déclaration TVA et déclarations CNSS pour éviter les pénalités de fin d'année." },
+      "ar": { "title": "مراجعة الامتثال لمنتصف 2026: الضرائب والضمان | ESO", "description": "قائمة تحقق عملية لنصف السنة تغطي أقساط ضريبة الدخل، دورات إقرارات ضريبة القيمة المضافة، وتصاريح الضمان الاجتماعي لتفادي غرامات نهاية السنة." }
     },
     "/insights/ifrs-19-simplified-disclosures": {
       "title": "IFRS 19: Simplified Disclosures for Subsidiaries | ESO",
       "description": "How subsidiaries without public accountability can reduce disclosure volume under IFRS 19 while remaining fully IFRS-compliant.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "IFRS 19 : informations simplifiées pour les filiales | ESO", "description": "Comment les filiales sans responsabilité publique réduisent le volume d'informations à fournir selon IFRS 19 tout en restant pleinement conformes aux IFRS." },
+      "ar": { "title": "IFRS 19: إفصاحات مبسّطة للشركات التابعة | ESO", "description": "كيف يمكن للشركات التابعة غير الخاضعة للمساءلة العامة تقليص حجم الإفصاحات بموجب IFRS 19 مع الحفاظ على الامتثال الكامل لمعايير IFRS." }
     },
     "/insights/deposit-recovery-financial-gap-law": {
       "title": "Deposit Recovery & the Financial Gap Law | ESO",
       "description": "Guidance on valuing, provisioning, and disclosing trapped Lebanese bank deposits under IFRS 9 as recovery mechanisms take shape.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Recouvrement des dépôts et loi sur le gap financier | ESO", "description": "Repères pour évaluer, provisionner et présenter les dépôts bancaires libanais bloqués selon IFRS 9 à mesure que les mécanismes de recouvrement se précisent." },
+      "ar": { "title": "استرداد الودائع وقانون الفجوة المالية | ESO", "description": "إرشادات لتقييم الودائع المصرفية اللبنانية المحتجزة وتكوين مخصصاتها والإفصاح عنها وفق IFRS 9 مع تبلور آليات الاسترداد." }
     },
     "/insights/e-invoicing-shift": {
       "title": "E-Invoicing & Digital VAT: How to Prepare | ESO",
       "description": "Why mandatory electronic invoicing is coming to the region, and the system, data, and process changes businesses should start now.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Facturation électronique et TVA numérique : se préparer | ESO", "description": "Pourquoi la facturation électronique obligatoire arrive dans la région, et les changements de systèmes, de données et de processus à engager dès maintenant." },
+      "ar": { "title": "الفوترة الإلكترونية وضريبة القيمة المضافة الرقمية | ESO", "description": "لماذا تقترب الفوترة الإلكترونية الإلزامية من المنطقة، وما التغييرات في الأنظمة والبيانات والعمليات التي ينبغي للشركات البدء بها الآن." }
     },
     "/insights/2026-budget-analysis": {
       "title": "2026 Lebanon Budget: New Corporate Tax Brackets | ESO",
       "description": "A study of the Ministry of Finance's 2026 fiscal decrees, revised corporate income tax brackets, and strategic tax modeling for enterprises.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Budget 2026 du Liban : nouvelles tranches d'impôt | ESO", "description": "Étude des décrets fiscaux 2026 du ministère des Finances, des tranches révisées de l'impôt sur les sociétés et de la modélisation fiscale stratégique." },
+      "ar": { "title": "موازنة لبنان 2026: شرائح جديدة لضريبة الشركات | ESO", "description": "دراسة للمراسيم المالية لعام 2026 الصادرة عن وزارة المالية، والشرائح المعدّلة لضريبة دخل الشركات، والنمذجة الضريبية الاستراتيجية للمؤسسات." }
     },
     "/insights/ifrs-18-transition": {
       "title": "IFRS 18 Transition Guide for MENA Enterprises | ESO",
       "description": "Presentation and disclosure changes under IFRS 18: new P&L categories, management performance measures, and how groups should prepare.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Guide de transition IFRS 18 pour les entreprises MENA | ESO", "description": "Changements de présentation et d'information selon IFRS 18 : nouvelles catégories du compte de résultat, indicateurs de performance et préparation des groupes." },
+      "ar": { "title": "دليل الانتقال إلى IFRS 18 لمؤسسات الشرق الأوسط | ESO", "description": "تغييرات العرض والإفصاح بموجب IFRS 18: فئات جديدة في بيان الدخل، مقاييس أداء الإدارة، وكيف ينبغي للمجموعات الاستعداد." }
     },
     "/insights/valuation-strategies": {
       "title": "SME Valuation Amid Multi-Tier Exchange Rates | ESO",
       "description": "How to bridge historical book value and hyper-inflationary reality when valuing Lebanese SME portfolios for investors and lenders.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Évaluer les PME face aux taux de change multiples | ESO", "description": "Comment rapprocher valeur comptable historique et réalité hyperinflationniste dans l'évaluation de portefeuilles de PME libanaises pour investisseurs et prêteurs." },
+      "ar": { "title": "تقييم الشركات الصغيرة والمتوسطة في ظل تعدد أسعار الصرف | ESO", "description": "كيفية الجمع بين القيمة الدفترية التاريخية وواقع التضخم المفرط عند تقييم محافظ الشركات الصغيرة والمتوسطة اللبنانية للمستثمرين والمقرضين." }
     },
     "/insights/nssf-compliance": {
       "title": "NSSF Compliance in a Hyper-Inflationary Economy | ESO",
       "description": "Strategies for managing payroll deductions and NSSF declarations as contribution ceilings shift in Lebanon.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Conformité CNSS en économie hyperinflationniste | ESO", "description": "Stratégies de gestion des retenues sur salaire et des déclarations CNSS alors que les plafonds de cotisation évoluent au Liban." },
+      "ar": { "title": "الامتثال للضمان الاجتماعي في اقتصاد التضخم المفرط | ESO", "description": "استراتيجيات لإدارة اقتطاعات الرواتب وتصاريح الضمان الاجتماعي مع تغيّر سقوف الاشتراكات في لبنان." }
     },
     "/insights/esg-reporting-frameworks": {
       "title": "ESG Reporting for Lebanese Corporations | ESO",
       "description": "Why ESG reporting is becoming a financing prerequisite for Lebanese firms, and how to benchmark operations against GRI standards.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Reporting ESG pour les sociétés libanaises | ESO", "description": "Pourquoi le reporting ESG devient une condition de financement pour les entreprises libanaises, et comment se comparer aux normes GRI." },
+      "ar": { "title": "تقارير الاستدامة ESG للشركات اللبنانية | ESO", "description": "لماذا أصبحت تقارير ESG شرطاً للتمويل لدى الشركات اللبنانية، وكيفية قياس العمليات وفق معايير GRI." }
     },
     "/insights/transfer-pricing-scrutiny": {
       "title": "Transfer Pricing Scrutiny in MENA | ESO",
       "description": "How MENA tax authorities are enforcing the arm's length principle, and the documentation that protects intercompany transactions.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Contrôle des prix de transfert dans la région MENA | ESO", "description": "Comment les administrations fiscales MENA appliquent le principe de pleine concurrence, et la documentation qui protège les transactions intragroupe." },
+      "ar": { "title": "التدقيق في أسعار التحويل في الشرق الأوسط | ESO", "description": "كيف تطبّق السلطات الضريبية في المنطقة مبدأ السعر المحايد، وما الوثائق التي تحمي المعاملات بين شركات المجموعة." }
     },
     "/insights/restructuring-distressed-assets": {
       "title": "Restructuring Distressed Assets: A Guide | ESO",
       "description": "Accounting maneuvers and debt-to-equity swaps for rescuing distressed assets, with the valuation and tax steps that make them hold up.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Restructurer des actifs en difficulté : guide | ESO", "description": "Techniques comptables et conversions de dette en capital pour sauver des actifs en difficulté, avec les étapes d'évaluation et de fiscalité qui les rendent solides." },
+      "ar": { "title": "إعادة هيكلة الأصول المتعثرة: دليل عملي | ESO", "description": "أساليب محاسبية ومبادلات الدين بحقوق الملكية لإنقاذ الأصول المتعثرة، مع خطوات التقييم والضرائب التي تضمن صمودها." }
     },
     "/insights/vat-recovery-bad-debts": {
       "title": "VAT Recovery on Bad Debts in Lebanon | ESO",
       "description": "A technical bulletin on legally reclaiming VAT remitted on uncollectible invoices, and the evidence file a successful claim requires.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Récupération de la TVA sur créances irrécouvrables | ESO", "description": "Note technique sur la récupération légale de la TVA versée sur des factures irrécouvrables, et le dossier de preuves qu'exige une demande aboutie." },
+      "ar": { "title": "استرداد ضريبة القيمة المضافة على الديون المعدومة | ESO", "description": "نشرة تقنية حول الاسترداد القانوني لضريبة القيمة المضافة المسددة على فواتير غير قابلة للتحصيل، وملف الإثباتات الذي تتطلبه المطالبة الناجحة." }
     },
     "/insights/ai-impact-on-auditing": {
       "title": "AI in Statutory Auditing | ESO",
       "description": "How artificial intelligence is changing sample sizes, anomaly detection, and fraud prevention in assurance work.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "L'IA dans l'audit légal | ESO", "description": "Comment l'intelligence artificielle transforme la taille des échantillons, la détection d'anomalies et la prévention de la fraude dans les missions d'assurance." },
+      "ar": { "title": "الذكاء الاصطناعي في التدقيق القانوني | ESO", "description": "كيف يغيّر الذكاء الاصطناعي أحجام العينات واكتشاف الحالات الشاذة ومنع الاحتيال في أعمال التأكيد." }
     },
     "/insights/holding-company-structures": {
       "title": "Holding Company Tax Strategies: Lebanon vs UAE | ESO",
       "description": "Tax benefits of a Lebanese SAL Holding versus a UAE Freezone entity for family offices and investment portfolios.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Stratégies fiscales des holdings : Liban vs EAU | ESO", "description": "Avantages fiscaux d'une SAL Holding libanaise face à une entité de zone franche aux Émirats pour les family offices et les portefeuilles d'investissement." },
+      "ar": { "title": "الاستراتيجيات الضريبية للشركات القابضة: لبنان والإمارات | ESO", "description": "المزايا الضريبية للشركة القابضة اللبنانية (SAL Holding) مقارنة بكيان في المناطق الحرة الإماراتية للمكاتب العائلية ومحافظ الاستثمار." }
     },
     "/insights/real-estate-tax-landscape": {
       "title": "Real Estate Tax Planning in Lebanon | ESO",
       "description": "Essential tax planning for property developers: registration fees, built-property tax, and contract structuring at acquisition.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Planification fiscale immobilière au Liban | ESO", "description": "Planification fiscale essentielle pour les promoteurs : frais d'enregistrement, taxe sur les propriétés bâties et structuration des contrats à l'acquisition." },
+      "ar": { "title": "التخطيط الضريبي العقاري في لبنان | ESO", "description": "تخطيط ضريبي أساسي للمطورين العقاريين: رسوم التسجيل، ضريبة الأملاك المبنية، وهيكلة العقود عند الاستحواذ." }
     },
     "/insights/ma-due-diligence-pitfalls": {
       "title": "Due Diligence Pitfalls in Cross-Border M&A | ESO",
       "description": "Common financial blindspots in MENA startup acquisitions, and why vendor due diligence closes deals faster.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Pièges de la due diligence dans les M&A transfrontalières | ESO", "description": "Angles morts financiers fréquents dans les acquisitions de start-ups MENA, et pourquoi la vendor due diligence accélère la conclusion des opérations." },
+      "ar": { "title": "مزالق العناية الواجبة في الاندماجات العابرة للحدود | ESO", "description": "النقاط المالية العمياء الشائعة في الاستحواذ على الشركات الناشئة في المنطقة، ولماذا تسرّع العناية الواجبة من جانب البائع إتمام الصفقات." }
     },
     "/insights/cybersecurity-financial-reporting": {
       "title": "Cybersecurity Risks in Financial Reporting | ESO",
       "description": "Why the integrity of financial statements depends on IT controls: access management, segregation of duties, and audit trails.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Cybersécurité et information financière | ESO", "description": "Pourquoi l'intégrité des états financiers dépend des contrôles informatiques : gestion des accès, séparation des tâches et pistes d'audit." },
+      "ar": { "title": "مخاطر الأمن السيبراني في التقارير المالية | ESO", "description": "لماذا تعتمد سلامة البيانات المالية على ضوابط تكنولوجيا المعلومات: إدارة الصلاحيات، الفصل بين المهام، ومسارات التدقيق." }
     },
     "/insights/offshore-lebanon-vs-cyprus": {
       "title": "Offshore Incorporation: Lebanon vs Cyprus | ESO",
       "description": "A comparative study of corporate tax rates, maintenance costs, and banking compliance for internationally facing service providers.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Société offshore : Liban ou Chypre ? | ESO", "description": "Étude comparative des taux d'impôt sur les sociétés, des coûts de maintien et de la conformité bancaire pour les prestataires de services à vocation internationale." },
+      "ar": { "title": "تأسيس الشركات الأوفشور: لبنان أم قبرص؟ | ESO", "description": "دراسة مقارنة لمعدلات ضريبة الشركات وتكاليف الصيانة والامتثال المصرفي لمقدمي الخدمات ذوي التوجه الدولي." }
     },
     "/insights/cryptocurrency-asset-valuation": {
       "title": "Crypto Asset Valuation for Statutory Audits | ESO",
       "description": "Determining fair value and recognizing impairment for corporate treasuries holding digital assets under IFRS.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Évaluer les crypto-actifs pour l'audit légal | ESO", "description": "Déterminer la juste valeur et comptabiliser les dépréciations des trésoreries d'entreprise détenant des actifs numériques selon les IFRS." },
+      "ar": { "title": "تقييم الأصول الرقمية لأغراض التدقيق القانوني | ESO", "description": "تحديد القيمة العادلة والاعتراف بانخفاض القيمة لخزائن الشركات التي تحتفظ بأصول رقمية وفق معايير IFRS." }
     },
     "/insights/optimizing-working-capital": {
       "title": "Optimizing Working Capital After Supply Shocks | ESO",
       "description": "Cash flow modeling strategies to extend payables, accelerate receivables, and free trapped liquidity without new financing.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Optimiser le fonds de roulement après des chocs d'offre | ESO", "description": "Modélisation des flux de trésorerie pour allonger les délais fournisseurs, accélérer les encaissements et libérer la liquidité bloquée sans nouveau financement." },
+      "ar": { "title": "تحسين رأس المال العامل بعد صدمات الإمداد | ESO", "description": "استراتيجيات نمذجة التدفقات النقدية لتمديد آجال الدفع، وتسريع التحصيل، وتحرير السيولة المحتجزة دون تمويل جديد." }
     },
     "/insights/outsourced-cfo-role": {
       "title": "The Outsourced CFO for Growing SMEs | ESO",
       "description": "Why mid-sized family businesses are shifting to fractional financial leadership, and when the model pays off.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Le directeur financier externalisé pour les PME | ESO", "description": "Pourquoi les entreprises familiales de taille moyenne passent à une direction financière à temps partagé, et quand ce modèle est rentable." },
+      "ar": { "title": "المدير المالي الخارجي للشركات النامية | ESO", "description": "لماذا تتجه الشركات العائلية المتوسطة إلى قيادة مالية جزئية، ومتى يؤتي هذا النموذج ثماره." }
     },
     "/insights/ngo-corporate-governance": {
       "title": "Corporate Governance for NGOs | ESO",
       "description": "Audit and governance requirements NGOs must meet to secure and keep international donor funding.",
-      "ogType": "article"
+      "ogType": "article",
+      "fr": { "title": "Gouvernance d'entreprise pour les ONG | ESO", "description": "Exigences d'audit et de gouvernance que les ONG doivent respecter pour obtenir et conserver les financements de bailleurs internationaux." },
+      "ar": { "title": "الحوكمة المؤسسية للمنظمات غير الحكومية | ESO", "description": "متطلبات التدقيق والحوكمة التي يجب على المنظمات غير الحكومية استيفاؤها للحصول على تمويل المانحين الدوليين والحفاظ عليه." }
     }
   }
 }
