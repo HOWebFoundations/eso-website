@@ -1,11 +1,12 @@
 // POST /api/contact — website contact form.
 //
-// Delivery, in order of preference:
-//   1. ESO's own Microsoft 365 via the Graph API (app-only, client-credentials),
-//      used when the MS_* env vars below are set. Same-origin, no third party.
-//   2. Fallback: the formsubmit.co relay to the firm's mailbox, so submissions are
-//      delivered even before the Microsoft app registration exists. formsubmit
-//      requires a one-time activation click in the recipient mailbox.
+// Sends through ESO's own Microsoft 365 via the Graph API (app-only, client-credentials)
+// when the MS_* env vars below are set: same-origin, no third party, delivered internally.
+//
+// When they are not set (or Graph fails), the response carries a `fallback` hint and the
+// visitor's browser posts the message to the formsubmit.co relay itself, exactly as the
+// careers form does. formsubmit only accepts submissions that originate from a browser on
+// the site (server-side calls from cloud hosts get 403), so the relay is not done here.
 //
 // Recipient precedence: CONTACT_TO -> MS_RECIPIENT -> MS_SENDER -> info@eso-acc.com
 //
@@ -68,28 +69,6 @@ async function sendViaGraph({ name, email, subject, message }) {
   if (r.status !== 202) throw new Error(`Graph ${r.status}: ${(await r.text().catch(() => '')).slice(0, 300)}`);
 }
 
-// formsubmit only accepts AJAX submissions that come from a web page, so we forward the
-// origin of the page that submitted the form (falling back to the firm's own domain).
-async function sendViaFormsubmit({ name, email, subject, message }, origin) {
-  const site = origin || 'https://eso-acc.com';
-  const r = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient())}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json', Origin: site, Referer: site + '/contact' },
-    body: JSON.stringify({
-      _subject: `Website inquiry: ${subject}`.slice(0, 240),
-      _replyto: email,
-      _template: 'table',
-      name, email, subject, message,
-    }),
-  });
-  const d = await r.json().catch(() => ({}));
-  if (r.ok && (d.success === true || d.success === 'true')) return;
-  const msg = String((d && d.message) || `HTTP ${r.status}`);
-  const err = new Error(msg);
-  err.pending = /activat/i.test(msg); // mailbox has not clicked formsubmit's activation link yet
-  throw err;
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') { json(res, 405, { error: 'method_not_allowed' }); return; }
 
@@ -104,23 +83,10 @@ export default async function handler(req, res) {
   if (!name || !email || !message) { json(res, 400, { error: 'missing_fields' }); return; }
   if (!emailOk(email)) { json(res, 400, { error: 'bad_email' }); return; }
 
-  const payload = { name, email, subject, message };
-  // Origin of the page that submitted the form (browsers send it on cross-page POSTs).
-  const hdr = (k) => String((req.headers && req.headers[k]) || '');
-  const origin = /^https?:\/\/[^/\s]+$/.test(hdr('origin')) ? hdr('origin') : ((hdr('referer').match(/^https?:\/\/[^/\s]+/) || [''])[0] || '');
-  let graphError = null;
+  const fallback = { provider: 'formsubmit', to: recipient() };
   if (graphConfigured()) {
-    try { await sendViaGraph(payload); json(res, 200, { ok: true, via: 'graph' }); return; }
-    catch (e) { graphError = String((e && e.message) || e).slice(0, 200); }
+    try { await sendViaGraph({ name, email, subject, message }); json(res, 200, { ok: true, via: 'graph' }); return; }
+    catch (e) { json(res, 502, { error: 'send_failed', message: String((e && e.message) || e).slice(0, 300), fallback }); return; }
   }
-  try {
-    await sendViaFormsubmit(payload, origin);
-    json(res, 200, { ok: true, via: 'formsubmit' });
-  } catch (e) {
-    json(res, 502, {
-      error: e.pending ? 'activation_pending' : 'send_failed',
-      message: String((e && e.message) || e).slice(0, 300),
-      ...(graphError ? { graph: graphError } : {}),
-    });
-  }
+  json(res, 503, { error: 'not_configured', message: 'Direct sending is not configured; the browser should use the fallback relay.', fallback });
 }

@@ -100,13 +100,27 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!data.name || !data.email || !data.message) { show('Please fill in your name, email and message.', false); return; }
       var label = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      // The firm's inbox as baked into the contact block (editable in the admin); used by the relay.
+      var siteEmail = ((document.getElementById('contact-email') || {}).textContent || '').trim() || 'info@eso-acc.com';
+      var SENT = 'Thank you, your message has been sent. We will get back to you shortly.';
+      var FAILED = 'Sorry, something went wrong. Please email ' + siteEmail + ' directly.';
+      // Relay used when the site's own mail sending is not configured: the browser posts to
+      // formsubmit.co (the same service the careers form uses), which only accepts browser origins.
+      function relay(to) {
+        return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _subject: 'Website inquiry: ' + (data.subject || 'Website inquiry'), _replyto: data.email, _template: 'table', name: data.name, email: data.email, subject: data.subject, message: data.message })
+        }).then(function (r) { return r.json(); }).then(function (d) { return !!(d && (d.success === true || d.success === 'true')); });
+      }
       fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
         .then(function (res) {
-          if (res.ok && res.d && res.d.ok) { show('Thank you — your message has been sent. We will get back to you shortly.', true); form.reset(); }
-          else { show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false); }
-        })
-        .catch(function () { show('Sorry, something went wrong. Please email info@eso-acc.com directly.', false); })
+          if (res.ok && res.d && res.d.ok) return true;
+          var fb = res.d && res.d.fallback;
+          return relay((fb && fb.provider === 'formsubmit' && fb.to) ? fb.to : siteEmail);
+        }, function () { return relay(siteEmail); })
+        .catch(function () { return false; })
+        .then(function (sent) { if (sent) { show(SENT, true); form.reset(); } else { show(FAILED, false); } })
         .then(function () { if (btn) { btn.disabled = false; btn.textContent = label; } });
     });
   });
