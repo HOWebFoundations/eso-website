@@ -173,6 +173,30 @@ header .hamburger span { background-color: var(--eso-logo-navy); }
 .hero-dot.is-active { background: #38bdf8; transform: scale(1.25); }
 /* Desktop: the tilted panels project a few px below their layout box; keep the caption clear of that too */
 @media (min-width: 1025px) { .hero-caption { margin-top: 14px; } }
+.advisory-hero .panel-header p { color: #cbd5e1; }
+/* Single fixed tagline (replaces the rotating quotes) */
+.hero-tagline { margin: 0 0 16px; padding: 0 10px; font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 500; font-size: clamp(1.1rem, 2.2vw, 1.6rem); line-height: 1.4; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.7); }
+
+/* --- Bright hero variant: add class "light" to .advisory-hero. White frosted panels and navy text over a bright photo. --- */
+.advisory-hero.light { background-image: none !important; background-color: #eef2f7; }
+.advisory-hero.light .hero-slideshow::after { background: linear-gradient(160deg, rgba(255,255,255,0.30) 0%, rgba(241,245,249,0.22) 55%, rgba(226,232,240,0.40) 100%); }
+.advisory-hero.light::after { background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(15, 23, 42, 0.16) 100%); }
+.advisory-hero.light .advisory-glass-panel { background: rgba(255, 255, 255, 0.74); border: 1px solid rgba(255, 255, 255, 0.95); border-left: 3px solid #0ea5e9; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+.advisory-hero.light .advisory-glass-panel:hover { box-shadow: 0 24px 48px rgba(15, 23, 42, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+.advisory-hero.light .canvas-title { color: var(--eso-navy); }
+.advisory-hero.light .panel-header p { color: #475569; }
+.advisory-hero.light .category-title { color: #0284c7; }
+.advisory-hero.light .simple-nav-link { background: rgba(255, 255, 255, 0.72); border-color: rgba(15, 23, 42, 0.08); color: var(--eso-navy); }
+.advisory-hero.light .simple-nav-link:hover { background: #fff; border-color: #0ea5e9; color: #0284c7; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.10); }
+.advisory-hero.light .highlight-link { background: rgba(14, 165, 233, 0.08); border-color: rgba(14, 165, 233, 0.35); }
+.advisory-hero.light .glowing-action-btn { color: #fff; background: var(--eso-navy); border-color: var(--eso-navy); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22); }
+.advisory-hero.light .glowing-action-btn:hover { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+.advisory-hero.light .date-badge { background: var(--eso-navy); color: #fff; }
+.advisory-hero.light .hero-tagline { color: var(--eso-navy); font-weight: 600; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
+.advisory-hero.light .hero-arrow { background: rgba(255, 255, 255, 0.75); border-color: rgba(15, 23, 42, 0.15); color: var(--eso-navy); }
+.advisory-hero.light .hero-arrow:hover { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+.advisory-hero.light .hero-dot { background: rgba(15, 23, 42, 0.25); }
+.advisory-hero.light .hero-dot.is-active { background: #0ea5e9; }
 .advisory-hero::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 30%, rgba(13, 15, 28, 0.55) 100%); }
 .hero-content-wrapper { position: relative; z-index: 10; width: 98%; max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: auto; flex: 0 0 auto; padding: 0 2%; perspective: 1200px; }
 
@@ -231,7 +255,8 @@ header .hamburger span { background-color: var(--eso-logo-navy); }
 
 .team-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: var(--transition); border: 1px solid var(--eso-silver-dark); display: flex; flex-direction: column; }
 .team-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-color: var(--eso-accent); }
-.team-img { width: 100%; height: 340px; background-size: cover; background-position: center 20%; background-color: var(--eso-silver-dark); border-bottom: 3px solid var(--eso-accent); }
+/* Portrait box (4:5) positioned near the top: heads are never cut and tight close-ups are not zoomed, at any card width. The CEO card sets its own inline height and 'contain'. */
+.team-img { width: 100%; height: auto; aspect-ratio: 4 / 5; background-size: cover; background-position: center 12%; background-color: var(--eso-silver-dark); border-bottom: 3px solid var(--eso-accent); }
 .team-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
 .team-info h3 { font-size: 1.3rem; margin-bottom: 5px; color: var(--eso-navy); }
 .team-role { font-size: 0.85rem; color: var(--eso-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 15px; }

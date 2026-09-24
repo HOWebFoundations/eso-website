@@ -167,7 +167,7 @@ function applyCMS(root, id, lang) {
   if (Array.isArray(CMS.team) && CMS.team.length) {
     const grid = root.querySelector('#staff-grid');
     if (grid) grid.set_content(CMS.team.slice().sort((a, b) => (a.order || 0) - (b.order || 0)).map((m) =>
-      `<div class="team-card"><div class="team-img" role="img" aria-label="${esc((m.name || '') + ', ESO Auditors and Consultants')}" style="background-image: url('${esc(m.photo || '')}'); background-position: center 20%;"></div><div class="team-info text-center"><h3>${esc(m.name || '')}</h3>${m.title ? `<p style="color:var(--eso-text-muted);font-size:0.85rem;margin-top:4px;">${esc(m.title)}</p>` : ''}</div></div>`).join(''));
+      `<div class="team-card"><div class="team-img" role="img" aria-label="${esc((m.name || '') + ', ESO Auditors and Consultants')}" style="background-image: url('${esc(m.photo || '')}');"></div><div class="team-info text-center"><h3>${esc(m.name || '')}</h3>${m.title ? `<p style="color:var(--eso-text-muted);font-size:0.85rem;margin-top:4px;">${esc(m.title)}</p>` : ''}</div></div>`).join(''));
   }
   // Leadership name
   if (CMS.leadership && CMS.leadership.name) { const nm = root.querySelector('#lead-name'); if (nm) nm.set_content(esc(CMS.leadership.name)); }
