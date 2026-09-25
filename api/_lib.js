@@ -15,10 +15,11 @@ export function secret() {
 
 // Constant-time password comparison (hash first so lengths always match).
 export function passwordOk(input) {
-  const expected = process.env.ADMIN_PASSWORD || '';
+  // Trim both sides: a trailing newline pasted into the Vercel env var must not lock everyone out.
+  const expected = String(process.env.ADMIN_PASSWORD || '').trim();
   if (!expected) return false;
-  const a = crypto.createHash('sha256').update(String(input)).digest();
-  const b = crypto.createHash('sha256').update(String(expected)).digest();
+  const a = crypto.createHash('sha256').update(String(input == null ? '' : input).trim()).digest();
+  const b = crypto.createHash('sha256').update(expected).digest();
   return crypto.timingSafeEqual(a, b);
 }
 
